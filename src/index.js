@@ -4,8 +4,8 @@ const createTree = (data) => {
   const nodes = d3.hierarchy(data, d => d.parents)
 
   const margin = {top: 0, right: 10, bottom: 0, left: 80};
-  const width = 1500 - margin.left - margin.right;
-  const height = 2000 - margin.top - margin.bottom;
+  const width = 1800 - margin.left - margin.right;
+  const height = 3000 - margin.top - margin.bottom;
 
   const tree = d3.tree()
     .size([height, width]);
@@ -40,6 +40,18 @@ const createTree = (data) => {
     .attr('x', d => d.children ? -8 : 8)
     .attr('text-anchor', d => d.children ? 'end' : 'start')
     .text(d => d.data.name);
+
+  node.append('text')
+    .attr('dy', 13)
+    .attr('x', d => d.children ? -8 : 8)
+    .attr('text-anchor', d => d.children ? 'end' : 'start')
+    .text(d => d.data.events && d.data.events.birth ? `* ${d.data.events.birth}` : '');
+
+  node.append('text')
+    .attr('dy', 23)
+    .attr('x', d => d.children ? -8 : 8)
+    .attr('text-anchor', d => d.children ? 'end' : 'start')
+    .text(d => d.data.events && d.data.events.death ? `† ${d.data.events.death}` : '');
 }
 
 fetch('family.json')
