@@ -5,18 +5,17 @@ const file = fs.readFileSync('gramps.xml');
 
 const findParents = (person, data) => {
   if (person.childof) {
-    return data.families[0].family.find(f => f['$'].handle === person.childof[0]['$'].hlink);
+    return data.families[0].family.find(f => f.$.handle === person.childof[0].$.hlink);
   }
   return null;
-}
+};
 
-const findPerson = (hlink, database) =>
-  database.people[0].person.find(p => p['$'].handle === hlink);
+const findPerson = (hlink, database) => database.people[0].person.find(p => p.$.handle === hlink);
 
 const printName = (person) => {
   const name = person.name[0];
-  const surname = name.surname[0]['_'] ? name.surname[0]['_'] : name.surname;
-  
+  const surname = name.surname[0]._ ? name.surname[0]._ : name.surname;
+
   return `${name.first} ${surname}`;
 };
 
@@ -31,7 +30,7 @@ const formatDate = (date) => {
 };
 
 const getEventType = (events, type) => events.find(event => event.type[0] === type);
-const getEventDate = event => event ? formatDate(event.dateval[0]['$'].val) : '';
+const getEventDate = event => (event ? formatDate(event.dateval[0].$.val) : '');
 
 const findEvents = (eventref, database) => {
   if (!eventref) {
@@ -39,22 +38,22 @@ const findEvents = (eventref, database) => {
   }
 
   const events = eventref
-    .map(event => event['$'].hlink)
-    .map(ref => database.events[0].event.find(event => event['$'].handle === ref))
+    .map(event => event.$.hlink)
+    .map(ref => database.events[0].event.find(event => event.$.handle === ref));
 
   return {
     birth: getEventDate(getEventType(events, 'Birth')),
-    death: getEventDate(getEventType(events, 'Death'))
+    death: getEventDate(getEventType(events, 'Death')),
   };
-}
+};
 
 const printPerson = (person, database) => {
   const parents = findParents(person, database);
   const father = parents && parents.father
-    ? printPerson(findPerson(parents.father[0]['$'].hlink, database), database)
+    ? printPerson(findPerson(parents.father[0].$.hlink, database), database)
     : {};
   const mother = parents && parents.mother
-    ? printPerson(findPerson(parents.mother[0]['$'].hlink, database), database)
+    ? printPerson(findPerson(parents.mother[0].$.hlink, database), database)
     : {};
 
   const personNode = {
@@ -62,15 +61,15 @@ const printPerson = (person, database) => {
     events: findEvents(person.eventref, database),
     parents: [
       father,
-      mother
-    ]
+      mother,
+    ],
   };
 
   return personNode;
-}
+};
 
 xml2js.parseString(file, (err, result) => {
-  const rootPerson = result.database.people[0].person.find(p => p['$'].id === 'I0000');
+  const rootPerson = result.database.people[0].person.find(p => p.$.id === 'I0000');
   const tree = printPerson(rootPerson, result.database);
 
   fs.writeFileSync('family.json', JSON.stringify(tree));
