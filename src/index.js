@@ -1,11 +1,27 @@
 import fetch from 'unfetch';
 import * as d3 from 'd3';
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import Popup from './popup';
+
 const addTextRow = (node, text, rowNumber) => node.append('text')
   .attr('dy', 3 + rowNumber * 10)
   .attr('x', d => (d.children ? -8 : 8))
   .attr('text-anchor', d => (d.children ? 'end' : 'start'))
   .text(text);
+
+const closePopup = () => {
+  ReactDOM.render(null, document.getElementById('popup-container'));
+};
+
+const openPopup = (node) => {
+  ReactDOM.render(
+    <Popup person={node.data} closePopup={closePopup} />,
+    document.getElementById('popup-container'),
+  );
+};
 
 const createTree = (data) => {
   const nodes = d3.hierarchy(data, d => d.parents);
@@ -47,6 +63,8 @@ const createTree = (data) => {
   addTextRow(node, d => d.data.name, 0);
   addTextRow(node, d => (d.data.events && d.data.events.birth ? `* ${d.data.events.birth}` : ''), 1);
   addTextRow(node, d => (d.data.events && d.data.events.death ? `† ${d.data.events.death}` : ''), 2);
+
+  node.on('click', openPopup);
 };
 
 fetch('family.json')
