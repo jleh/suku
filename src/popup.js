@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Sources from './sources';
+
 const renderPlace = place => (place ? place.name : '');
 
 const getYear = date => date.substring(date.length - 4);
@@ -11,8 +13,6 @@ const Popup = ({ person, closePopup }) => {
     return null;
   }
 
-  console.log(person);
-
   const {
     birth, birthPlace, death, deathPlace, causeOfDeath,
   } = person.events;
@@ -22,13 +22,13 @@ const Popup = ({ person, closePopup }) => {
       <h3>{person.name}</h3>
 
       {birth && <div>* {birth} {renderPlace(birthPlace)}</div>}
-      {death
-        && <div>† {death} {renderPlace(deathPlace)} {renderAge(death, birth)}</div>}
+      {death && <div>† {death} {renderPlace(deathPlace)} {renderAge(death, birth)}</div>}
 
       <p />
 
-      {causeOfDeath
-        && <div>Kuolinsyy: {causeOfDeath}</div>}
+      {causeOfDeath && <div>Kuolinsyy: {causeOfDeath}</div>}
+
+      <Sources sources={person.sources} />
 
       <button type="button" onClick={closePopup}>
         Sulje
