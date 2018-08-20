@@ -14,7 +14,7 @@ const Popup = ({ person, closePopup }) => {
   }
 
   const {
-    birth, birthPlace, death, deathPlace, causeOfDeath,
+    birth, birthPlace, death, deathPlace, causeOfDeath, occupations,
   } = person.events;
 
   return (
@@ -24,7 +24,13 @@ const Popup = ({ person, closePopup }) => {
       {birth && <div>* {birth} {renderPlace(birthPlace)}</div>}
       {death && <div>† {death} {renderPlace(deathPlace)} {renderAge(death, birth)}</div>}
 
-      <p />
+      <div className="occupations">
+        {occupations.map(occupation => (
+          <div key={occupation.$.id}>
+            {occupation.description[0]} <span className="place-name">{occupation.place && occupation.place.name}</span>
+          </div>
+        ))}
+      </div>
 
       {causeOfDeath && <div>Kuolinsyy: {causeOfDeath}</div>}
 
