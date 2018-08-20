@@ -8,10 +8,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-        },
-      },
-    ],
+          loader: 'babel-loader'
+        }
+      }
+    ]
   },
 
   devtool: 'source-map',
@@ -20,7 +20,8 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: 'index.html', to: '' },
       { from: 'family.json', to: '' },
-    ]),
-  ],
+      { from: 'worldEvents.json', to: '' }
+    ])
+  ]
 
 };

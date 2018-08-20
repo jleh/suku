@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       data: null,
       selectedPerson: null,
+      worldEvents: {}
     };
 
     this.personSelected = this.personSelected.bind(this);
@@ -23,6 +24,10 @@ class App extends Component {
     fetch('family.json')
       .then(res => res.json())
       .then(data => this.setState({ data }));
+
+    fetch('worldEvents.json')
+      .then(res => res.json())
+      .then(worldEvents => this.setState({ worldEvents }));
   }
 
   personSelected(selectedPerson) {
@@ -34,12 +39,12 @@ class App extends Component {
   }
 
   render() {
-    const { data, selectedPerson } = this.state;
+    const { data, selectedPerson, worldEvents } = this.state;
 
     return (
       <div>
         {data && <AncestorTree data={data} personSelected={this.personSelected} />}
-        {data && <Timeline data={data} />}
+        {data && <Timeline data={data} worldEvents={worldEvents} />}
         {selectedPerson && <Popup person={selectedPerson} closePopup={this.closePopup} />}
       </div>
     );

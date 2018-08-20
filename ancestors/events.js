@@ -20,7 +20,7 @@ const getPlace = (ref, places) => {
   if (place.coord) {
     eventPlace.coordinates = {
       lng: place.coord[0].$.long,
-      lat: place.coord[0].$.lat,
+      lat: place.coord[0].$.lat
     };
   }
 
@@ -65,7 +65,7 @@ const findEvents = (eventref, database) => {
     death: getEventDate(death),
     deathPlace: getEventPlace(death, places),
     causeOfDeath: getEventDescription(getEventType(events, 'Cause Of Death')),
-    occupations: getEvents(events, 'Occupation', places),
+    occupations: getEvents(events, 'Occupation', places)
   };
 };
 
