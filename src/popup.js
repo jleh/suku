@@ -19,7 +19,7 @@ const Popup = ({ person, closePopup }) => {
 
   return (
     <div className="popup">
-      <h3>{person.name}</h3>
+      <h2>{person.name}</h2>
 
       {birth && <div>* {birth} {renderPlace(birthPlace)}</div>}
       {death && <div>† {death} {renderPlace(deathPlace)} {renderAge(death, birth)}</div>}
