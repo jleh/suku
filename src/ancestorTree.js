@@ -31,7 +31,7 @@ export default class AncestorTree extends Component {
     const tree = d3.tree()
       .size([height, width]);
 
-    const svg = d3.select('body')
+    const svg = d3.select('#tree')
       .append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom);

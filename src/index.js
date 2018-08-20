@@ -4,6 +4,7 @@ import fetch from 'unfetch';
 
 import AncestorTree from './ancestorTree';
 import Popup from './popup';
+import Timeline from './timeline';
 
 class App extends Component {
   constructor() {
@@ -38,6 +39,7 @@ class App extends Component {
     return (
       <div>
         {data && <AncestorTree data={data} personSelected={this.personSelected} />}
+        {data && <Timeline data={data} />}
         {selectedPerson && <Popup person={selectedPerson} closePopup={this.closePopup} />}
       </div>
     );
