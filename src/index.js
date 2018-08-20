@@ -29,8 +29,8 @@ const createTree = (data) => {
   const margin = {
     top: 0, right: 10, bottom: 0, left: 80,
   };
-  const width = 1800 - margin.left - margin.right;
-  const height = 3000 - margin.top - margin.bottom;
+  const width = 2000 - margin.left - margin.right;
+  const height = 3500 - margin.top - margin.bottom;
 
   const tree = d3.tree()
     .size([height, width]);
