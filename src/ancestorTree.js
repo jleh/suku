@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import * as d3 from 'd3';
+
+import { hierarchy, tree } from 'd3-hierarchy';
+import { linkHorizontal } from 'd3-shape';
+import { select } from 'd3-selection';
+
+const d3 = Object.assign({}, {
+  hierarchy,
+  tree,
+  linkHorizontal,
+  select
+});
 
 const addTextRow = (node, text, rowNumber) => node.append('text')
   .attr('dy', 3 + rowNumber * 10)
@@ -23,12 +33,12 @@ export default class AncestorTree extends Component {
     const nodes = d3.hierarchy(data, d => d.parents);
 
     const margin = {
-      top: 0, right: 10, bottom: 0, left: 80,
+      top: 0, right: 10, bottom: 0, left: 80
     };
     const width = 2000 - margin.left - margin.right;
     const height = 3500 - margin.top - margin.bottom;
 
-    const tree = d3.tree()
+    const ancestorTree = d3.tree()
       .size([height, width]);
 
     const svg = d3.select('#tree')
@@ -40,7 +50,7 @@ export default class AncestorTree extends Component {
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
     g.selectAll('.link')
-      .data(tree(nodes).links())
+      .data(ancestorTree(nodes).links())
       .enter().append('path')
       .attr('class', 'link')
       .attr('d', d3.linkHorizontal()

@@ -1,4 +1,5 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
 
@@ -23,5 +24,4 @@ module.exports = {
       { from: 'worldEvents.json', to: '' }
     ])
   ]
-
 };

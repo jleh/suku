@@ -30,6 +30,11 @@ class App extends Component {
       .then(worldEvents => this.setState({ worldEvents }));
   }
 
+  getMainContentStyle() {
+    const { selectedPerson } = this.state;
+    return selectedPerson ? { display: 'none' } : { display: 'block' };
+  }
+
   personSelected(selectedPerson) {
     this.setState({ selectedPerson });
   }
@@ -43,8 +48,10 @@ class App extends Component {
 
     return (
       <div>
-        {data && <AncestorTree data={data} personSelected={this.personSelected} />}
-        {data && <Timeline data={data} worldEvents={worldEvents} />}
+        <div style={this.getMainContentStyle()}>
+          {data && <AncestorTree data={data} personSelected={this.personSelected} />}
+          {data && <Timeline data={data} worldEvents={worldEvents} />}
+        </div>
         {selectedPerson && <Popup person={selectedPerson} closePopup={this.closePopup} />}
       </div>
     );

@@ -14,7 +14,7 @@ const Popup = ({ person, closePopup }) => {
   }
 
   const {
-    birth, birthPlace, death, deathPlace, causeOfDeath, occupations,
+    birth, birthPlace, death, deathPlace, causeOfDeath, occupations
   } = person.events;
 
   return (

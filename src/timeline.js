@@ -1,5 +1,6 @@
 import React from 'react';
-import { sortBy, uniq } from 'lodash';
+import sortBy from 'lodash/sortBy';
+import uniq from 'lodash/uniq';
 
 const toSortDate = (textDate) => {
   const date = textDate.replace(/\?/g, '0');
