@@ -28,6 +28,10 @@ export default class AncestorTree extends Component {
     return false;
   }
 
+  componentWillUnmount() {
+    this.node.on('click', null);
+  }
+
   createTree(data) {
     const { personSelected } = this.props;
     const nodes = d3.hierarchy(data, d => d.parents);
@@ -71,6 +75,7 @@ export default class AncestorTree extends Component {
     addTextRow(node, d => (d.data.events && d.data.events.death ? `† ${d.data.events.death}` : ''), 2);
 
     node.on('click', n => personSelected(n.data));
+    this.node = node;
   }
 
   render() {

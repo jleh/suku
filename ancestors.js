@@ -1,6 +1,8 @@
 const fs = require('fs');
 const xml2js = require('xml2js');
 
+const config = require('./config.json');
+
 const findEvents = require('./ancestors/events');
 const findSources = require('./ancestors/sources');
 
@@ -36,7 +38,7 @@ const printPerson = (person, database) => {
     events: findEvents(person.eventref, database),
     parents: [
       father,
-      mother,
+      mother
     ],
     sources: findSources(person, database),
   };
@@ -45,7 +47,7 @@ const printPerson = (person, database) => {
 };
 
 xml2js.parseString(file, (err, result) => {
-  const rootPerson = result.database.people[0].person.find(p => p.$.id === 'I0000');
+  const rootPerson = result.database.people[0].person.find(p => p.$.id === config.rootPerson);
   const tree = printPerson(rootPerson, result.database);
 
   fs.writeFileSync('family.json', JSON.stringify(tree));

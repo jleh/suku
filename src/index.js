@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import fetch from 'unfetch';
 
+import config from '../config.json';
+
 import AncestorTree from './ancestorTree';
 import Popup from './popup';
 import Timeline from './timeline';
+import Places from './places';
 
 class App extends Component {
   constructor() {
@@ -13,11 +16,13 @@ class App extends Component {
     this.state = {
       data: null,
       selectedPerson: null,
-      worldEvents: {}
+      worldEvents: {},
+      page: 'tree'
     };
 
     this.personSelected = this.personSelected.bind(this);
     this.closePopup = this.closePopup.bind(this);
+    this.switchPage = this.switchPage.bind(this);
   }
 
   componentDidMount() {
@@ -43,14 +48,41 @@ class App extends Component {
     this.setState({ selectedPerson: null });
   }
 
+  switchPage(page) {
+    this.setState({ page });
+  }
+
   render() {
-    const { data, selectedPerson, worldEvents } = this.state;
+    const {
+      data, page, selectedPerson, worldEvents
+    } = this.state;
+
+    if (!data) {
+      return (
+        <div>
+          Ladataan...
+        </div>
+      );
+    }
 
     return (
       <div>
         <div style={this.getMainContentStyle()}>
-          {data && <AncestorTree data={data} personSelected={this.personSelected} />}
-          {data && <Timeline data={data} worldEvents={worldEvents} />}
+          <h1>{config.pageTitle}</h1>
+          <nav>
+            <button type="button" onClick={() => this.switchPage('tree')}>
+              Sukupuu
+            </button>
+            <button type="button" onClick={() => this.switchPage('timeline')}>
+              Aikajana
+            </button>
+            <button type="button" onClick={() => this.switchPage('places')}>
+              Paikat
+            </button>
+          </nav>
+          {page === 'tree' && <AncestorTree data={data} personSelected={this.personSelected} />}
+          {page === 'timeline' && <Timeline data={data} worldEvents={worldEvents} />}
+          {page === 'places' && <Places />}
         </div>
         {selectedPerson && <Popup person={selectedPerson} closePopup={this.closePopup} />}
       </div>
