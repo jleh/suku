@@ -35,11 +35,6 @@ class App extends Component {
       .then(worldEvents => this.setState({ worldEvents }));
   }
 
-  getMainContentStyle() {
-    const { selectedPerson } = this.state;
-    return selectedPerson ? { display: 'none' } : { display: 'block' };
-  }
-
   personSelected(selectedPerson) {
     this.setState({ selectedPerson });
   }
@@ -67,23 +62,22 @@ class App extends Component {
 
     return (
       <div>
-        <div style={this.getMainContentStyle()}>
-          <h1>{config.pageTitle}</h1>
-          <nav>
-            <button type="button" onClick={() => this.switchPage('tree')}>
-              Sukupuu
-            </button>
-            <button type="button" onClick={() => this.switchPage('timeline')}>
-              Aikajana
-            </button>
-            <button type="button" onClick={() => this.switchPage('places')}>
-              Paikat
-            </button>
-          </nav>
-          {page === 'tree' && <AncestorTree data={data} personSelected={this.personSelected} />}
-          {page === 'timeline' && <Timeline data={data} worldEvents={worldEvents} />}
-          {page === 'places' && <Places data={data} />}
-        </div>
+        <h1>{config.pageTitle}</h1>
+        <nav>
+          <button type="button" onClick={() => this.switchPage('tree')}>
+            Sukupuu
+          </button>
+          <button type="button" onClick={() => this.switchPage('timeline')}>
+            Aikajana
+          </button>
+          <button type="button" onClick={() => this.switchPage('places')}>
+            Paikat
+          </button>
+        </nav>
+        {page === 'tree' && <AncestorTree data={data} personSelected={this.personSelected} />}
+        {page === 'timeline' && <Timeline data={data} worldEvents={worldEvents} />}
+        {page === 'places' && <Places data={data} />}
+
         {selectedPerson && <Popup person={selectedPerson} closePopup={this.closePopup} />}
       </div>
     );

@@ -25,7 +25,7 @@ const Popup = ({ person, closePopup }) => {
       {death && <div>† {death} {renderPlace(deathPlace)} {renderAge(death, birth)}</div>}
 
       <div className="occupations">
-        {occupations.map(occupation => (
+        {occupations && occupations.map(occupation => (
           <div key={occupation.$.id}>
             {occupation.description[0]} <span className="place-name">{occupation.place && occupation.place.name}</span>
           </div>
