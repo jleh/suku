@@ -82,7 +82,7 @@ class App extends Component {
           </nav>
           {page === 'tree' && <AncestorTree data={data} personSelected={this.personSelected} />}
           {page === 'timeline' && <Timeline data={data} worldEvents={worldEvents} />}
-          {page === 'places' && <Places />}
+          {page === 'places' && <Places data={data} />}
         </div>
         {selectedPerson && <Popup person={selectedPerson} closePopup={this.closePopup} />}
       </div>

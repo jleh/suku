@@ -40,7 +40,7 @@ const printPerson = (person, database) => {
       father,
       mother
     ],
-    sources: findSources(person, database),
+    sources: findSources(person, database)
   };
 
   return personNode;
