@@ -74,6 +74,7 @@ class App extends Component {
             Paikat
           </button>
         </nav>
+
         {page === 'tree' && <AncestorTree data={data} personSelected={this.personSelected} />}
         {page === 'timeline' && <Timeline data={data} worldEvents={worldEvents} />}
         {page === 'places' && <Places data={data} />}

@@ -33,7 +33,7 @@ const getPlace = (ref, places) => {
 };
 
 const getEventPlace = (event, places) => {
-  if (event && event.place) {
+  if (event && event.place && event.place[0]) {
     const eventPlace = getPlace(event.place[0].$.hlink, places);
 
     return eventPlace;
