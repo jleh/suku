@@ -8,6 +8,8 @@ const findSources = require('./ancestors/sources');
 
 const file = fs.readFileSync('gramps.xml');
 
+const processedPersons = [];
+
 const findParents = (person, data) => {
   if (person.childof) {
     return data.families[0].family.find(f => f.$.handle === person.childof[0].$.hlink);
@@ -25,23 +27,37 @@ const printName = (person) => {
 };
 
 const printPerson = (person, database) => {
-  const parents = findParents(person, database);
-  const father = parents && parents.father
-    ? printPerson(findPerson(parents.father[0].$.hlink, database), database)
-    : {};
-  const mother = parents && parents.mother
-    ? printPerson(findPerson(parents.mother[0].$.hlink, database), database)
-    : {};
+  // If persons parents are e.g. cousins their ancestors will be duplicated to
+  // family tree. We only want one branch of ancestors.
+  const exsistingPerson = processedPersons.find(p => person.$.id === p.id);
+  let personParents = [{}, {}];
+
+  if (!exsistingPerson) {
+    const parents = findParents(person, database);
+    const father = parents && parents.father
+      ? printPerson(findPerson(parents.father[0].$.hlink, database), database)
+      : {};
+    const mother = parents && parents.mother
+      ? printPerson(findPerson(parents.mother[0].$.hlink, database), database)
+      : {};
+
+    personParents = [father, mother];
+  }
 
   const personNode = {
+    id: person.$.id,
     name: printName(person),
     events: findEvents(person.eventref, database),
-    parents: [
-      father,
-      mother
-    ],
-    sources: findSources(person, database)
+    parents: personParents,
+    sources: findSources(person, database),
+    duplicate: (exsistingPerson !== undefined)
   };
+
+  if (!exsistingPerson) {
+    processedPersons.push(personNode);
+  } else {
+    exsistingPerson.duplicate = true;
+  }
 
   return personNode;
 };

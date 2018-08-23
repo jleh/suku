@@ -61,10 +61,13 @@ export default class AncestorTree extends Component {
         .x(d => d.y)
         .y(d => d.x));
 
+    const getLeafClassName = d => (d.children ? ' node--internal' : ' node--leaf');
+    const getDuplicateClassName = d => (d.data.duplicate ? 'node--duplicate' : '');
+
     const node = g.selectAll('.node')
       .data(nodes.descendants())
       .enter().append('g')
-      .attr('class', d => `node ${(d.children ? ' node--internal' : ' node--leaf')}`)
+      .attr('class', d => `node ${getLeafClassName(d)} ${getDuplicateClassName(d)}`)
       .attr('transform', d => `translate(${d.y},${d.x})`);
 
     node.append('circle')
