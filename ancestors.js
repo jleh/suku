@@ -39,9 +39,6 @@ const printPerson = (person, database) => {
     personParents = [father, mother];
   }
 
-  const family = findFamily(person, database);
-  console.log(family);
-
   const personNode = {
     id: person.$.id,
     name: printName(person),
@@ -49,7 +46,7 @@ const printPerson = (person, database) => {
     parents: personParents,
     sources: findSources(person, database),
     duplicate: (exsistingPerson !== undefined),
-    family
+    family: findFamily(person, database)
   };
 
   if (!exsistingPerson) {

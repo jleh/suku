@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Family from './family';
 import Sources from './sources';
 
 const renderPlace = place => (place ? place.name : '');
@@ -34,6 +35,7 @@ const Popup = ({ person, closePopup }) => {
 
       {causeOfDeath && <div>Kuolinsyy: {causeOfDeath}</div>}
 
+      <Family families={person.family} />
       <Sources sources={person.sources} />
 
       <button type="button" onClick={closePopup}>
