@@ -5,6 +5,8 @@ const config = require('./config.json');
 
 const findEvents = require('./ancestors/events');
 const findSources = require('./ancestors/sources');
+const findFamily = require('./ancestors/family');
+const printName = require('./ancestors/name');
 
 const file = fs.readFileSync('gramps.xml');
 
@@ -18,13 +20,6 @@ const findParents = (person, data) => {
 };
 
 const findPerson = (hlink, database) => database.people[0].person.find(p => p.$.handle === hlink);
-
-const printName = (person) => {
-  const name = person.name[0];
-  const surname = name.surname[0]._ ? name.surname[0]._ : name.surname;
-
-  return `${name.first} ${surname}`;
-};
 
 const printPerson = (person, database) => {
   // If persons parents are e.g. cousins their ancestors will be duplicated to
@@ -44,13 +39,17 @@ const printPerson = (person, database) => {
     personParents = [father, mother];
   }
 
+  const family = findFamily(person, database);
+  console.log(family);
+
   const personNode = {
     id: person.$.id,
     name: printName(person),
     events: findEvents(person.eventref, database),
     parents: personParents,
     sources: findSources(person, database),
-    duplicate: (exsistingPerson !== undefined)
+    duplicate: (exsistingPerson !== undefined),
+    family
   };
 
   if (!exsistingPerson) {
