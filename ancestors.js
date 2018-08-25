@@ -21,6 +21,17 @@ const findParents = (person, data) => {
 
 const findPerson = (hlink, database) => database.people[0].person.find(p => p.$.handle === hlink);
 
+const coatOfArms = (person) => {
+  if (person.attribute) {
+    const attribute = person.attribute.find(a => a.$.type === 'arms');
+
+    if (attribute) {
+      return attribute.$.value;
+    }
+  }
+  return undefined;
+};
+
 const printPerson = (person, database) => {
   // If persons parents are e.g. cousins their ancestors will be duplicated to
   // family tree. We only want one branch of ancestors.
@@ -46,7 +57,8 @@ const printPerson = (person, database) => {
     parents: personParents,
     sources: findSources(person, database),
     duplicate: (exsistingPerson !== undefined),
-    family: findFamily(person, database)
+    family: findFamily(person, database),
+    coatOfArms: coatOfArms(person)
   };
 
   if (!exsistingPerson) {

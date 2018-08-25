@@ -63,15 +63,23 @@ export default class AncestorTree extends Component {
 
     const getLeafClassName = d => (d.children ? ' node--internal' : ' node--leaf');
     const getDuplicateClassName = d => (d.data.duplicate ? 'node--duplicate' : '');
+    const getArmsClass = d => (d.data.coatOfArms ? 'coat-of-arms' : '');
 
     const node = g.selectAll('.node')
       .data(nodes.descendants())
       .enter().append('g')
-      .attr('class', d => `node ${getLeafClassName(d)} ${getDuplicateClassName(d)}`)
+      .attr('class', d => `node ${getLeafClassName(d)} ${getDuplicateClassName(d)} ${getArmsClass(d)}`)
       .attr('transform', d => `translate(${d.y},${d.x})`);
 
     node.append('circle')
       .attr('r', 2.5);
+
+    g.selectAll('.coat-of-arms').append('image')
+      .attr('xlink:href', d => `http://karttalehtinen.fi/suku/vaakunat/${d.data.coatOfArms}.svg`)
+      .attr('width', 20)
+      .attr('height', 20)
+      .attr('x', -10)
+      .attr('y', -10);
 
     addTextRow(node, d => d.data.name, 0);
     addTextRow(node, d => (d.data.events && d.data.events.birth ? `* ${d.data.events.birth}` : ''), 1);
