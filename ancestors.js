@@ -3,7 +3,7 @@ const xml2js = require('xml2js');
 
 const config = require('./config.json');
 
-const findEvents = require('./ancestors/events');
+const { findEvents } = require('./ancestors/events');
 const findSources = require('./ancestors/sources');
 const findFamily = require('./ancestors/family');
 const printName = require('./ancestors/name');

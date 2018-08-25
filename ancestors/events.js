@@ -69,4 +69,6 @@ const findEvents = (eventref, database) => {
   };
 };
 
-module.exports = findEvents;
+module.exports = {
+  findEvents
+};
