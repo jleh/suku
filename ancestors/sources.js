@@ -3,9 +3,9 @@ const findCitationAndSource = (ref, database) => {
   const source = database.sources[0].source.find(s => s.$.handle === citation.sourceref[0].$.hlink);
 
   return {
-    page: citation.page[0],
+    page: citation && citation.page ? citation.page[0] : '',
     title: source.stitle[0],
-    author: source.sauthor ? source.sauthor[0] : null,
+    author: source.sauthor ? source.sauthor[0] : null
   };
 };
 
