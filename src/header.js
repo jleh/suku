@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import config from '../config.json';
 
-const Header = () => (
+const Header = ({ updated }) => (
   <div>
     <h1>{config.pageTitle}</h1>
 
@@ -12,6 +12,8 @@ const Header = () => (
       <Link to="/timeline">Aikajana</Link>
       <Link to="/places">Paikat</Link>
     </nav>
+
+    <div>Päivitetty: {updated}</div>
   </div>
 );
 

@@ -25,7 +25,10 @@ class App extends Component {
   componentDidMount() {
     fetch('family.json')
       .then(res => res.json())
-      .then(data => this.setState({ data }));
+      .then(data => this.setState({
+        data: data.tree,
+        updated: data.updated
+      }));
 
     fetch('worldEvents.json')
       .then(res => res.json())
@@ -45,7 +48,7 @@ class App extends Component {
 
   render() {
     const {
-      data, selectedPerson, worldEvents
+      data, selectedPerson, worldEvents, updated
     } = this.state;
 
     if (!data) {
@@ -58,7 +61,7 @@ class App extends Component {
 
     return (
       <div>
-        <Header />
+        <Header updated={updated} />
         <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
         <Route path="/timeline" component={() => <Timeline data={data} worldEvents={worldEvents} />} />
         <Route path="/places" component={() => <Places data={data} />} />

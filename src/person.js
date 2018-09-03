@@ -42,7 +42,7 @@ const Person = ({ person, history }) => {
       <Sources sources={person.sources} />
 
       <button type="button" onClick={goBack}>
-        Sulje
+        Takaisin
       </button>
     </div>
   );

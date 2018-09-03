@@ -74,5 +74,10 @@ xml2js.parseString(file, (err, result) => {
   const rootPerson = result.database.people[0].person.find(p => p.$.id === config.rootPerson);
   const tree = printPerson(rootPerson, result.database);
 
-  fs.writeFileSync('family.json', JSON.stringify(tree));
+  const data = {
+    tree,
+    updated: new Date().toLocaleString()
+  };
+
+  fs.writeFileSync('family.json', JSON.stringify(data));
 });
