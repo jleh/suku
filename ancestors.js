@@ -32,6 +32,16 @@ const coatOfArms = (person) => {
   return undefined;
 };
 
+const getWikipedia = (person) => {
+  if (!person.url) {
+    return null;
+  }
+
+  const link = person.url.find(url => url.$.type === 'wikipedia');
+
+  return link ? link.$.href : null;
+};
+
 const printPerson = (person, database) => {
   // If persons parents are e.g. cousins their ancestors will be duplicated to
   // family tree. We only want one branch of ancestors.
@@ -58,7 +68,8 @@ const printPerson = (person, database) => {
     sources: findSources(person, database),
     duplicate: (exsistingPerson !== undefined),
     family: findFamily(person, database),
-    coatOfArms: coatOfArms(person)
+    coatOfArms: coatOfArms(person),
+    wikipedia: getWikipedia(person)
   };
 
   if (!exsistingPerson) {

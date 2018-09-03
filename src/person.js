@@ -28,6 +28,8 @@ const Person = ({ person, history }) => {
       {birth && <div>* {birth} {renderPlace(birthPlace)}</div>}
       {death && <div>† {death} {renderPlace(deathPlace)} {renderAge(death, birth)}</div>}
 
+      {person.wikipedia && <div><a href={person.wikipedia} target="_blank" rel="noopener noreferrer">Wikipedia</a></div>}
+
       <div className="occupations">
         {occupations && occupations.map(occupation => (
           <div key={occupation.$.id}>
