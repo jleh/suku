@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import Family from './family';
 import Sources from './sources';
@@ -9,10 +10,12 @@ const getYear = date => date.substring(date.length - 4);
 const getAge = (date, birth) => (birth ? Number(getYear(date)) - Number(getYear(birth)) : null);
 const renderAge = (date, birth) => (birth ? `${getAge(date, birth)} v` : null);
 
-const Popup = ({ person, closePopup }) => {
+const Person = ({ person, history }) => {
   if (!person.name) {
     return null;
   }
+
+  const goBack = () => history.goBack();
 
   const {
     birth, birthPlace, death, deathPlace, causeOfDeath, occupations
@@ -38,11 +41,11 @@ const Popup = ({ person, closePopup }) => {
       <Family families={person.family} />
       <Sources sources={person.sources} />
 
-      <button type="button" onClick={closePopup}>
+      <button type="button" onClick={goBack}>
         Sulje
       </button>
     </div>
   );
 };
 
-export default Popup;
+export default withRouter(Person);

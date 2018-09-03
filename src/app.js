@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import fetch from 'unfetch';
 
-import config from '../config.json';
-
+import Header from './header';
 import AncestorTree from './ancestorTree';
-import Popup from './popup';
+import Person from './person';
 import Timeline from './timeline';
 import Places from './places';
 
@@ -16,13 +15,11 @@ class App extends Component {
     this.state = {
       data: null,
       selectedPerson: null,
-      worldEvents: {},
-      page: 'tree'
+      worldEvents: {}
     };
 
     this.personSelected = this.personSelected.bind(this);
     this.closePopup = this.closePopup.bind(this);
-    this.switchPage = this.switchPage.bind(this);
   }
 
   componentDidMount() {
@@ -36,20 +33,19 @@ class App extends Component {
   }
 
   personSelected(selectedPerson) {
+    const { history } = this.props;
+
     this.setState({ selectedPerson });
+    history.push('/person');
   }
 
   closePopup() {
     this.setState({ selectedPerson: null });
   }
 
-  switchPage(page) {
-    this.setState({ page });
-  }
-
   render() {
     const {
-      data, page, selectedPerson, worldEvents
+      data, selectedPerson, worldEvents
     } = this.state;
 
     if (!data) {
@@ -62,37 +58,14 @@ class App extends Component {
 
     return (
       <div>
-        <Route path="/" component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
+        <Header />
+        <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
         <Route path="/timeline" component={() => <Timeline data={data} worldEvents={worldEvents} />} />
         <Route path="/places" component={() => <Places data={data} />} />
+        <Route path="/person" component={() => <Person person={selectedPerson} />} />
       </div>
     );
-
-    /*
-    return (
-      <div>
-        <h1>{config.pageTitle}</h1>
-        <nav>
-          <button type="button" onClick={() => this.switchPage('tree')}>
-            Sukupuu
-          </button>
-          <button type="button" onClick={() => this.switchPage('timeline')}>
-            Aikajana
-          </button>
-          <button type="button" onClick={() => this.switchPage('places')}>
-            Paikat
-          </button>
-        </nav>
-
-        {page === 'tree' && <AncestorTree data={data} personSelected={this.personSelected} />}
-        {page === 'timeline' && <Timeline data={data} worldEvents={worldEvents} />}
-        {page === 'places' && <Places data={data} />}
-
-        {selectedPerson && <Popup person={selectedPerson} closePopup={this.closePopup} />}
-      </div>
-    );
-    */
   }
 }
 
-export default App;
+export default withRouter(App);
