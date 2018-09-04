@@ -1,7 +1,12 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
+  output: {
+    filename: '[name].[contenthash].js'
+  },
 
   module: {
     rules: [
@@ -25,10 +30,13 @@ module.exports = {
   devtool: 'source-map',
 
   plugins: [
+    new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
-      { from: 'index.html', to: '' },
       { from: 'family.json', to: '' },
       { from: 'worldEvents.json', to: '' }
-    ])
+    ]),
+    new HtmlWebpackPlugin({
+      template: 'index.html'
+    })
   ]
 };
