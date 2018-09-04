@@ -70,5 +70,6 @@ const findEvents = (eventref, database) => {
 };
 
 module.exports = {
-  findEvents
+  findEvents,
+  getEventsByType
 };

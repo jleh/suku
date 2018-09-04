@@ -1,11 +1,12 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   output: {
-    filename: '[name].[contenthash].js'
+    filename: '[name].[hash].js'
   },
 
   module: {
@@ -29,6 +30,10 @@ module.exports = {
 
   devtool: 'source-map',
 
+  devServer: {
+    hot: true
+  },
+
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
@@ -37,6 +42,7 @@ module.exports = {
     ]),
     new HtmlWebpackPlugin({
       template: 'index.html'
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };

@@ -1,12 +1,6 @@
-const citationUrl = (citation) => {
-  if (!citation.srcattribute) {
-    return null;
-  }
+const { findAttributeValue } = require('./utils');
 
-  const url = citation.srcattribute.find(src => src.$.type === 'web');
-
-  return url ? url.$.value : null;
-};
+const citationUrl = citation => findAttributeValue(citation.srcattribute, 'web', 'value');
 
 const findCitationAndSource = (ref, database) => {
   const citation = database.citations[0].citation.find(c => c.$.handle === ref);

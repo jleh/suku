@@ -4,6 +4,7 @@ const xml2js = require('xml2js');
 const config = require('./config.json');
 
 const { findEvents } = require('./ancestors/events');
+const { findAttributeValue } = require('./ancestors/utils');
 const findSources = require('./ancestors/sources');
 const findFamily = require('./ancestors/family');
 const printName = require('./ancestors/name');
@@ -21,26 +22,8 @@ const findParents = (person, data) => {
 
 const findPerson = (hlink, database) => database.people[0].person.find(p => p.$.handle === hlink);
 
-const coatOfArms = (person) => {
-  if (person.attribute) {
-    const attribute = person.attribute.find(a => a.$.type === 'arms');
-
-    if (attribute) {
-      return attribute.$.value;
-    }
-  }
-  return undefined;
-};
-
-const getWikipedia = (person) => {
-  if (!person.url) {
-    return null;
-  }
-
-  const link = person.url.find(url => url.$.type === 'wikipedia');
-
-  return link ? link.$.href : null;
-};
+const coatOfArms = person => findAttributeValue(person.attribute, 'arms', 'value');
+const getWikipedia = person => findAttributeValue(person.url, 'wikipedia', 'href');
 
 const printPerson = (person, database) => {
   // If persons parents are e.g. cousins their ancestors will be duplicated to
