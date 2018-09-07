@@ -1,20 +1,11 @@
-const printName = require('./name');
-const { findEvents } = require('./events');
-
 const getFamily = (ref, database) => database.families[0].family
   .find(family => family.$.handle === ref);
 
 const getPerson = (ref, database) => database.people[0].person.find(p => p.$.handle === ref);
 const getSpouse = (ref, database) => (ref && ref[0] ? getPerson(ref[0].$.hlink, database) : null);
 
-const printChildren = (person, database) => ({
-  name: printName(person),
-  birth: findEvents(person.eventref, database).birth,
-  death: findEvents(person.eventref, database).death
-});
-
-const getChildren = (family, database) => (family.childref
-  ? family.childref.map(childref => printChildren(getPerson(childref.$.hlink, database), database))
+const getChildren = family => (family.childref
+  ? family.childref.map(childref => childref.$.hlink)
   : []);
 
 const findFamily = (person, database) => {
@@ -28,7 +19,7 @@ const findFamily = (person, database) => {
 
       return {
         type: family.rel[0].$.type,
-        spouse: printName(spouse),
+        spouse: spouse ? spouse.$.handle : null,
         children: getChildren(family, database)
       };
     });

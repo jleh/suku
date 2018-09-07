@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import fetch from 'unfetch';
 
+import config from '../config.json';
+
 import Header from './header';
 import AncestorTree from './ancestorTree';
 import Person from './person';
 import Timeline from './timeline';
 import Places from './places';
+import personTree from './personTree';
 
 class App extends Component {
   constructor() {
@@ -26,7 +29,8 @@ class App extends Component {
     fetch('family.json')
       .then(res => res.json())
       .then(data => this.setState({
-        data: data.tree,
+        data: personTree(data.persons, config.rootPerson),
+        persons: data.persons,
         updated: data.updated
       }));
 
@@ -48,7 +52,7 @@ class App extends Component {
 
   render() {
     const {
-      data, selectedPerson, worldEvents, updated
+      data, selectedPerson, worldEvents, updated, persons
     } = this.state;
 
     if (!data) {
@@ -65,7 +69,7 @@ class App extends Component {
         <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
         <Route path="/timeline" component={() => <Timeline data={data} worldEvents={worldEvents} />} />
         <Route path="/places" component={() => <Places data={data} />} />
-        <Route path="/person" component={() => <Person person={selectedPerson} />} />
+        <Route path="/person" component={() => <Person person={selectedPerson} persons={persons} />} />
       </div>
     );
   }

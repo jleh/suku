@@ -10,7 +10,7 @@ const getYear = date => date.substring(date.length - 4);
 const getAge = (date, birth) => (birth ? Number(getYear(date)) - Number(getYear(birth)) : null);
 const renderAge = (date, birth) => (birth ? `${getAge(date, birth)} v` : null);
 
-const Person = ({ person, history }) => {
+const Person = ({ person, persons, history }) => {
   if (!person.name) {
     return null;
   }
@@ -46,7 +46,7 @@ const Person = ({ person, history }) => {
 
       {causeOfDeath && <div>Kuolinsyy: {causeOfDeath}</div>}
 
-      <Family families={person.family} />
+      <Family families={person.family} persons={persons} />
       <Sources sources={person.sources} />
 
       <button type="button" onClick={goBack}>
