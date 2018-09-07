@@ -1,5 +1,12 @@
 {
-  "presets": ["env", "react"],
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": ["ie 11"]
+      }
+    }],
+    "react"
+  ],
   "plugins": [
     "lodash"
   ]

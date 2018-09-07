@@ -5,7 +5,7 @@ const printBirth = child => (child.birth ? `* ${child.birth}` : null);
 const printDeath = child => (child.death ? `† ${child.death}` : null);
 
 const Dates = styled.span`
-  font-size: 0.75em
+  font-size: 0.75em;
 `;
 
 export default ({ families }) => (
