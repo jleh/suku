@@ -17,16 +17,14 @@ class App extends Component {
 
     this.state = {
       data: null,
-      selectedPerson: null,
       worldEvents: {}
     };
 
     this.personSelected = this.personSelected.bind(this);
-    this.closePopup = this.closePopup.bind(this);
   }
 
   componentDidMount() {
-    fetch('family.json')
+    fetch('/suku/family.json')
       .then(res => res.json())
       .then(data => this.setState({
         data: personTree(data.persons, config.rootPerson),
@@ -34,33 +32,23 @@ class App extends Component {
         updated: data.updated
       }));
 
-    fetch('worldEvents.json')
+    fetch('/suku/worldEvents.json')
       .then(res => res.json())
       .then(worldEvents => this.setState({ worldEvents }));
   }
 
   personSelected(selectedPerson) {
     const { history } = this.props;
-
-    this.setState({ selectedPerson });
-    history.push('/person');
-  }
-
-  closePopup() {
-    this.setState({ selectedPerson: null });
+    history.push(`/person/${selectedPerson.id}`);
   }
 
   render() {
     const {
-      data, selectedPerson, worldEvents, updated, persons
+      data, worldEvents, updated, persons
     } = this.state;
 
     if (!data) {
-      return (
-        <div>
-          Ladataan...
-        </div>
-      );
+      return <div>Ladataan...</div>;
     }
 
     return (
@@ -69,7 +57,7 @@ class App extends Component {
         <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
         <Route path="/timeline" component={() => <Timeline data={data} worldEvents={worldEvents} />} />
         <Route path="/places" component={() => <Places data={data} />} />
-        <Route path="/person" component={() => <Person person={selectedPerson} persons={persons} />} />
+        <Route path="/person/:id" component={() => <Person persons={persons} />} />
       </div>
     );
   }

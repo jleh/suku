@@ -10,7 +10,9 @@ const getYear = date => date.substring(date.length - 4);
 const getAge = (date, birth) => (birth ? Number(getYear(date)) - Number(getYear(birth)) : null);
 const renderAge = (date, birth) => (birth ? `${getAge(date, birth)} v` : null);
 
-const Person = ({ person, persons, history }) => {
+const Person = ({ persons, history, match }) => {
+  const person = persons.find(p => p.id === match.params.id);
+
   if (!person.name) {
     return null;
   }

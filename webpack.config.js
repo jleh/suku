@@ -5,7 +5,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   output: {
-    filename: '[name].[hash].js'
+    filename: '[name].[hash].js',
+    publicPath: process.env.NODE_ENV === 'production' ? '/suku/' : undefined
   },
 
   module: {
@@ -28,6 +29,14 @@ module.exports = {
   },
 
   devtool: 'source-map',
+  devServer: {
+    historyApiFallback: {
+      rewrites: [
+        { from: /family.json$/, to: '/family.json' },
+        { from: /worldEvents.json$/, to: '/worldEvents.json' }
+      ]
+    }
+  },
 
   plugins: [
     new CleanWebpackPlugin(['dist']),
