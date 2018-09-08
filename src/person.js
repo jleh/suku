@@ -1,12 +1,18 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Family from './family';
 import Sources from './sources';
+import Wikipedia from './wikipedia';
+import LinkedPerson from './linkedPerson';
 
 const Place = styled.span`
   font-style: italic;
+`;
+
+const Parents = styled.div`
+  margin-top: 1em;
 `;
 
 const renderPlace = place => (place ? place.name : '');
@@ -35,13 +41,13 @@ const Person = ({ persons, history, match }) => {
       {birth && <div>* {birth} {renderPlace(birthPlace)}</div>}
       {death && <div>† {death} {renderPlace(deathPlace)} {renderAge(death, birth)}</div>}
 
-      {person.wikipedia && (
-        <div>
-          <a href={person.wikipedia} target="_blank" rel="noopener noreferrer">
-            Wikipedia
-          </a>
-        </div>
-      )}
+      <Wikipedia person={person} />
+
+      <Parents>
+        Vanhemmat:
+        <LinkedPerson personRef={person.father} persons={persons} />
+        <LinkedPerson personRef={person.mother} persons={persons} />
+      </Parents>
 
       <div className="occupations">
         {occupations && occupations.map(occupation => (
@@ -63,6 +69,9 @@ const Person = ({ persons, history, match }) => {
       <button type="button" onClick={goBack}>
         Takaisin
       </button>
+      <Link to="/">
+        <button type="button">Etusivu</button>
+      </Link>
     </div>
   );
 };
