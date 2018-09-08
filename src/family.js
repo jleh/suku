@@ -10,9 +10,13 @@ const findPerson = (handle, persons) => persons.find(p => p.handle === handle);
 const Dates = styled.span`
   font-size: 0.75em;
 `;
+const Family = styled.div`
+  margin-top: 2em;
+  margin-bottom: 1em;
+`;
 
 export default ({ families, persons }) => (
-  <div className="family">
+  <Family>
     {families.map(family => (
       <div key={family.spouse}>
         {get(findPerson(family.spouse, persons), 'name')}
@@ -27,5 +31,5 @@ export default ({ families, persons }) => (
         </ol>
       </div>
     ))}
-  </div>
+  </Family>
 );

@@ -6,7 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   output: {
     filename: '[name].[hash].js',
-    publicPath: process.env.NODE_ENV === 'production' ? '/suku/' : undefined
+    publicPath: process.env.NODE_ENV === 'production' ? '/suku/' : '/'
   },
 
   module: {
