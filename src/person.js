@@ -7,6 +7,10 @@ import Sources from './sources';
 import Wikipedia from './wikipedia';
 import LinkedPerson from './linkedPerson';
 
+const PersonDiv = styled.div`
+  padding-left: 1em;
+`;
+
 const Place = styled.span`
   font-style: italic;
 `;
@@ -35,7 +39,7 @@ const Person = ({ persons, history, match }) => {
   } = person.events;
 
   return (
-    <div className="popup">
+    <PersonDiv>
       <h2>{person.name}</h2>
 
       {birth && <div>* {birth} {renderPlace(birthPlace)}</div>}
@@ -72,7 +76,7 @@ const Person = ({ persons, history, match }) => {
       <Link to="/">
         <button type="button">Etusivu</button>
       </Link>
-    </div>
+    </PersonDiv>
   );
 };
 

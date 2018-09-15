@@ -10,6 +10,7 @@ import Person from './person';
 import Timeline from './timeline';
 import Places from './places';
 import personTree from './personTree';
+import PersonList from './personList';
 
 class App extends Component {
   constructor() {
@@ -58,6 +59,7 @@ class App extends Component {
         <Route path="/timeline" component={() => <Timeline data={data} worldEvents={worldEvents} />} />
         <Route path="/places" component={() => <Places data={data} />} />
         <Route path="/person/:id" component={() => <Person persons={persons} />} />
+        <Route path="/persons" component={() => <PersonList persons={persons} />} />
       </div>
     );
   }
