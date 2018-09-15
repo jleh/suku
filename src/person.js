@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+import { Translate } from 'react-localize-redux';
 
 import Family from './family';
 import Sources from './sources';
 import Wikipedia from './wikipedia';
 import LinkedPerson from './linkedPerson';
-import { Translate } from 'react-localize-redux';
 
 const PersonDiv = styled.div`
   padding-left: 1em;
