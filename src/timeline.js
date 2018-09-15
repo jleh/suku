@@ -1,6 +1,7 @@
 import React from 'react';
 import sortBy from 'lodash/sortBy';
 import uniq from 'lodash/uniq';
+import { Translate } from 'react-localize-redux';
 
 const toSortDate = (textDate) => {
   const date = textDate.replace(/\?/g, '0');
@@ -58,7 +59,7 @@ const Timeline = ({ data, worldEvents }) => {
 
   return (
     <div>
-      <h2>Aikajana</h2>
+      <h2><Translate id="menu.timeline" /></h2>
       {years.map(year => (
         <div key={year}>
           <h4>{year}</h4>

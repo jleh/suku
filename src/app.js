@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { Route, withRouter } from 'react-router-dom';
+import { withLocalize, Translate } from 'react-localize-redux';
 import fetch from 'unfetch';
 
 import config from '../config.json';
+import translations from './translations/translations.json';
 
 import Header from './header';
 import AncestorTree from './ancestorTree';
@@ -13,13 +16,21 @@ import personTree from './personTree';
 import PersonList from './personList';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    const { initialize } = this.props;
 
     this.state = {
       data: null,
       worldEvents: {}
     };
+
+    initialize({
+      languages: ['fi'],
+      translation: translations,
+      options: { renderToStaticMarkup }
+    });
 
     this.personSelected = this.personSelected.bind(this);
   }
@@ -49,7 +60,7 @@ class App extends Component {
     } = this.state;
 
     if (!data) {
-      return <div>Ladataan...</div>;
+      return <div><Translate id="loading" /></div>;
     }
 
     return (
@@ -65,4 +76,6 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default withRouter(
+  withLocalize(App)
+);

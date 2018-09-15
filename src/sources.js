@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Translate } from 'react-localize-redux';
 
 const getSourceText = source => (
   <Fragment>
@@ -20,7 +21,7 @@ const renderSource = source => (
 
 export default ({ sources }) => sources && (
   <div className="sources">
-    <div>Lähteet:</div>
+    <div><Translate id="sources" />:</div>
     {sources.map(renderSource)}
   </div>
 );

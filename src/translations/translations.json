@@ -1,0 +1,20 @@
+{
+  "loading": ["Ladataan..."],
+  "updated": ["Päivitetty"],
+  "frontPage": ["Etusivu"],
+  "back": ["Takaisin"],
+  "sources": ["Lähteet"],
+  "menu": {
+    "ancestorTree": ["Sukupuu"],
+    "timeline": ["Aikajana"],
+    "places": ["Paikat"],
+    "personIndex": ["Henkiköhakemisto"]
+  },
+  "family": {
+    "spouse": ["Puoliso"]
+  },
+  "person": {
+    "parents": ["Vanhemmat"],
+    "causeOfDeath": ["Kuolinsyy"]
+  }
+}

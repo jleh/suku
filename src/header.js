@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Translate } from 'react-localize-redux';
 
 import config from '../config.json';
 
@@ -13,16 +14,24 @@ const Header = ({ updated }) => (
     <h1>{config.pageTitle}</h1>
 
     <nav>
-      <Link to="/">Sukupuu</Link>
+      <Link to="/">
+        <Translate id="menu.ancestorTree" />
+      </Link>
       { ' ' }
-      <Link to="/timeline">Aikajana</Link>
+      <Link to="/timeline">
+        <Translate id="menu.timeline" />
+      </Link>
       { ' ' }
-      <Link to="/places">Paikat</Link>
+      <Link to="/places">
+        <Translate id="menu.places" />
+      </Link>
       { ' ' }
-      <Link to="/persons">Henkilöhakemisto</Link>
+      <Link to="/persons">
+        <Translate id="menu.personIndex" />
+      </Link>
     </nav>
 
-    <div>Päivitetty: {updated}</div>
+    <div><Translate id="updated" />: {updated}</div>
   </HeaderDiv>
 );
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import sortBy from 'lodash/sortBy';
 import { Link } from 'react-router-dom';
+import { Translate } from 'react-localize-redux';
 
 const filterOutPrivateNames = persons => persons.filter(p => p.name !== ' Private');
 const getLastName = (person) => {
@@ -11,7 +12,7 @@ const sortAndFilterList = persons => sortBy(filterOutPrivateNames(persons), getL
 
 export default ({ persons }) => (
   <div>
-    <h2>Henkilöhakemisto</h2>
+    <h2><Translate id="menu.personIndex" /></h2>
     {sortAndFilterList(persons).map(person => (
       <div key={person.id}>
         <Link to={`/person/${person.id}`}>{person.name}</Link>
