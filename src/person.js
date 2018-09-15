@@ -6,6 +6,7 @@ import Family from './family';
 import Sources from './sources';
 import Wikipedia from './wikipedia';
 import LinkedPerson from './linkedPerson';
+import { Translate } from 'react-localize-redux';
 
 const PersonDiv = styled.div`
   padding-left: 1em;
@@ -48,7 +49,7 @@ const Person = ({ persons, history, match }) => {
       <Wikipedia person={person} />
 
       <Parents>
-        Vanhemmat:
+        <Translate id="person.parents" />:
         <LinkedPerson personRef={person.father} persons={persons} />
         <LinkedPerson personRef={person.mother} persons={persons} />
       </Parents>
@@ -65,16 +66,18 @@ const Person = ({ persons, history, match }) => {
         ))}
       </div>
 
-      {causeOfDeath && <div>Kuolinsyy: {causeOfDeath}</div>}
+      {causeOfDeath && <div><Translate id="person.causeOfDeath" />: {causeOfDeath}</div>}
 
       <Family families={person.family} persons={persons} />
       <Sources sources={person.sources} />
 
       <button type="button" onClick={goBack}>
-        Takaisin
+        <Translate id="back" />
       </button>
       <Link to="/">
-        <button type="button">Etusivu</button>
+        <button type="button">
+          <Translate id="frontPage" />
+        </button>
       </Link>
     </PersonDiv>
   );
