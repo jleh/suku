@@ -4,6 +4,7 @@
   "frontPage": ["Etusivu"],
   "back": ["Takaisin"],
   "sources": ["Lähteet"],
+  "page": ["s."],
   "menu": {
     "ancestorTree": ["Sukupuu"],
     "timeline": ["Aikajana"],
@@ -16,5 +17,13 @@
   "person": {
     "parents": ["Vanhemmat"],
     "causeOfDeath": ["Kuolinsyy"]
+  },
+  "events": {
+    "birth": ["syntyi"],
+    "death": ["kuoli"],
+    "occupation": ["työskenteli"]
+  },
+  "places": {
+    "villages": ["Kylät"]
   }
 }

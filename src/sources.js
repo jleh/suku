@@ -1,9 +1,15 @@
 import React, { Fragment } from 'react';
 import { Translate } from 'react-localize-redux';
+import styled from 'styled-components';
+
+const SourcesDiv = styled.div`
+  margin-top: 2em;
+  margin-bottom: 2em;
+`;
 
 const getSourceText = source => (
   <Fragment>
-    <i>{source.author}</i> {source.title} {source.page}
+    <i>{source.author}</i> {source.title} <Translate id="page" /> {source.page}
   </Fragment>
 );
 
@@ -20,8 +26,8 @@ const renderSource = source => (
 );
 
 export default ({ sources }) => sources && (
-  <div className="sources">
+  <SourcesDiv>
     <div><Translate id="sources" />:</div>
     {sources.map(renderSource)}
-  </div>
+  </SourcesDiv>
 );

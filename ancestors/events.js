@@ -15,7 +15,10 @@ const getEventDescription = event => (event ? formatDate(event.description[0]) :
 
 const getPlace = (ref, places) => {
   const place = places.find(p => p.$.handle === ref);
-  const eventPlace = { name: place.pname[0].$.value };
+  const eventPlace = {
+    id: place.$.id,
+    name: place.pname[0].$.value
+  };
 
   if (place.coord) {
     eventPlace.coordinates = {

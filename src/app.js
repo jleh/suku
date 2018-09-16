@@ -11,9 +11,11 @@ import Header from './header';
 import AncestorTree from './ancestorTree';
 import Person from './person';
 import Timeline from './timeline';
-import Places from './places';
+import Places from './places/places';
 import personTree from './personTree';
 import PersonList from './personList';
+import Place from './places/place';
+import Village from './places/village';
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +25,7 @@ class App extends Component {
 
     this.state = {
       data: null,
+      places: [],
       worldEvents: {}
     };
 
@@ -41,6 +44,7 @@ class App extends Component {
       .then(data => this.setState({
         data: personTree(data.persons, config.rootPerson),
         persons: data.persons,
+        places: data.places,
         updated: data.updated
       }));
 
@@ -56,7 +60,7 @@ class App extends Component {
 
   render() {
     const {
-      data, worldEvents, updated, persons
+      data, worldEvents, updated, persons, places
     } = this.state;
 
     if (!data) {
@@ -68,9 +72,11 @@ class App extends Component {
         <Header updated={updated} />
         <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
         <Route path="/timeline" component={() => <Timeline data={data} worldEvents={worldEvents} />} />
-        <Route path="/places" component={() => <Places data={data} />} />
+        <Route path="/places" component={() => <Places data={data} places={places} />} />
         <Route path="/person/:id" component={() => <Person persons={persons} />} />
         <Route path="/persons" component={() => <PersonList persons={persons} />} />
+        <Route path="/place/:id" component={() => <Place places={places} persons={persons} />} />
+        <Route path="/village/:id" component={() => <Village places={places} persons={persons} />} />
       </div>
     );
   }
