@@ -60,7 +60,7 @@ const findEvents = (eventref, database) => {
   const personEvents = events.map(event => ({
     id: event.$.id,
     type: event.type[0],
-    date: getEventDate(event),
+    date: event.dateval && event.dateval[0].$.val,
     place: getEventPlace(event, places),
     description: event.description && event.description[0]
   }));
@@ -68,6 +68,7 @@ const findEvents = (eventref, database) => {
   return {
     personEvents,
     birth: getEventDate(birth),
+    birthISO: birth && birth.dateval && birth.dateval[0].$.val,
     birthPlace: getEventPlace(birth, places),
     death: getEventDate(death),
     deathPlace: getEventPlace(death, places)

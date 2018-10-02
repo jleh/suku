@@ -7,26 +7,14 @@ import Family from './family';
 import Sources from './sources';
 import Wikipedia from './wikipedia';
 import LinkedPerson from './linkedPerson';
+import PersonEvents from './personEvents';
 
 const PersonDiv = styled.div`
   padding-left: 1em;
 `;
 
-const Place = styled.span`
-  font-style: italic;
-`;
-
 const Parents = styled.div`
   margin-top: 1em;
-`;
-
-const Events = styled.table`
-  margin-top: 1em;
-  min-width: 60%;
-`;
-
-const EventDate = styled.td`
-  width: 6em;
 `;
 
 const renderPlace = place => (place ? place.name : '');
@@ -45,7 +33,7 @@ const Person = ({ persons, history, match }) => {
   const goBack = () => history.goBack();
 
   const {
-    birth, birthPlace, death, deathPlace, personEvents
+    birth, birthPlace, death, deathPlace, personEvents, birthISO
   } = person.events;
 
   return (
@@ -63,20 +51,7 @@ const Person = ({ persons, history, match }) => {
         <LinkedPerson personRef={person.mother} persons={persons} />
       </Parents>
 
-      <Events>
-        <tbody>
-          {personEvents.map(event => (
-            <tr key={event.id}>
-              <EventDate>{event.date}</EventDate>
-              <td><Translate id={`events.${event.type}`} /></td>
-              <td>{event.description}</td>
-              <td>
-                <Place>{event.place && event.place.name}</Place>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Events>
+      <PersonEvents events={personEvents} birth={birthISO} />
 
       <Family families={person.family} persons={persons} />
       <Sources sources={person.sources} />
