@@ -15,13 +15,20 @@
     "spouse": ["Puoliso"]
   },
   "person": {
-    "parents": ["Vanhemmat"],
-    "causeOfDeath": ["Kuolinsyy"]
+    "parents": ["Vanhemmat"]
   },
   "events": {
-    "birth": ["syntyi"],
-    "death": ["kuoli"],
-    "occupation": ["työskenteli"]
+    "Birth": ["Syntyi"],
+    "Christening": ["Kastettu"],
+    "Baptism": ["Kastettu"],
+    "Death": ["Kuoli"],
+    "Occupation": ["Työskenteli"],
+    "Residence": ["Asui"],
+    "Degree": ["Tutkinto"],
+    "Burial": ["Haudattu"],
+    "Other": ["Muu"],
+    "Education": ["Koulutus"],
+    "Cause Of Death": ["Kuolinsyy"]
   },
   "places": {
     "villages": ["Kylät"]

@@ -11,7 +11,6 @@ const formatDate = (date) => {
 const getEventType = (events, type) => events.find(event => event.type[0] === type);
 const getEventsByType = (events, type) => events.filter(event => event.type[0] === type);
 const getEventDate = event => (event && event.dateval ? formatDate(event.dateval[0].$.val) : '');
-const getEventDescription = event => (event ? formatDate(event.description[0]) : '');
 
 const getPlace = (ref, places) => {
   const place = places.find(p => p.$.handle === ref);
@@ -45,10 +44,6 @@ const getEventPlace = (event, places) => {
   return '';
 };
 
-const getEvents = (events, type, places) => getEventsByType(events, type)
-  .map(event => Object.assign(event, { place: getEventPlace(event, places) }))
-  .map(event => Object.assign(event, { date: getEventDate(event) }));
-
 const findEvents = (eventref, database) => {
   if (!eventref) {
     return {};
@@ -62,13 +57,20 @@ const findEvents = (eventref, database) => {
   const birth = getEventType(events, 'Birth');
   const death = getEventType(events, 'Death');
 
+  const personEvents = events.map(event => ({
+    id: event.$.id,
+    type: event.type[0],
+    date: getEventDate(event),
+    place: getEventPlace(event, places),
+    description: event.description && event.description[0]
+  }));
+
   return {
+    personEvents,
     birth: getEventDate(birth),
     birthPlace: getEventPlace(birth, places),
     death: getEventDate(death),
-    deathPlace: getEventPlace(death, places),
-    causeOfDeath: getEventDescription(getEventType(events, 'Cause Of Death')),
-    occupations: getEvents(events, 'Occupation', places)
+    deathPlace: getEventPlace(death, places)
   };
 };
 

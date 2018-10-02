@@ -20,6 +20,15 @@ const Parents = styled.div`
   margin-top: 1em;
 `;
 
+const Events = styled.table`
+  margin-top: 1em;
+  min-width: 60%;
+`;
+
+const EventDate = styled.td`
+  width: 6em;
+`;
+
 const renderPlace = place => (place ? place.name : '');
 
 const getYear = date => date.substring(date.length - 4);
@@ -36,7 +45,7 @@ const Person = ({ persons, history, match }) => {
   const goBack = () => history.goBack();
 
   const {
-    birth, birthPlace, death, deathPlace, causeOfDeath, occupations
+    birth, birthPlace, death, deathPlace, personEvents
   } = person.events;
 
   return (
@@ -54,19 +63,20 @@ const Person = ({ persons, history, match }) => {
         <LinkedPerson personRef={person.mother} persons={persons} />
       </Parents>
 
-      <div className="occupations">
-        {occupations && occupations.map(occupation => (
-          <div key={occupation.$.id}>
-            {occupation.description[0]}
-            { ' ' }
-            {occupation.date}
-            { ' ' }
-            <Place>{occupation.place && occupation.place.name}</Place>
-          </div>
-        ))}
-      </div>
-
-      {causeOfDeath && <div><Translate id="person.causeOfDeath" />: {causeOfDeath}</div>}
+      <Events>
+        <tbody>
+          {personEvents.map(event => (
+            <tr key={event.id}>
+              <EventDate>{event.date}</EventDate>
+              <td><Translate id={`events.${event.type}`} /></td>
+              <td>{event.description}</td>
+              <td>
+                <Place>{event.place && event.place.name}</Place>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Events>
 
       <Family families={person.family} persons={persons} />
       <Sources sources={person.sources} />
