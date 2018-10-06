@@ -3,3 +3,4 @@ dist
 *.xml
 *.bak
 family.json
+coverage

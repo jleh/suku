@@ -1,0 +1,16 @@
+.table {
+  margin-top: 1em;
+  min-width: 60%;
+}
+
+.date {
+  width: 6em;
+}
+
+.place {
+  font-style: italic;
+}
+
+.age {
+  width: 5em;
+}

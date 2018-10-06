@@ -1,23 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import styled from 'styled-components';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 
 import { getPlaceEvents } from '../util';
 import PlaceEvents from './placeEvents';
 
-const VillageEvents = styled.div`
-  margin-top: 1em;
-`;
-
-const MapContainer = styled.div`
-  height: 25em;
-  width: 100%;
-`;
-
-const Buildings = styled.div`
-  margin-left: 1em;
-`;
+import styles from './village.css';
 
 const getCoordinates = place => [
   parseFloat(place.coordinates.lat.replace(',', '.')),
@@ -25,7 +13,7 @@ const getCoordinates = place => [
 ];
 
 const renderMap = village => (
-  <MapContainer>
+  <div className={styles.map}>
     <Map center={getCoordinates(village)} zoom={12}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -35,7 +23,7 @@ const renderMap = village => (
         <Marker position={getCoordinates(farm)} />
       ))}
     </Map>
-  </MapContainer>
+  </div>
 );
 
 const Village = ({ match, persons, places }) => {
@@ -52,16 +40,16 @@ const Village = ({ match, persons, places }) => {
           <h3>{farm.name}</h3>
           <PlaceEvents placeEvents={getPlaceEvents(farm.id, persons)} />
           {farm.buildings.map(building => (
-            <Buildings key={building.id}>
+            <div className={styles.buildings} key={building.id}>
               <h4>{building.name}</h4>
               <PlaceEvents placeEvents={getPlaceEvents(building.id, persons)} />
-            </Buildings>
+            </div>
           ))}
         </div>
       ))}
-      <VillageEvents>
+      <div className={styles.events}>
         <PlaceEvents placeEvents={getPlaceEvents(village.id, persons)} />
-      </VillageEvents>
+      </div>
     </div>
   );
 };

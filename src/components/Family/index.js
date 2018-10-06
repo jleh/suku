@@ -1,16 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Translate } from 'react-localize-redux';
+
+import styles from './family.css';
 
 import LinkedPerson from '../LinkedPerson';
 
-const Family = styled.div`
-  margin-top: 2em;
-  margin-bottom: 1em;
-`;
-
 export default ({ families, persons }) => (
-  <Family>
+  <div className={styles.family}>
     {families.map(family => (
       <div key={family.spouse}>
         <Translate id="family.spouse" />: <LinkedPerson personRef={family.spouse} persons={persons} />
@@ -23,5 +19,5 @@ export default ({ families, persons }) => (
         </ol>
       </div>
     ))}
-  </Family>
+  </div>
 );

@@ -1,16 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { Translate } from 'react-localize-redux';
 
 import config from '../../../config.json';
-
-const HeaderDiv = styled.div`
-  margin-bottom: 1em;
-`;
+import styles from './header.css';
 
 const Header = ({ updated }) => (
-  <HeaderDiv>
+  <div className={styles.header}>
     <h1>{config.pageTitle}</h1>
 
     <nav>
@@ -32,7 +28,7 @@ const Header = ({ updated }) => (
     </nav>
 
     <div><Translate id="updated" />: {updated}</div>
-  </HeaderDiv>
+  </div>
 );
 
 export default Header;
