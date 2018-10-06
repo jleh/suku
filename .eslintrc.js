@@ -1,7 +1,8 @@
 module.exports = {
     "extends": "airbnb",
     env: {
-        "browser": true
+        "browser": true,
+        "jest/globals": true
     },
     rules: {
         'comma-dangle': [2, 'never'],
@@ -9,5 +10,6 @@ module.exports = {
         'react/jsx-one-expression-per-line': 'off',
         'react/prop-types': 'off',
         'react/no-array-index-key': 'off'
-    }
+    },
+    plugins: ['jest']
 };
