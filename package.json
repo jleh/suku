@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "tree": "node ancestors.js",
     "dev": "webpack-dev-server --mode=development",
     "build": "cross-env NODE_ENV=production webpack --mode=production"
@@ -31,7 +31,11 @@
     "eslint-plugin-jest": "^21.24.1",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
+    "npm": "^6.4.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.0.10",
     "react-test-renderer": "^16.5.2",
     "redux": "^4.0.0",
     "style-loader": "^0.23.0",

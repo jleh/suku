@@ -4,16 +4,18 @@ import { Route, withRouter } from 'react-router-dom';
 import { withLocalize, Translate } from 'react-localize-redux';
 import fetch from 'unfetch';
 
+import './app.css';
+
 import config from '../config.json';
 import translations from './translations/translations.json';
 
-import Header from './header';
-import AncestorTree from './ancestorTree';
-import Person from './person';
-import Timeline from './timeline';
+import Header from './components/Header';
+import AncestorTree from './components/AncestorTree';
+import Person from './components/Person';
+import Timeline from './components/Timeline';
 import Places from './places/places';
-import personTree from './personTree';
-import PersonList from './personList';
+import treeBuilder from './treeBuilder';
+import PersonList from './components/PersonList';
 import Place from './places/place';
 import Village from './places/village';
 
@@ -42,7 +44,7 @@ class App extends Component {
     fetch('/suku/family.json')
       .then(res => res.json())
       .then(data => this.setState({
-        data: personTree(data.persons, config.rootPerson),
+        data: treeBuilder(data.persons, config.rootPerson),
         persons: data.persons,
         places: data.places,
         updated: data.updated

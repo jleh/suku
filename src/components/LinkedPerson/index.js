@@ -1,12 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { findPerson, printBirth, printDeath } from './util';
+import styles from './linkedPerson.css';
 
-const Dates = styled.span`
-  font-size: 0.75em;
-`;
+import { findPerson, printBirth, printDeath } from '../../util';
 
 export default ({ personRef, persons }) => {
   const person = findPerson(personRef, persons);
@@ -21,7 +18,7 @@ export default ({ personRef, persons }) => {
         {person.name}
       </Link>
       { ' ' }
-      <Dates>{printBirth(person)} {printDeath(person)}</Dates>
+      <span className={styles.dates}>{printBirth(person)} {printDeath(person)}</span>
     </div>
   );
 };

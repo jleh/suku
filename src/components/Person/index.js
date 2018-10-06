@@ -1,21 +1,14 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import styled from 'styled-components';
 import { Translate } from 'react-localize-redux';
 
-import Family from './family';
-import Sources from './sources';
-import Wikipedia from './wikipedia';
-import LinkedPerson from './linkedPerson';
-import PersonEvents from './personEvents';
+import styles from './person.css';
 
-const PersonDiv = styled.div`
-  padding-left: 1em;
-`;
-
-const Parents = styled.div`
-  margin-top: 1em;
-`;
+import Family from '../Family';
+import Sources from '../Sources';
+import Wikipedia from '../Wikipedia';
+import LinkedPerson from '../LinkedPerson';
+import PersonEvents from '../PersonEvents';
 
 const renderPlace = place => (place ? place.name : '');
 
@@ -37,7 +30,7 @@ const Person = ({ persons, history, match }) => {
   } = person.events;
 
   return (
-    <PersonDiv>
+    <div className={styles.person}>
       <h2>{person.name}</h2>
 
       {birth && <div>* {birth} {renderPlace(birthPlace)}</div>}
@@ -45,11 +38,11 @@ const Person = ({ persons, history, match }) => {
 
       <Wikipedia person={person} />
 
-      <Parents>
+      <div className={styles.parent}>
         <Translate id="person.parents" />:
         <LinkedPerson personRef={person.father} persons={persons} />
         <LinkedPerson personRef={person.mother} persons={persons} />
-      </Parents>
+      </div>
 
       <PersonEvents events={personEvents} birth={birthISO} />
 
@@ -64,7 +57,7 @@ const Person = ({ persons, history, match }) => {
           <Translate id="frontPage" />
         </button>
       </Link>
-    </PersonDiv>
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Translate } from 'react-localize-redux';
 
-import config from '../config.json';
+import config from '../../../config.json';
 
 const HeaderDiv = styled.div`
   margin-bottom: 1em;

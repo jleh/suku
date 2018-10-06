@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Translate } from 'react-localize-redux';
 
-import LinkedPerson from './linkedPerson';
+import LinkedPerson from '../LinkedPerson';
 
 const Family = styled.div`
   margin-top: 2em;
