@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders events even if birthday is unknown 1`] = `
+<table
+  className="table"
+>
+  <tbody>
+    <tr>
+      <td
+        className="date"
+      >
+        06.06.1900
+      </td>
+      <td
+        className="age"
+      />
+      <td>
+        Missing translationId: events.Residence for language: \${ languageCode }
+      </td>
+      <td />
+      <td
+        className="place"
+      >
+        Place
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
+
+exports[`Renders nothing if no events 1`] = `null`;
+
+exports[`Renders person age on event 1`] = `
+<table
+  className="table"
+>
+  <tbody>
+    <tr>
+      <td
+        className="date"
+      >
+        06.06.1900
+      </td>
+      <td
+        className="age"
+      >
+        50 vuotta
+      </td>
+      <td>
+        Missing translationId: events.Residence for language: \${ languageCode }
+      </td>
+      <td />
+      <td
+        className="place"
+      >
+        Place
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
