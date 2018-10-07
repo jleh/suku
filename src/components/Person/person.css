@@ -4,4 +4,27 @@
 
 .parents {
   margin-top: 1em;
-};
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 8em auto;
+  grid-template-rows: 12em;
+}
+
+.picture {
+  grid-column-start: 1;
+
+  & img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.info {
+  padding-left: 1em;
+
+  & > div {
+    font-size: 0.9em;
+  }
+}

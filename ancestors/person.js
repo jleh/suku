@@ -12,6 +12,7 @@ const findParents = (person, data) => {
 };
 
 const coatOfArms = person => findAttributeValue(person.attribute, 'arms', 'value');
+const picture = person => findAttributeValue(person.attribute, 'profile', 'value');
 const getWikipedia = person => findAttributeValue(person.url, 'wikipedia', 'href');
 
 const toPerson = (person, database) => {
@@ -25,6 +26,7 @@ const toPerson = (person, database) => {
     handle: person.$.handle,
     name: printName(person),
     coatOfArms: coatOfArms(person),
+    picture: picture(person),
     wikipedia: getWikipedia(person),
     sources: findSources(person, database),
     events: findEvents(person.eventref, database),

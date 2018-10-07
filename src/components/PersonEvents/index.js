@@ -12,7 +12,10 @@ const renderAgeOnEvent = (birth, event) => {
     return null;
   }
 
-  return event.type !== 'Birth' && renderAge(birth, event.date);
+  return event.type !== 'Birth'
+    && renderAge(birth, event.date)
+      .replace('vuotta', 'v')
+      .replace('päivää', 'pv');
 };
 
 export default ({ events, birth }) => {

@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+h {
+  font-weight: 400;
 }
 
 .timeline-date {

@@ -29,7 +29,8 @@
     "Other": ["Muu"],
     "Education": ["Koulutus"],
     "Cause Of Death": ["Kuolinsyy"],
-    "Confirmation": ["Pääsi ripille"]
+    "Confirmation": ["Pääsi ripille"],
+    "Military Service": ["Asepalvelus"]
   },
   "places": {
     "villages": ["Kylät"]

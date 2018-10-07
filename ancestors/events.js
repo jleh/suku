@@ -13,6 +13,8 @@ const getEventsByType = (events, type) => events.filter(event => event.type[0] =
 const getEventDate = event => (event && event.dateval ? formatDate(event.dateval[0].$.val) : '');
 
 const getPlace = (ref, places) => {
+
+
   const place = places.find(p => p.$.handle === ref);
   const eventPlace = {
     id: place.$.id,
@@ -29,6 +31,10 @@ const getPlace = (ref, places) => {
   if (place.placeref) {
     const parent = getPlace(place.placeref[0].$.hlink, places);
     eventPlace.name = `${eventPlace.name}, ${parent.name}`;
+
+    // Finland is the primary country for persons
+    // so naming it will be redundant.
+    eventPlace.name = eventPlace.name.replace(', Suomi', '');
   }
 
   return eventPlace;

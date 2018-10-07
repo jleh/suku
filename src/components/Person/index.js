@@ -23,9 +23,17 @@ const Person = ({ persons, match }) => {
 
   return (
     <div className={styles.person}>
-      <h2>{person.name}</h2>
-
-      <PersonDates events={person.events} />
+      <div className={styles.header}>
+        <div className={styles.picture}>
+          {person.picture
+            && <img src={`http://karttalehtinen.fi/suku/kuvat/${person.picture}`} alt="Profile" />
+          }
+        </div>
+        <div className={styles.info}>
+          <h2>{person.name}</h2>
+          <PersonDates events={person.events} />
+        </div>
+      </div>
 
       <Wikipedia person={person} />
 
