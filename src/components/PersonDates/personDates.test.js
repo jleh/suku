@@ -1,7 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 
 import PersonDates from '.';
+
+const renderComponent = events => renderer
+  .create(<PersonDates events={events} />)
+  .toJSON();
 
 test('Renders person birth and death', () => {
   const events = {
@@ -11,7 +15,7 @@ test('Renders person birth and death', () => {
     deathPlace: { name: 'Place 2' }
   };
 
-  expect(shallow(<PersonDates events={events} />).find('div').length).toBe(3);
+  expect(renderComponent(events)).toMatchSnapshot();
 });
 
 test('Renders living person', () => {
@@ -20,7 +24,7 @@ test('Renders living person', () => {
     birthPlace: { name: 'Place 1' }
   };
 
-  expect(shallow(<PersonDates events={events} />).find('div').length).toBe(2);
+  expect(renderComponent(events)).toMatchSnapshot();
 });
 
 test('Renders person whose death date is only known', () => {
@@ -28,5 +32,5 @@ test('Renders person whose death date is only known', () => {
     death: '9.9.1890'
   };
 
-  expect(shallow(<PersonDates events={events} />).find('div').length).toBe(2);
+  expect(renderComponent(events)).toMatchSnapshot();
 });

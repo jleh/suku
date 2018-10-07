@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Does not fail if person is missing 1`] = `null`;
+
+exports[`Prints person with birth and death dates 1`] = `
+<div>
+  <a
+    href="/person/1"
+    onClick={[Function]}
+  >
+    Test Person
+  </a>
+   
+  <span
+    className="dates"
+  >
+    * 1.1.1900
+     
+    † 1.1.1950
+  </span>
+</div>
+`;
+
+exports[`Renders if birth or death is missing 1`] = `
+<div>
+  <a
+    href="/person/2"
+    onClick={[Function]}
+  >
+    Other Person
+  </a>
+   
+  <span
+    className="dates"
+  >
+     
+  </span>
+</div>
+`;

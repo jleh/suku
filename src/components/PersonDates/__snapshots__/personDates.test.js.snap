@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders living person 1`] = `
+<div>
+  <div>
+    * 
+    6.6.1800
+     
+    Place 1
+  </div>
+</div>
+`;
+
+exports[`Renders person birth and death 1`] = `
+<div>
+  <div>
+    * 
+    6.6.1800
+     
+    Place 1
+  </div>
+  <div>
+    † 
+    9.9.1890
+     
+    Place 2
+     
+    90 vuotta
+  </div>
+</div>
+`;
+
+exports[`Renders person whose death date is only known 1`] = `
+<div>
+  <div>
+    † 
+    9.9.1890
+     
+    
+     
+  </div>
+</div>
+`;

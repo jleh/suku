@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Empty if person has no wikipedia link 1`] = `null`;
+
+exports[`Renders wikipedia link if person has wikipedia page 1`] = `
+<div>
+  <a
+    href="http://fi.wikipedia.fi"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    Wikipedia
+  </a>
+</div>
+`;

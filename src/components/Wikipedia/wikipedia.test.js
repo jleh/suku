@@ -1,18 +1,18 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 
 import Wikipedia from '.';
 
+const renderComponent = person => renderer
+  .create(<Wikipedia person={person} />)
+  .toJSON();
+
 test('Renders wikipedia link if person has wikipedia page', () => {
   const person = { wikipedia: 'http://fi.wikipedia.fi' };
-  const component = shallow(<Wikipedia person={person} />);
-
-  expect(component.find('a').length).toBe(1);
+  expect(renderComponent(person)).toMatchSnapshot();
 });
 
 test('Empty if person has no wikipedia link', () => {
   const person = {};
-  const component = shallow(<Wikipedia person={person} />);
-
-  expect(component.find('a').length).toBe(0);
+  expect(renderComponent(person)).toMatchSnapshot();
 });

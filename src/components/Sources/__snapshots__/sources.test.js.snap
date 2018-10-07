@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders source list 1`] = `
+<div
+  className="sources"
+>
+  <div>
+    Missing translationId: sources for language: \${ languageCode }
+    :
+  </div>
+  <div>
+    <i>
+      Author
+    </i>
+     
+    Source title
+     
+    Missing translationId: page for language: \${ languageCode }
+     
+    123
+  </div>
+</div>
+`;
+
+exports[`Renders source list with links 1`] = `
+<div
+  className="sources"
+>
+  <div>
+    Missing translationId: sources for language: \${ languageCode }
+    :
+  </div>
+  <div>
+    <a
+      href="http://www.example.com"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i>
+        Author
+      </i>
+       
+      Source title
+       
+      Missing translationId: page for language: \${ languageCode }
+       
+      123
+    </a>
+  </div>
+</div>
+`;

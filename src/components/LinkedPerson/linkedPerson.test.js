@@ -1,6 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { Link } from 'react-router-dom';
+import renderer from 'react-test-renderer';
+import { MemoryRouter } from 'react-router-dom';
 
 import LinkedPerson from '.';
 
@@ -22,27 +22,22 @@ const persons = [
   }
 ];
 
-test('Prints person name link', () => {
-  const wrapper = shallow(<LinkedPerson personRef="H1" persons={persons} />);
-  expect(wrapper.find(Link).length).toBe(1);
-});
+const renderComponent = id => renderer
+  .create(
+    <MemoryRouter>
+      <LinkedPerson personRef={id} persons={persons} />
+    </MemoryRouter>
+  )
+  .toJSON();
 
-test('Prints person birthday', () => {
-  const wrapper = shallow(<LinkedPerson personRef="H1" persons={persons} />);
-  expect(wrapper.find('div').find('span').text()).toEqual(expect.stringContaining('* 1.1.1900'));
-});
-
-test('Prints person deathday', () => {
-  const wrapper = shallow(<LinkedPerson personRef="H1" persons={persons} />);
-  expect(wrapper.find('div').find('span').text()).toEqual(expect.stringContaining('† 1.1.1950'));
+test('Prints person with birth and death dates', () => {
+  expect(renderComponent('H1')).toMatchSnapshot();
 });
 
 test('Does not fail if person is missing', () => {
-  const wrapper = shallow(<LinkedPerson personRef="not-found" persons={persons} />);
-  expect(wrapper.text()).toBe('');
+  expect(renderComponent('not-fond')).toMatchSnapshot();
 });
 
 test('Renders if birth or death is missing', () => {
-  const wrapper = shallow(<LinkedPerson personRef="H2" persons={persons} />);
-  expect(wrapper.find(Link).length).toBe(1);
+  expect(renderComponent('H2')).toMatchSnapshot();
 });
