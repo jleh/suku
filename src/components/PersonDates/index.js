@@ -1,5 +1,4 @@
 import React from 'react';
-import { parse } from 'date-fns';
 
 import { renderAge } from '../../util';
 
