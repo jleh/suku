@@ -28,7 +28,8 @@
     "Burial": ["Haudattu"],
     "Other": ["Muu"],
     "Education": ["Koulutus"],
-    "Cause Of Death": ["Kuolinsyy"]
+    "Cause Of Death": ["Kuolinsyy"],
+    "Confirmation": ["Pääsi ripille"]
   },
   "places": {
     "villages": ["Kylät"]

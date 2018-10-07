@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Translate } from 'react-localize-redux';
 
 import styles from './person.css';
@@ -9,36 +9,27 @@ import Sources from '../Sources';
 import Wikipedia from '../Wikipedia';
 import LinkedPerson from '../LinkedPerson';
 import PersonEvents from '../PersonEvents';
+import NavigationButtons from '../NavigationButtons';
+import PersonDates from '../PersonDates';
 
-const renderPlace = place => (place ? place.name : '');
-
-const getYear = date => date.substring(date.length - 4);
-const getAge = (date, birth) => (birth ? Number(getYear(date)) - Number(getYear(birth)) : null);
-const renderAge = (date, birth) => (birth ? `${getAge(date, birth)} v` : null);
-
-const Person = ({ persons, history, match }) => {
+const Person = ({ persons, match }) => {
   const person = persons.find(p => p.id === match.params.id);
 
   if (!person.name) {
     return null;
   }
 
-  const goBack = () => history.goBack();
-
-  const {
-    birth, birthPlace, death, deathPlace, personEvents, birthISO
-  } = person.events;
+  const { personEvents, birthISO } = person.events;
 
   return (
     <div className={styles.person}>
       <h2>{person.name}</h2>
 
-      {birth && <div>* {birth} {renderPlace(birthPlace)}</div>}
-      {death && <div>† {death} {renderPlace(deathPlace)} {renderAge(death, birth)}</div>}
+      <PersonDates events={person.events} />
 
       <Wikipedia person={person} />
 
-      <div className={styles.parent}>
+      <div className={styles.parents}>
         <Translate id="person.parents" />:
         <LinkedPerson personRef={person.father} persons={persons} />
         <LinkedPerson personRef={person.mother} persons={persons} />
@@ -49,14 +40,7 @@ const Person = ({ persons, history, match }) => {
       <Family families={person.family} persons={persons} />
       <Sources sources={person.sources} />
 
-      <button type="button" onClick={goBack}>
-        <Translate id="back" />
-      </button>
-      <Link to="/">
-        <button type="button">
-          <Translate id="frontPage" />
-        </button>
-      </Link>
+      <NavigationButtons />
     </div>
   );
 };

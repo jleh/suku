@@ -1,14 +1,12 @@
 import React from 'react';
 import { Translate } from 'react-localize-redux';
-import { format, distanceInWordsStrict } from 'date-fns';
-import fiLocale from 'date-fns/locale/fi';
+import { format } from 'date-fns';
+
+import { renderAge } from '../../util';
 
 import styles from './personEvents.css';
 
 const renderDate = date => date && (date.length === 4 ? date : format(date, 'DD.MM.YYYY'));
-const renderAge = (birth, date) => ((birth === date || !date)
-  ? null
-  : distanceInWordsStrict(birth, date, { locale: fiLocale }));
 
 export default ({ events, birth }) => (
   <table className={styles.table}>

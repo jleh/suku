@@ -1,6 +1,7 @@
 .table {
   margin-top: 1em;
   min-width: 60%;
+  width: 100%;
 }
 
 .date {
@@ -9,6 +10,7 @@
 
 .place {
   font-style: italic;
+  font-size: 0.9em;
 }
 
 .age {
