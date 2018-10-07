@@ -71,7 +71,8 @@ const findEvents = (eventref, database) => {
     birthISO: birth && birth.dateval && birth.dateval[0].$.val,
     birthPlace: getEventPlace(birth, places),
     death: getEventDate(death),
-    deathPlace: getEventPlace(death, places)
+    deathPlace: getEventPlace(death, places),
+    deathISO: death && death.dateval && death.dateval[0].$.val
   };
 };
 
