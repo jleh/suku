@@ -1,11 +1,46 @@
-.table {
+.timeline {
   margin-top: 1em;
   min-width: 60%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.date {
+.timelineRow {
+  display: flex;
+  flex-direction: row;
+  height: 4em;
 
+  & div {
+    flex-basis: 6em;
+  }
+}
+
+.timelineText {
+  flex-grow: 2;
+  align-self: center;
+}
+
+.line {
+  max-width: 2em;
+
+  & div {
+    height: 100%;
+    top: 40%;
+    position: relative;
+    border-left: 1px solid #000;
+  }
+
+  & div::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: -7px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid #000;
+  }
 }
 
 .place {
@@ -14,5 +49,17 @@
 }
 
 .age {
-  white-space: nowrap;
+  padding-left: 0.5em;
+}
+
+.date {
+  width: 5em;
+  flex-grow: 0.25;
+  align-self: center;
+}
+
+.last {
+  & div {
+    border: none;
+  }
 }

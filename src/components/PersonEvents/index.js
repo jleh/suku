@@ -12,10 +12,13 @@ const renderAgeOnEvent = (birth, event) => {
     return null;
   }
 
-  return event.type !== 'Birth'
-    && renderAge(birth, event.date)
-      .replace('vuotta', 'v')
-      .replace('päivää', 'pv');
+  const age = event.type !== 'Birth' && renderAge(birth, event.date);
+
+  if (age) {
+    return age.replace('vuotta', 'v').replace('päivää', 'pv');
+  }
+
+  return null;
 };
 
 export default ({ events, birth }) => {
@@ -23,19 +26,32 @@ export default ({ events, birth }) => {
     return null;
   }
 
+  const lineClass = (index, length) => (index === length - 1 ? styles.last : '');
+
   return (
-    <table className={styles.table}>
-      <tbody>
-        {events.map(event => (
-          <tr key={event.id}>
-            <td className={styles.date}>{renderDate(event.date)}</td>
-            <td className={styles.age}>{renderAgeOnEvent(birth, event)}</td>
-            <td><Translate id={`events.${event.type}`} /></td>
-            <td>{event.description}</td>
-            <td className={styles.place}>{event.place && event.place.name}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+    <div className={styles.timeline}>
+      {events.map((event, index) => (
+        <div key={event.id} className={styles.timelineRow}>
+          <div className={styles.date}>
+            <div>
+              {renderDate(event.date)}
+            </div>
+            <div className={styles.age}>
+              {renderAgeOnEvent(birth, event)}
+            </div>
+          </div>
+          <div className={`${styles.line} ${lineClass(index, events.length)}`}>
+            <div />
+          </div>
+          <div className={styles.timelineText}>
+            <div>
+              <Translate id={`events.${event.type}`} /> {event.description}
+            </div>
+            <div className={styles.place}>
+              {event.place && event.place.name}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>);
 };
