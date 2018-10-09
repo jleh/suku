@@ -23,7 +23,7 @@ const renderSource = source => (
 
 export default ({ sources }) => sources && (
   <div className={styles.sources}>
-    <div><Translate id="sources" />:</div>
+    <h3><Translate id="sources" /></h3>
     {sources.map(renderSource)}
   </div>
 );

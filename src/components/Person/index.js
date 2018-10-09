@@ -12,6 +12,12 @@ import PersonEvents from '../PersonEvents';
 import NavigationButtons from '../NavigationButtons';
 import PersonDates from '../PersonDates';
 
+const renderArms = coatOfArms => coatOfArms && (
+  <div className={styles.coatOfArms}>
+    <img src={`http://karttalehtinen.fi/suku/vaakunat/${coatOfArms}.svg`} alt="Suvun vaakuna" />
+  </div>
+);
+
 const Person = ({ persons, match }) => {
   const person = persons.find(p => p.id === match.params.id);
 
@@ -30,22 +36,33 @@ const Person = ({ persons, match }) => {
           }
         </div>
         <div className={styles.info}>
-          <h2>{person.name}</h2>
-          <PersonDates events={person.events} />
+          <div>
+            <h2>{person.name}</h2>
+            <PersonDates events={person.events} />
+            <Wikipedia person={person} />
+          </div>
+          {renderArms(person.coatOfArms)}
         </div>
       </div>
 
-      <Wikipedia person={person} />
+      <div className={styles.content}>
+        <div className={styles.personEvents}>
+          <h3>Elämä</h3>
+          <PersonEvents events={personEvents} birth={birthISO} />
+        </div>
 
-      <div className={styles.parents}>
-        <Translate id="person.parents" />:
-        <LinkedPerson personRef={person.father} persons={persons} />
-        <LinkedPerson personRef={person.mother} persons={persons} />
+        <div>
+          <h3>Perhe</h3>
+          <div className={styles.parents}>
+            <Translate id="person.parents" />:
+            <LinkedPerson personRef={person.father} persons={persons} />
+            <LinkedPerson personRef={person.mother} persons={persons} />
+          </div>
+
+          <Family families={person.family} persons={persons} />
+        </div>
       </div>
 
-      <PersonEvents events={personEvents} birth={birthISO} />
-
-      <Family families={person.family} persons={persons} />
       <Sources sources={person.sources} />
 
       <NavigationButtons />
