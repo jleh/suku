@@ -4,6 +4,8 @@ import { hierarchy, tree } from 'd3-hierarchy';
 import { linkHorizontal } from 'd3-shape';
 import { select } from 'd3-selection';
 
+import config from '../../../config.json';
+
 const d3 = Object.assign({}, {
   hierarchy,
   tree,
@@ -75,7 +77,7 @@ export default class AncestorTree extends Component {
       .attr('r', 2.5);
 
     g.selectAll('.coat-of-arms').append('image')
-      .attr('xlink:href', d => `http://karttalehtinen.fi/suku/vaakunat/${d.data.coatOfArms}.svg`)
+      .attr('xlink:href', d => `${config.coatOfArmsBasePath}/${d.data.coatOfArms}.svg`)
       .attr('width', 20)
       .attr('height', 20)
       .attr('x', -10)

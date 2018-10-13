@@ -4,6 +4,8 @@ import { Translate } from 'react-localize-redux';
 
 import styles from './person.css';
 
+import config from '../../../config.json';
+
 import Family from '../Family';
 import Sources from '../Sources';
 import Wikipedia from '../Wikipedia';
@@ -14,7 +16,7 @@ import PersonDates from '../PersonDates';
 
 const renderArms = coatOfArms => coatOfArms && (
   <div className={styles.coatOfArms}>
-    <img src={`http://karttalehtinen.fi/suku/vaakunat/${coatOfArms}.svg`} alt="Suvun vaakuna" />
+    <img src={`${config.coatOfArmsBasePath}/${coatOfArms}.svg`} alt="Suvun vaakuna" />
   </div>
 );
 
@@ -32,7 +34,7 @@ const Person = ({ persons, match }) => {
       <div className={styles.header}>
         <div className={styles.picture}>
           {person.picture
-            && <img src={`http://karttalehtinen.fi/suku/kuvat/${person.picture}`} alt="Profile" />
+            && <img src={`${config.picturesBasePath}/${person.picture}`} alt="Profile" />
           }
         </div>
         <div className={styles.info}>
