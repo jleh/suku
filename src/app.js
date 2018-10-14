@@ -19,6 +19,8 @@ import PersonList from './components/PersonList';
 import Place from './places/place';
 import Village from './places/village';
 
+import { createIdMap, createRefMap } from './util';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +48,10 @@ class App extends Component {
       .then(data => this.setState({
         data: treeBuilder(data.persons, config.rootPerson),
         persons: data.persons,
+        personMap: createIdMap(data.persons),
+        personRefMap: createRefMap(data.persons),
         places: data.places,
+        placesMap: createIdMap(data.places),
         updated: data.updated
       }));
 
@@ -62,7 +67,8 @@ class App extends Component {
 
   render() {
     const {
-      data, worldEvents, updated, persons, places
+      data, worldEvents, updated, persons,
+      personMap, personRefMap, places, placesMap
     } = this.state;
 
     if (!data) {
@@ -75,7 +81,7 @@ class App extends Component {
         <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
         <Route path="/timeline" component={() => <Timeline data={data} worldEvents={worldEvents} />} />
         <Route path="/places" component={() => <Places data={data} places={places} />} />
-        <Route path="/person/:id" component={() => <Person persons={persons} />} />
+        <Route path="/person/:id" component={() => <Person persons={personMap} personRefs={personRefMap} places={placesMap} />} />
         <Route path="/persons" component={() => <PersonList persons={persons} />} />
         <Route path="/place/:id" component={() => <Place places={places} persons={persons} />} />
         <Route path="/village/:id" component={() => <Village places={places} persons={persons} />} />

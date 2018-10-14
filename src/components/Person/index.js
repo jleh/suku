@@ -20,8 +20,10 @@ const renderArms = coatOfArms => coatOfArms && (
   </div>
 );
 
-const Person = ({ persons, match }) => {
-  const person = persons.find(p => p.id === match.params.id);
+const Person = ({
+  persons, personRefs, places, match
+}) => {
+  const person = persons.get(match.params.id);
 
   if (!person.name) {
     return null;
@@ -50,18 +52,18 @@ const Person = ({ persons, match }) => {
       <div className={styles.content}>
         <div className={styles.personEvents}>
           <h3>Elämä</h3>
-          <PersonEvents events={personEvents} birth={birthISO} />
+          <PersonEvents events={personEvents} birth={birthISO} places={places} />
         </div>
 
         <div>
           <h3>Perhe</h3>
           <div className={styles.parents}>
             <Translate id="person.parents" />:
-            <LinkedPerson personRef={person.father} persons={persons} />
-            <LinkedPerson personRef={person.mother} persons={persons} />
+            <LinkedPerson personRef={person.father} persons={personRefs} />
+            <LinkedPerson personRef={person.mother} persons={personRefs} />
           </div>
 
-          <Family families={person.family} persons={persons} />
+          <Family families={person.family} persons={personRefs} />
         </div>
       </div>
 

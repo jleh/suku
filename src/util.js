@@ -4,8 +4,6 @@ import fiLocale from 'date-fns/locale/fi';
 export const printBirth = child => (child.events.birth ? `* ${child.events.birth}` : null);
 export const printDeath = child => (child.events.death ? `† ${child.events.death}` : null);
 
-export const findPerson = (handle, persons) => persons.find(p => p.handle === handle);
-
 const getEvents = (data, placeId) => {
   if (!data || !data.events) {
     return [];
@@ -52,3 +50,15 @@ export const getPlaceEvents = (placeId, persons) => persons.reduce((events, pers
 export const renderAge = (birth, date) => ((birth === date || !date)
   ? null
   : distanceInWordsStrict(birth, date, { locale: fiLocale }));
+
+export const createIdMap = (objects) => {
+  const idMap = new Map();
+  objects.forEach(object => idMap.set(object.id, object));
+  return idMap;
+};
+
+export const createRefMap = (objects) => {
+  const refMap = new Map();
+  objects.forEach(object => refMap.set(object.handle, object));
+  return refMap;
+};

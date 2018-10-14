@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 import styles from './linkedPerson.css';
 
-import { findPerson, printBirth, printDeath } from '../../util';
+import { printBirth, printDeath } from '../../util';
 
 export default ({ personRef, persons }) => {
-  const person = findPerson(personRef, persons);
+  const person = persons.get(personRef);
 
   if (!person) {
     return null;
