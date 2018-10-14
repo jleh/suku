@@ -13,6 +13,7 @@ import LinkedPerson from '../LinkedPerson';
 import PersonEvents from '../PersonEvents';
 import NavigationButtons from '../NavigationButtons';
 import PersonDates from '../PersonDates';
+import PersonMap from '../PersonMap';
 
 const renderArms = coatOfArms => coatOfArms && (
   <div className={styles.coatOfArms}>
@@ -67,6 +68,7 @@ const Person = ({
         </div>
       </div>
 
+      <PersonMap events={person.events.personEvents} places={places} />
       <Sources sources={person.sources} />
 
       <NavigationButtons />

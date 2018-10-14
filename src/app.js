@@ -19,7 +19,7 @@ import PersonList from './components/PersonList';
 import Place from './places/place';
 import Village from './places/village';
 
-import { createIdMap, createRefMap } from './util';
+import { createIdMap, createRefMap, createPlacesMap } from './util';
 
 class App extends Component {
   constructor(props) {
@@ -51,7 +51,7 @@ class App extends Component {
         personMap: createIdMap(data.persons),
         personRefMap: createRefMap(data.persons),
         places: data.places,
-        placesMap: createIdMap(data.places),
+        placesMap: createPlacesMap(data.places),
         updated: data.updated
       }));
 

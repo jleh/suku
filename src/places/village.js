@@ -2,15 +2,10 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 
-import { getPlaceEvents } from '../util';
+import { getPlaceEvents, getCoordinates } from '../util';
 import PlaceEvents from './placeEvents';
 
 import styles from './village.css';
-
-const getCoordinates = place => [
-  parseFloat(place.coordinates.lat.replace(',', '.')),
-  parseFloat(place.coordinates.lng.replace(',', '.'))
-];
 
 const renderMap = village => (
   <div className={styles.map}>

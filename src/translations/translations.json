@@ -30,7 +30,8 @@
     "Education": ["Koulutus"],
     "Cause Of Death": ["Kuolinsyy"],
     "Confirmation": ["Pääsi ripille"],
-    "Military Service": ["Asepalvelus"]
+    "Military Service": ["Asepalvelus"],
+    "Medical Information": ["Terveys"]
   },
   "places": {
     "villages": ["Kylät"]

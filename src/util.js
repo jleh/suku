@@ -62,3 +62,24 @@ export const createRefMap = (objects) => {
   objects.forEach(object => refMap.set(object.handle, object));
   return refMap;
 };
+
+export const getCoordinates = place => [
+  parseFloat(place.coordinates.lat.replace(',', '.')),
+  parseFloat(place.coordinates.lng.replace(',', '.'))
+];
+
+export const createPlacesMap = (places) => {
+  let placesMap = createIdMap(places);
+
+  places.forEach((place) => {
+    placesMap = new Map([...createIdMap(place.villages), ...placesMap]);
+    place.villages.forEach((village) => {
+      placesMap = new Map([...createIdMap(village.farms), ...placesMap]);
+      village.farms.forEach((farm) => {
+        placesMap = new Map([...createIdMap(farm.buildings), ...placesMap]);
+      });
+    });
+  });
+
+  return placesMap;
+};
