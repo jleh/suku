@@ -16,14 +16,14 @@ const getEvents = (data, placeId) => {
     events.push({
       name: data.name,
       id: data.id,
-      type: 'birth'
+      type: 'Birth'
     });
   }
   if (deathPlace && deathPlace.id === placeId) {
     events.push({
       name: data.name,
       id: data.id,
-      type: 'death'
+      type: 'Death'
     });
   }
 
@@ -33,7 +33,7 @@ const getEvents = (data, placeId) => {
         events.push({
           name: data.name,
           id: data.id,
-          type: 'occupation'
+          type: 'Occupation'
         });
       }
     });

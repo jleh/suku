@@ -5,6 +5,10 @@
 .map {
   height: 25em;
   width: 100%;
+
+  & > div {
+    height: 100%;
+  }
 }
 
 .buildings {

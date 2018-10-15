@@ -1,5 +1,7 @@
 import React from 'react';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import {
+  Map, TileLayer, Marker, Popup
+} from 'react-leaflet';
 import { latLngBounds } from 'leaflet';
 import uniq from 'lodash/uniq';
 
