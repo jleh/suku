@@ -6,8 +6,7 @@ import styles from './person.css';
 
 import config from '../../../config.json';
 
-import PersonContext from '../../context/personContext';
-import PlacesContext from '../../context/placeContext';
+import withContext from '../../context';
 
 import Family from '../Family';
 import Sources from '../Sources';
@@ -24,66 +23,60 @@ const renderArms = coatOfArms => coatOfArms && (
   </div>
 );
 
-const Person = ({ match }) => (
-  <PlacesContext.Consumer>
-    {({ placesById }) => (
-      <PersonContext.Consumer>
-        {({ personsById, personsByRef }) => {
-          const person = personsById.get(match.params.id);
-          const { personEvents, birthISO } = person.events;
+const Person = ({
+  personsById, personsByRef, placesById, match
+}) => {
+  const person = personsById.get(match.params.id);
+  const { personEvents, birthISO } = person.events;
 
-          if (!person.name) {
-            return null;
-          }
+  if (!person.name) {
+    return null;
+  }
 
-          return (
-            (
-              <div className={styles.person}>
-                <div className={styles.header}>
-                  <div className={styles.picture}>
-                    {person.picture
-                      && <img src={`${config.picturesBasePath}/${person.picture}`} alt="Profile" />
-                    }
-                  </div>
-                  <div className={styles.info}>
-                    <div>
-                      <h2>{person.name}</h2>
-                      <PersonDates events={person.events} />
-                      <Wikipedia person={person} />
-                    </div>
-                    {renderArms(person.coatOfArms)}
-                  </div>
-                </div>
+  return (
+    (
+      <div className={styles.person}>
+        <div className={styles.header}>
+          <div className={styles.picture}>
+            {person.picture
+              && <img src={`${config.picturesBasePath}/${person.picture}`} alt="Profile" />
+            }
+          </div>
+          <div className={styles.info}>
+            <div>
+              <h2>{person.name}</h2>
+              <PersonDates events={person.events} />
+              <Wikipedia person={person} />
+            </div>
+            {renderArms(person.coatOfArms)}
+          </div>
+        </div>
 
-                <div className={styles.content}>
-                  <div className={styles.personEvents}>
-                    <h3>Elämä</h3>
-                    <PersonEvents events={personEvents} birth={birthISO} places={placesById} />
-                  </div>
+        <div className={styles.content}>
+          <div className={styles.personEvents}>
+            <h3>Elämä</h3>
+            <PersonEvents events={personEvents} birth={birthISO} places={placesById} />
+          </div>
 
-                  <div>
-                    <h3>Perhe</h3>
-                    <div className={styles.parents}>
-                      <Translate id="person.parents" />:
-                      <LinkedPerson personRef={person.father} persons={personsByRef} />
-                      <LinkedPerson personRef={person.mother} persons={personsByRef} />
-                    </div>
+          <div>
+            <h3>Perhe</h3>
+            <div className={styles.parents}>
+              <Translate id="person.parents" />:
+              <LinkedPerson personRef={person.father} persons={personsByRef} />
+              <LinkedPerson personRef={person.mother} persons={personsByRef} />
+            </div>
 
-                    <Family families={person.family} persons={personsByRef} />
-                  </div>
-                </div>
+            <Family families={person.family} persons={personsByRef} />
+          </div>
+        </div>
 
-                <PersonMap events={person.events.personEvents} places={placesById} />
-                <Sources sources={person.sources} />
+        <PersonMap events={person.events.personEvents} places={placesById} />
+        <Sources sources={person.sources} />
 
-                <NavigationButtons />
-              </div>
-            )
-          );
-        }}
-      </PersonContext.Consumer>
-    )}
-  </PlacesContext.Consumer>
-);
+        <NavigationButtons />
+      </div>
+    )
+  );
+};
 
-export default withRouter(Person);
+export default withRouter(withContext(Person));

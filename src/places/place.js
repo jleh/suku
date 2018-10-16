@@ -2,10 +2,12 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Translate } from 'react-localize-redux';
 
+import withContext from '../context';
+
 import { getPlaceEvents } from '../util';
 import PlaceEvents from './placeEvents';
 
-const Place = ({ match, places, persons }) => {
+const Place = ({ match, places, personList }) => {
   const place = places.find(p => p.id === match.params.id);
 
   return (
@@ -19,9 +21,9 @@ const Place = ({ match, places, persons }) => {
           </li>
         ))}
       </ul>
-      <PlaceEvents placeEvents={getPlaceEvents(place.id, persons)} />
+      <PlaceEvents placeEvents={getPlaceEvents(place.id, personList)} />
     </div>
   );
 };
 
-export default withRouter(Place);
+export default withRouter(withContext(Place));

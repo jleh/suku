@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default ({ places }) => (
+import withContext from '../context';
+
+const Places = ({ places }) => (
   <div>
     <h2>Paikat</h2>
     {places.map(place => (
@@ -13,3 +15,5 @@ export default ({ places }) => (
     ))}
   </div>
 );
+
+export default withContext(Places);
