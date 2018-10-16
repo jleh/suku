@@ -92,6 +92,11 @@ export default class AncestorTree extends Component {
   }
 
   render() {
-    return <div id="tree" />;
+    return (
+      <div>
+        Siirry alemmas nähdäksesi puun juuren.
+        <div id="tree" />
+      </div>
+    );
   }
 }
