@@ -9,6 +9,9 @@ import './app.css';
 import config from '../config.json';
 import translations from './translations/translations.json';
 
+import PersonContext from './context/personContext';
+import PlacesContext from './context/placeContext';
+
 import Header from './components/Header';
 import AncestorTree from './components/AncestorTree';
 import Person from './components/Person';
@@ -76,16 +79,20 @@ class App extends Component {
     }
 
     return (
-      <div>
-        <Header updated={updated} />
-        <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
-        <Route path="/timeline" component={() => <Timeline data={data} worldEvents={worldEvents} />} />
-        <Route path="/places" component={() => <Places data={data} places={places} />} />
-        <Route path="/person/:id" component={() => <Person persons={personMap} personRefs={personRefMap} places={placesMap} />} />
-        <Route path="/persons" component={() => <PersonList persons={persons} />} />
-        <Route path="/place/:id" component={() => <Place places={places} persons={persons} />} />
-        <Route path="/village/:id" component={() => <Village places={places} persons={persons} />} />
-      </div>
+      <PersonContext.Provider value={{ personsById: personMap, personsByRef: personRefMap }}>
+        <PlacesContext.Provider value={{ places, placesById: placesMap }}>
+          <div>
+            <Header updated={updated} />
+            <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
+            <Route path="/timeline" component={() => <Timeline data={data} worldEvents={worldEvents} />} />
+            <Route path="/places" component={() => <Places data={data} places={places} />} />
+            <Route path="/person/:id" component={Person} />
+            <Route path="/persons" component={() => <PersonList persons={persons} />} />
+            <Route path="/place/:id" component={() => <Place places={places} persons={persons} />} />
+            <Route path="/village/:id" component={() => <Village places={places} persons={persons} />} />
+          </div>
+        </PlacesContext.Provider>
+      </PersonContext.Provider>
     );
   }
 }
