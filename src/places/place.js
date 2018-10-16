@@ -7,8 +7,8 @@ import withContext from '../context';
 import { getPlaceEvents } from '../util';
 import PlaceEvents from './placeEvents';
 
-const Place = ({ match, places, personList }) => {
-  const place = places.find(p => p.id === match.params.id);
+const Place = ({ match, placesById, personList }) => {
+  const place = placesById.get(match.params.id);
 
   return (
     <div>

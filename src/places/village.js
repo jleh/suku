@@ -23,10 +23,8 @@ const renderMap = village => (
   </div>
 );
 
-const Village = ({ match, personList, places }) => {
-  const village = places
-    .reduce((villages, place) => [...villages, ...place.villages], [])
-    .find(v => v.id === match.params.id);
+const Village = ({ match, personList, placesById }) => {
+  const village = placesById.get(match.params.id);
 
   return (
     <div>
