@@ -9,7 +9,8 @@
     "ancestorTree": ["Sukupuu"],
     "timeline": ["Aikajana"],
     "places": ["Paikat"],
-    "personIndex": ["Henkiköhakemisto"]
+    "personIndex": ["Henkiköhakemisto"],
+    "updates": ["Päivitykset"]
   },
   "family": {
     "spouse": ["Puoliso"]

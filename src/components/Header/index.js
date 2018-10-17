@@ -25,6 +25,10 @@ const Header = ({ updated }) => (
       <Link to="/persons">
         <Translate id="menu.personIndex" />
       </Link>
+      { ' ' }
+      <Link to="/blog">
+        <Translate id="menu.updates" />
+      </Link>
     </nav>
 
     <div><Translate id="updated" />: {updated}</div>

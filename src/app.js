@@ -21,6 +21,7 @@ import treeBuilder from './treeBuilder';
 import PersonList from './components/PersonList';
 import Place from './places/place';
 import Village from './places/village';
+import Blog from './components/Blog';
 
 import { createIdMap, createRefMap, createPlacesMap } from './util';
 
@@ -93,6 +94,7 @@ class App extends Component {
             <Route path="/persons" component={PersonList} />
             <Route path="/place/:id" component={Place} />
             <Route path="/village/:id" component={Village} />
+            <Route path="/blog" component={Blog} />
           </div>
         </PlacesContext.Provider>
       </PersonContext.Provider>
