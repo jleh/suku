@@ -46,7 +46,10 @@ module.exports.getPlaces = (database) => {
     .filter(place => place.$.type === 'Village')
     .forEach((village) => {
       const villageObject = toVillage(village);
-      cities.get(village.placeref[0].$.hlink).villages.push(villageObject);
+      const city = cities.get(village.placeref[0].$.hlink);
+
+      villageObject.city = city.id;
+      city.villages.push(villageObject);
       villages.set(villageObject.handle, villageObject);
     });
 
@@ -54,7 +57,10 @@ module.exports.getPlaces = (database) => {
     .filter(place => place.$.type === 'Farm')
     .forEach((farm) => {
       const farmObject = toFarm(farm);
-      villages.get(farm.placeref[0].$.hlink).farms.push(farmObject);
+      const village = villages.get(farm.placeref[0].$.hlink);
+
+      farmObject.village = village.id;
+      village.farms.push(farmObject);
       farms.set(farmObject.handle, farmObject);
     });
 

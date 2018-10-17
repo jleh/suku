@@ -10,30 +10,16 @@ const getEvents = (data, placeId) => {
   }
 
   const events = [];
-  const { birthPlace, deathPlace, occupations } = data.events;
+  const { personEvents } = data.events;
 
-  if (birthPlace && birthPlace.id === placeId) {
-    events.push({
-      name: data.name,
-      id: data.id,
-      type: 'Birth'
-    });
-  }
-  if (deathPlace && deathPlace.id === placeId) {
-    events.push({
-      name: data.name,
-      id: data.id,
-      type: 'Death'
-    });
-  }
-
-  if (occupations) {
-    occupations.forEach((event) => {
+  if (personEvents) {
+    personEvents.forEach((event) => {
       if (event.place.id === placeId) {
         events.push({
           name: data.name,
           id: data.id,
-          type: 'Occupation'
+          type: event.type,
+          event
         });
       }
     });

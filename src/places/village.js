@@ -1,35 +1,25 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { Map, TileLayer, Marker } from 'react-leaflet';
+import { withRouter, Link } from 'react-router-dom';
 
 import withContext from '../context';
 
-import { getPlaceEvents, getCoordinates } from '../util';
+import { getPlaceEvents } from '../util';
+
 import PlaceEvents from './placeEvents';
+import VillageMap from './villageMap';
 
 import styles from './village.css';
 
-const renderMap = village => (
-  <div className={styles.map}>
-    <Map center={getCoordinates(village)} zoom={12}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-      />
-      {village.farms.filter(farm => farm.coordinates !== null).map(farm => (
-        <Marker key={farm.id} position={getCoordinates(farm)} />
-      ))}
-    </Map>
-  </div>
-);
-
 const Village = ({ match, personList, placesById }) => {
   const village = placesById.get(match.params.id);
+  const city = placesById.get(village.city);
 
   return (
     <div>
       <h2>{village.name}</h2>
-      {village.coordinates && renderMap(village)}
+      <Link to={`/place/${city.id}`}>{city.name}</Link>
+
+      {village.coordinates && <VillageMap village={village} />}
       {village.farms.map(farm => (
         <div key={farm.id}>
           <h3>{farm.name}</h3>
