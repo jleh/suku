@@ -1,12 +1,10 @@
 import React from 'react';
 import { Translate } from 'react-localize-redux';
-import { format } from 'date-fns';
 
-import { renderAge } from '../../util';
+import { renderAge, renderDate } from '../../util';
 
 import styles from './personEvents.css';
 
-const renderDate = date => date && (date.length === 4 ? date : format(date, 'DD.MM.YYYY'));
 const renderAgeOnEvent = (birth, event) => {
   if (!birth) {
     return null;

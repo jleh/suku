@@ -1,6 +1,8 @@
 import React from 'react';
 import { latLngBounds } from 'leaflet';
-import { Map, TileLayer, Marker } from 'react-leaflet';
+import {
+  Map, TileLayer, Marker, Popup
+} from 'react-leaflet';
 
 import { getCoordinates } from '../util';
 
@@ -29,7 +31,9 @@ export default ({ village }) => {
           attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
         />
         {village.farms.filter(farm => farm.coordinates !== null).map(farm => (
-          <Marker key={farm.id} position={getCoordinates(farm)} />
+          <Marker key={farm.id} position={getCoordinates(farm)}>
+            <Popup>{farm.name}</Popup>
+          </Marker>
         ))}
       </Map>
     </div>
