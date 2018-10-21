@@ -32,7 +32,8 @@
     "Cause Of Death": ["Kuolinsyy"],
     "Confirmation": ["Pääsi ripille"],
     "Military Service": ["Asepalvelus"],
-    "Medical Information": ["Terveys"]
+    "Medical Information": ["Terveys"],
+    "Nobility Title": ["Aateloitu"]
   },
   "places": {
     "villages": ["Kylät"]
