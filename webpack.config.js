@@ -36,6 +36,12 @@ module.exports = {
     ]
   },
 
+  optimization: {
+    splitChunks: {
+      chunks: 'initial'
+    }
+  },
+
   devtool: 'source-map',
   devServer: {
     historyApiFallback: {

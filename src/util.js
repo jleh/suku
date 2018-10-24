@@ -1,4 +1,5 @@
-import { distanceInWordsStrict, format } from 'date-fns';
+import distanceInWordsStrict from 'date-fns/distance_in_words_strict';
+import format from 'date-fns/format';
 import fiLocale from 'date-fns/locale/fi';
 
 export const printBirth = child => (child.events.birth ? `* ${child.events.birth}` : null);
