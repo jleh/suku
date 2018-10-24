@@ -134,6 +134,490 @@
     }
   ],
   "events": [
-
+    {
+      "name": "Katovuosi",
+      "start": 1527,
+      "end": 1528
+    },
+    {
+      "name": "Kreivisota",
+      "start": 1533,
+      "end": 1536,
+      "url": "https://fi.wikipedia.org/wiki/Kreivisota"
+    },
+    {
+      "name": "Voudintilejä aletaan laatia",
+      "start": 1537,
+      "end": 1537
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1542,
+      "end": 1542
+    },
+    {
+      "name": "Mikael Agricolan ABC-kirja julkaistaan",
+      "start": 1543,
+      "end": 1543,
+      "url": "https://fi.wikipedia.org/wiki/Abckiria"
+    },
+    {
+      "name": "Mikael Agricolan Uusi Testamentti julkaistaan",
+      "start": 1548,
+      "end": 1548,
+      "url": "https://fi.wikipedia.org/wiki/Se_Wsi_Testamenti"
+    },
+    {
+      "name": "Helsinki perustetaan",
+      "start": 1550,
+      "end": 1550
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1551,
+      "end": 1551
+    },
+    {
+      "name": "Suuri Venäjän sota",
+      "start": 1555,
+      "end": 1557,
+      "url": "https://fi.wikipedia.org/wiki/Suuri_Ven%C3%A4j%C3%A4n_sota"
+    },
+    {
+      "name": "Erik XIV:n ja Juhana III:n veljessota",
+      "start": 1563,
+      "end": 1563
+    },
+    {
+      "name": "Pohjoismaiden seitsenvuotinen sota",
+      "start": 1563,
+      "end": 1570,
+      "url": "https://fi.wikipedia.org/wiki/Pohjoismaiden_seitsenvuotinen_sota"
+    },
+    {
+      "name": "Perinnöllinen aatelisuus",
+      "start": 1569,
+      "end": 1569
+    },
+    {
+      "name": "Pitkä viha",
+      "start": 1570,
+      "end": 1595,
+      "url": "https://fi.wikipedia.org/wiki/Pitk%C3%A4_viha"
+    },
+    {
+      "name": "Suomen väkiluku 300 000",
+      "start": 1571,
+      "end": 1571
+    },
+    {
+      "name": "Ensimmäinen kirjallinen merkintä Orimattilasta",
+      "start": 1573,
+      "end": 1573
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1574,
+      "end": 1574
+    },
+    {
+      "name": "Paha katovuosi",
+      "start": 1580,
+      "end": 1580
+    },
+    {
+      "name": "Rutto",
+      "start": 1580,
+      "end": 1580
+    },
+    {
+      "name": "Täyssinän rauha",
+      "start": 1595,
+      "end": 1595
+    },
+    {
+      "name": "Nuijasota",
+      "start": 1596,
+      "end": 1597,
+      "url": "https://fi.wikipedia.org/wiki/Nuijasota"
+    },
+    {
+      "name": "Ankara katovuosi",
+      "start": 1601,
+      "end": 1602
+    },
+    {
+      "name": "Puolan sota",
+      "start": 1601,
+      "end": 1611
+    },
+    {
+      "name": "Inkerin sota",
+      "start": 1610,
+      "end": 1617
+    },
+    {
+      "name": "Rutto",
+      "start": 1630,
+      "end": 1630
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1631,
+      "end": 1635
+    },
+    {
+      "name": "Läänintilejä aletaan kirjata",
+      "start": 1634,
+      "end": 1634
+    },
+    {
+      "name": "Postilaitos perustetaan Ruotsiin",
+      "start": 1638,
+      "end": 1638
+    },
+    {
+      "name": "Orimattilan seurakunta muodostetaan",
+      "start": 1636,
+      "end": 1636
+    },
+    {
+      "name": "Turun akatemia perustetaan",
+      "start": 1640,
+      "end": 1640
+    },
+    {
+      "name": "Suomenkielinen Raamattu ilmestyy",
+      "start": 1642,
+      "end": 1642
+    },
+    {
+      "name": "Westfalenin rauha",
+      "start": 1648,
+      "end": 1648
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1649,
+      "end": 1650
+    },
+    {
+      "name": "Ruptuurisota",
+      "start": 1656,
+      "end": 1658,
+      "url": "https://fi.wikipedia.org/wiki/Ruptuurisota"
+    },
+    {
+      "name": "Pohjan sota",
+      "start": 1655,
+      "end": 1660,
+      "url": "https://fi.wikipedia.org/wiki/Pohjan_sota"
+    },
+    {
+      "name": "Rutto",
+      "start": 1657,
+      "end": 1657
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1664,
+      "end": 1664
+    },
+    {
+      "name": "Suuret kuolonvuodet, kolmasosa suomalaisista kuolee",
+      "start": 1695,
+      "end": 1697
+    },
+    {
+      "name": "Suuri Pohjan sota",
+      "start": 1700,
+      "end": 1721,
+      "url": "https://fi.wikipedia.org/wiki/Suuri_Pohjan_sota"
+    },
+    {
+      "name": "Isoviha",
+      "start": 1713,
+      "end": 1721,
+      "url": "https://fi.wikipedia.org/wiki/Isoviha"
+    },
+    {
+      "name": "Hattujen sota",
+      "start": 1741,
+      "end": 1743,
+      "url": "https://fi.wikipedia.org/wiki/Hattujen_sota"
+    },
+    {
+      "name": "Turun hovioikeus perustetaan",
+      "start": 1623,
+      "end": 1623
+    },
+    {
+      "name": "Suomalaiset 30-vuotisessa sodassa",
+      "start": 1629,
+      "end": 1648
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1680,
+      "end": 1680
+    },
+    {
+      "name": "Kirkkolaki",
+      "start": 1686,
+      "end": 1686
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1690,
+      "end": 1690
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1693,
+      "end": 1693
+    },
+    {
+      "name": "Suomen väkiluku 400 000",
+      "start": 1695,
+      "end": 1695
+    },
+    {
+      "name": "Katovuodet",
+      "start": 1704,
+      "end": 1706
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1708,
+      "end": 1708
+    },
+    {
+      "name": "Paha ruttoepidemia",
+      "start": 1710,
+      "end": 1710
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1726,
+      "end": 1726
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1740,
+      "end": 1740
+    },
+    {
+      "name": "Pikkuviha",
+      "start": 1742,
+      "end": 1743,
+      "url": "https://fi.wikipedia.org/wiki/Pikkuviha"
+    },
+    {
+      "name": "Gregoriaaninen kalenteri käyttöön",
+      "start": 1753,
+      "end": 1753
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1756,
+      "end": 1756
+    },
+    {
+      "name": "Isojakoasetus",
+      "start": 1757,
+      "end": 1757
+    },
+    {
+      "name": "Suomalaiset tuovat perunan suomeen Pommerin sodasta",
+      "start": 1757,
+      "end": 1762
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1763,
+      "end": 1763
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1769,
+      "end": 1769
+    },
+    {
+      "name": "Ensimmäinen suomalainen sanomalehti",
+      "start": 1771,
+      "end": 1771
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1776,
+      "end": 1776
+    },
+    {
+      "name": "Katovuosi",
+      "start": 1783,
+      "end": 1785
+    },
+    {
+      "name": "Isorokkoepidemia",
+      "start": 1770,
+      "end": 1778
+    },
+    {
+      "name": "Kustaa III:n sota",
+      "start": 1788,
+      "end": 1790,
+      "url": "https://fi.wikipedia.org/wiki/Kustaa_III:n_sota"
+    },
+    {
+      "name": "Rokotukset aloitetaan",
+      "start": 1797,
+      "end": 1797
+    },
+    {
+      "name": "Suomen sota",
+      "start": 1808,
+      "end": 1809,
+      "url": "https://fi.wikipedia.org/wiki/Suomen_sota"
+    },
+    {
+      "name": "Suomen pankki perustetaan",
+      "start": 1811,
+      "end": 1811
+    },
+    {
+      "name": "Helsingistä tulee Suomen pääkaupunki",
+      "start": 1812,
+      "end": 1812
+    },
+    {
+      "name": "Kuolemanrangaistus muutetaan karkoitukseksi Siperiaan",
+      "start": 1825,
+      "end": 1825
+    },
+    {
+      "name": "Yliopisto siirtyy Turusta Helsinkiin",
+      "start": 1827,
+      "end": 1827
+    },
+    {
+      "name": "Maailman ensimmäinen valokuva",
+      "start": 1827,
+      "end": 1827
+    },
+    {
+      "name": "Yliopisto siirtyy Turusta Helsinkiin",
+      "start": 1827,
+      "end": 1827
+    },
+    {
+      "name": "Joulukuusi ensimmäisen kerran käytössä Suomessa",
+      "start": 1829,
+      "end": 1829
+    },
+    {
+      "name": "Ankara katovuosi",
+      "start": 1833,
+      "end": 1833
+    },
+    {
+      "name": "Kalevala ilmestyy",
+      "start": 1833,
+      "end": 1833
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    },
+    {
+      "name": "",
+      "start": ,
+      "end":
+    }
   ]
 }
