@@ -41,7 +41,7 @@ module.exports = {
     historyApiFallback: {
       rewrites: [
         { from: /family.json$/, to: '/family.json' },
-        { from: /worldEvents.json$/, to: '/worldEvents.json' }
+        { from: /world.json$/, to: '/world.json' }
       ]
     }
   },
@@ -50,7 +50,7 @@ module.exports = {
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
       { from: 'family.json', to: '' },
-      { from: 'worldEvents.json', to: '' },
+      { from: 'world.json', to: '' },
       { from: 'blog.md', to: '' }
     ]),
     new HtmlWebpackPlugin({

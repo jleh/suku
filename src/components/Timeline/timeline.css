@@ -1,0 +1,12 @@
+.timelineEvents {
+  display: flex;
+  flex-basis: 0;
+}
+
+.worldEvents {
+  flex-grow: 2;
+}
+
+.familyEvents {
+  flex-grow: 1.5;
+}

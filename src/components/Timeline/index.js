@@ -3,6 +3,10 @@ import sortBy from 'lodash/sortBy';
 import uniq from 'lodash/uniq';
 import { Translate } from 'react-localize-redux';
 
+import styles from './timeline.css';
+
+import WorldEvents from '../WorldEvents';
+
 const toSortDate = (textDate) => {
   const date = textDate.replace(/\?/g, '0');
 
@@ -63,8 +67,8 @@ const Timeline = ({ data, worldEvents }) => {
       {years.map(year => (
         <div key={year}>
           <h4>{year}</h4>
-          <div className="timeline-events">
-            <div className="family-events">
+          <div className={styles.timelineEvents}>
+            <div className={styles.familyEvents}>
               {events.filter(event => event.year === year).map(event => (
                 <div key={`${event.date}-${event.text}`}>
                   <div className="timeline-date">{event.displayDate}</div>
@@ -72,10 +76,8 @@ const Timeline = ({ data, worldEvents }) => {
                 </div>
               ))}
             </div>
-            <div className="world-events">
-              {worldEvents[year] && worldEvents[year].map(event => (
-                <div key={`${year}-${event}`}>{event}</div>
-              ))}
+            <div className={styles.worldEvents}>
+              <WorldEvents year={year} worldEvents={worldEvents} />
             </div>
           </div>
         </div>

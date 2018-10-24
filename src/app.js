@@ -59,7 +59,7 @@ class App extends Component {
         updated: data.updated
       }));
 
-    fetch('/suku/worldEvents.json')
+    fetch('/suku/world.json')
       .then(res => res.json())
       .then(worldEvents => this.setState({ worldEvents }));
   }
