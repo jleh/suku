@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders nothing if no events 1`] = `
+<div>
+  <h2>
+    Missing translationId: menu.personIndex for language: \${ languageCode }
+  </h2>
+  <div>
+    <a
+      href="/person/H3"
+      onClick={[Function]}
+    >
+      Test A
+    </a>
+  </div>
+  <div>
+    <a
+      href="/person/H1"
+      onClick={[Function]}
+    >
+      Test B
+    </a>
+  </div>
+  <div>
+    <a
+      href="/person/H2"
+      onClick={[Function]}
+    >
+      Test C
+    </a>
+  </div>
+  <div>
+    <a
+      href="/person/H4"
+      onClick={[Function]}
+    >
+      Test af D
+    </a>
+  </div>
+</div>
+`;

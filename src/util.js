@@ -5,20 +5,20 @@ import fiLocale from 'date-fns/locale/fi';
 export const printBirth = child => (child.events.birth ? `* ${child.events.birth}` : null);
 export const printDeath = child => (child.events.death ? `† ${child.events.death}` : null);
 
-const getEvents = (data, placeId) => {
-  if (!data || !data.events) {
+const getEvents = (person, placeId) => {
+  if (!person || !person.events) {
     return [];
   }
 
   const events = [];
-  const { personEvents } = data.events;
+  const { personEvents } = person.events;
 
   if (personEvents) {
     personEvents.forEach((event) => {
       if (event.place.id === placeId) {
         events.push({
-          name: data.name,
-          id: data.id,
+          name: person.name,
+          id: person.id,
           type: event.type,
           event
         });
@@ -34,7 +34,7 @@ export const getPlaceEvents = (placeId, persons) => persons.reduce((events, pers
   ...getEvents(person, placeId)
 ], []);
 
-export const renderAge = (birth, date) => ((birth === date || !date)
+export const renderAge = (birth, date) => ((birth === date || !date || !birth)
   ? null
   : distanceInWordsStrict(birth, date, { locale: fiLocale }));
 

@@ -24,3 +24,4 @@ const PersonList = ({ personList }) => (
 );
 
 export default withContext(PersonList);
+export { PersonList as PersonListWithoutContext };
