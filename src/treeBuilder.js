@@ -1,6 +1,8 @@
+import { createRefMap } from './util';
+
 const processedPersons = {};
 
-const findParents = (person, persons) => {
+const findParents = (person, personMap) => {
   // If persons parents are e.g. cousins their ancestors will be duplicated to
   // family tree. We only want one branch of ancestors.
   const exsistingPerson = processedPersons[person.id];
@@ -10,8 +12,8 @@ const findParents = (person, persons) => {
     parents = [{}, {}];
   } else {
     parents = [
-      person.father ? findParents(persons.find(p => p.handle === person.father), persons) : {},
-      person.mother ? findParents(persons.find(p => p.handle === person.mother), persons) : {}
+      person.father ? findParents(personMap.get(person.father), personMap) : {},
+      person.mother ? findParents(personMap.get(person.mother), personMap) : {}
     ];
   }
 
@@ -28,5 +30,7 @@ const findParents = (person, persons) => {
 
 export default (persons, rootPersonId) => {
   const rootPerson = persons.find(p => rootPersonId === p.id);
-  return findParents(rootPerson, persons);
+  const personMap = createRefMap(persons);
+
+  return findParents(rootPerson, personMap);
 };
