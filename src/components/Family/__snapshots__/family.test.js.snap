@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders family 1`] = `
+<div
+  className="family"
+>
+  <div>
+    Missing translationId: family.spouse for language: \${ languageCode }
+    : 
+    <div>
+      <a
+        href="/person/2"
+        onClick={[Function]}
+      >
+        Other Person
+      </a>
+       
+      <span
+        className="dates"
+      >
+         
+      </span>
+    </div>
+    <ol>
+      <li>
+        <div>
+          <a
+            href="/person/1"
+            onClick={[Function]}
+          >
+            Test Person
+          </a>
+           
+          <span
+            className="dates"
+          >
+            * 1.1.1900
+             
+            † 1.1.1950
+          </span>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
+`;
