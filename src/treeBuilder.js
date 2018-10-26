@@ -1,11 +1,11 @@
 import { createRefMap } from './util';
 
-const processedPersons = {};
+const processedPersons = new Map();
 
 const findParents = (person, personMap) => {
   // If persons parents are e.g. cousins their ancestors will be duplicated to
   // family tree. We only want one branch of ancestors.
-  const exsistingPerson = processedPersons[person.id];
+  const exsistingPerson = processedPersons.get(person.id);
   let parents = [];
 
   if (exsistingPerson) {
@@ -18,7 +18,7 @@ const findParents = (person, personMap) => {
   }
 
   const treePerson = Object.assign({}, person, { parents });
-  processedPersons[treePerson.id] = treePerson;
+  processedPersons.set(treePerson.id, treePerson);
 
   if (exsistingPerson) {
     treePerson.duplicate = true;
