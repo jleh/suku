@@ -4,10 +4,9 @@ exports[`Renders source list 1`] = `
 <div
   className="sources"
 >
-  <div>
+  <h3>
     Missing translationId: sources for language: \${ languageCode }
-    :
-  </div>
+  </h3>
   <div>
     <i>
       Author
@@ -26,10 +25,9 @@ exports[`Renders source list with links 1`] = `
 <div
   className="sources"
 >
-  <div>
+  <h3>
     Missing translationId: sources for language: \${ languageCode }
-    :
-  </div>
+  </h3>
   <div>
     <a
       href="http://www.example.com"

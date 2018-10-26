@@ -1,61 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Renders events even if birthday is unknown 1`] = `
-<table
-  className="table"
+<div
+  className="timeline"
 >
-  <tbody>
-    <tr>
-      <td
-        className="date"
-      >
+  <div
+    className="timelineRow"
+  >
+    <div
+      className="date"
+    >
+      <div>
         06.06.1900
-      </td>
-      <td
+      </div>
+      <div
         className="age"
       />
-      <td>
+    </div>
+    <div
+      className="line last"
+    >
+      <div />
+    </div>
+    <div
+      className="timelineText"
+    >
+      <div>
         Missing translationId: events.Residence for language: \${ languageCode }
-      </td>
-      <td />
-      <td
+         
+      </div>
+      <div
         className="place"
       >
         Place
-      </td>
-    </tr>
-  </tbody>
-</table>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`Renders nothing if no events 1`] = `null`;
 
 exports[`Renders person age on event 1`] = `
-<table
-  className="table"
+<div
+  className="timeline"
 >
-  <tbody>
-    <tr>
-      <td
-        className="date"
-      >
+  <div
+    className="timelineRow"
+  >
+    <div
+      className="date"
+    >
+      <div>
         06.06.1900
-      </td>
-      <td
+      </div>
+      <div
         className="age"
       >
-        50 vuotta
-      </td>
-      <td>
+        50 v
+      </div>
+    </div>
+    <div
+      className="line last"
+    >
+      <div />
+    </div>
+    <div
+      className="timelineText"
+    >
+      <div>
         Missing translationId: events.Residence for language: \${ languageCode }
-      </td>
-      <td />
-      <td
+         
+      </div>
+      <div
         className="place"
       >
         Place
-      </td>
-    </tr>
-  </tbody>
-</table>
+      </div>
+    </div>
+  </div>
+</div>
 `;

@@ -4,23 +4,23 @@ import { MemoryRouter } from 'react-router-dom';
 
 import LinkedPerson from '.';
 
-const persons = [
-  {
-    handle: 'H1',
-    id: '1',
-    name: 'Test Person',
-    events: {
-      birth: '1.1.1900',
-      death: '1.1.1950'
-    }
-  },
-  {
-    handle: 'H2',
-    id: '2',
-    name: 'Other Person',
-    events: {}
+const persons = new Map();
+
+persons.set('H1', {
+  handle: 'H1',
+  id: '1',
+  name: 'Test Person',
+  events: {
+    birth: '1.1.1900',
+    death: '1.1.1950'
   }
-];
+});
+persons.set('H2', {
+  handle: 'H2',
+  id: '2',
+  name: 'Other Person',
+  events: {}
+});
 
 const renderComponent = id => renderer
   .create(
