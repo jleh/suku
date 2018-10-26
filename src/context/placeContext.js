@@ -2,5 +2,6 @@ import React from 'react';
 
 export default React.createContext({
   places: [],
-  placesById: new Map()
+  placesById: new Map(),
+  worldEvents: []
 });

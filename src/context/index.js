@@ -9,7 +9,7 @@ export default WrappedComponent => props => (
       personsById, personsByRef, personList, data, personSelected
     }) => (
       <PlaceContext.Consumer>
-        {({ places, placesById }) => (
+        {({ places, placesById, worldEvents }) => (
           <WrappedComponent
             {...props}
             personsById={personsById}
@@ -19,6 +19,7 @@ export default WrappedComponent => props => (
             placesById={placesById}
             data={data}
             personSelected={personSelected}
+            worldEvents={worldEvents}
           />
         )}
       </PlaceContext.Consumer>

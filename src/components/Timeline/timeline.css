@@ -10,3 +10,8 @@
 .familyEvents {
   flex-grow: 1.5;
 }
+
+.eventPlace {
+  font-size: 0.75em;
+  font-style: italic;
+}

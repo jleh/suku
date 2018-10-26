@@ -1,64 +1,32 @@
 import React from 'react';
 import sortBy from 'lodash/sortBy';
 import uniq from 'lodash/uniq';
+import groupBy from 'lodash/groupBy';
 import { Translate } from 'react-localize-redux';
 
 import styles from './timeline.css';
 
+import withContext from '../../context';
 import WorldEvents from '../WorldEvents';
+import TimelineEvent from './TimelineEvent';
 
-const toSortDate = (textDate) => {
-  const date = textDate.replace(/\?/g, '0');
-
-  if (date.length === 10) {
-    const fields = date.split('.');
-    return `${fields[2]}-${fields[1]}-${fields[0]}`;
-  }
-
-  return date;
-};
-
-const getYear = date => date.substring(date.length - 4);
-const getDayAndMonth = date => (date.length > 4 ? date.substring(0, 5) : '');
-
-const getEvents = (data) => {
-  if (!data || !data.events) {
-    return [];
-  }
-
-  const events = [];
-
-  if (data.events.birth) {
-    events.push({
-      text: `${data.name} syntyi`,
-      sortDate: toSortDate(data.events.birth),
-      date: data.events.birth,
-      displayDate: getDayAndMonth(data.events.birth),
-      year: getYear(data.events.birth)
-    });
-  }
-
-  if (data.events.death) {
-    events.push({
-      text: `${data.name} kuoli`,
-      sortDate: toSortDate(data.events.death),
-      date: data.events.death,
-      displayDate: getDayAndMonth(data.events.death),
-      year: getYear(data.events.death)
-    });
-  }
-
-  return [
-    ...events,
-    ...getEvents(data.parents[0]),
-    ...getEvents(data.parents[1])
-  ];
-};
-
+const getYear = date => date.substring(0, 4);
 const getYears = events => uniq(events.map(event => getYear(event.date))).sort();
 
-const Timeline = ({ data, worldEvents }) => {
-  const events = sortBy(getEvents(data), 'sortDate');
+const personEventsReducer = (events, person) => {
+  if (person.events.personEvents) {
+    const personEvents = person.events.personEvents.map(event => Object.assign(event, { person }));
+    return [...events, ...personEvents];
+  }
+
+  return events;
+};
+
+const Timeline = ({ personList, worldEvents }) => {
+  const events = sortBy(personList
+    .reduce(personEventsReducer, [])
+    .filter(event => event.date !== undefined), 'date');
+  const eventsByYear = groupBy(events, event => getYear(event.date));
   const years = getYears(events);
 
   return (
@@ -69,11 +37,8 @@ const Timeline = ({ data, worldEvents }) => {
           <h4>{year}</h4>
           <div className={styles.timelineEvents}>
             <div className={styles.familyEvents}>
-              {events.filter(event => event.year === year).map(event => (
-                <div key={`${event.date}-${event.text}`}>
-                  <div className="timeline-date">{event.displayDate}</div>
-                  <div className="timeline-text">{event.text}</div>
-                </div>
+              {eventsByYear[year].map(event => (
+                <TimelineEvent key={`${event.id}-${event.person.id}`} event={event} />
               ))}
             </div>
             <div className={styles.worldEvents}>
@@ -86,4 +51,4 @@ const Timeline = ({ data, worldEvents }) => {
   );
 };
 
-export default Timeline;
+export default withContext(Timeline);

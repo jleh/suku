@@ -84,11 +84,11 @@ class App extends Component {
 
     return (
       <PersonContext.Provider value={personContext}>
-        <PlacesContext.Provider value={{ places, placesById }}>
+        <PlacesContext.Provider value={{ places, placesById, worldEvents }}>
           <div>
             <Header updated={updated} />
             <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
-            <Route path="/timeline" component={() => <Timeline data={data} worldEvents={worldEvents} />} />
+            <Route path="/timeline" component={Timeline} />
             <Route path="/places" component={Places} />
             <Route path="/person/:id" component={Person} />
             <Route path="/persons" component={PersonList} />

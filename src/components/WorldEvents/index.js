@@ -6,7 +6,7 @@ const getEventsForYear = (events, year) => events
 export default ({ year, worldEvents }) => (
   <div>
     {getEventsForYear(worldEvents.events, parseInt(year, 10)).map(event => (
-      <div key={`${event.name}-${event.year}`}>
+      <div key={`${event.name}-${event.start}`}>
         {event.name}
       </div>
     ))}
