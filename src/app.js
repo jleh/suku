@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { Route, withRouter } from 'react-router-dom';
 import { withLocalize, Translate } from 'react-localize-redux';
-import fetch from 'unfetch';
 
 import './app.css';
 
-import config from '../config.json';
 import translations from './translations/translations.json';
+
+import { getWorldEvents, getData } from './api';
 
 import PersonContext from './context/personContext';
 import PlacesContext from './context/placeContext';
@@ -17,13 +17,11 @@ import AncestorTree from './components/AncestorTree';
 import Person from './components/Person';
 import Timeline from './components/Timeline';
 import Places from './places/places';
-import treeBuilder from './treeBuilder';
 import PersonList from './components/PersonList';
 import Place from './places/place';
 import Village from './places/village';
 import Blog from './components/Blog';
 
-import { createIdMap, createRefMap, createPlacesMap } from './util';
 
 class App extends Component {
   constructor(props) {
@@ -47,21 +45,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('/suku/family.json')
-      .then(res => res.json())
-      .then(data => this.setState({
-        data: treeBuilder(data.persons, config.rootPerson),
-        personList: data.persons,
-        personsById: createIdMap(data.persons),
-        personsByRef: createRefMap(data.persons),
-        places: data.places,
-        placesById: createPlacesMap(data.places),
-        updated: data.updated
-      }));
-
-    fetch('/suku/world.json')
-      .then(res => res.json())
-      .then(worldEvents => this.setState({ worldEvents }));
+    getData().then(data => this.setState(data));
+    getWorldEvents().then(worldEvents => this.setState({ worldEvents }));
   }
 
   personSelected(selectedPerson) {
