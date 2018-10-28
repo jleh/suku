@@ -8,6 +8,7 @@
     "react"
   ],
   "plugins": [
-    "lodash"
+    "lodash",
+    "react-hot-loader/babel"
   ]
 }

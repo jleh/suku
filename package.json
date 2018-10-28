@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --coverage --collectCoverageFrom=src/**/*.js",
     "tree": "node ancestors.js",
-    "dev": "webpack-dev-server --mode=development",
+    "dev": "webpack-dev-server --mode=development --hot",
     "build": "cross-env NODE_ENV=production webpack --mode=production"
   },
   "keywords": [],
@@ -52,6 +52,7 @@
     "lodash": "^4.17.10",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-hot-loader": "^4.3.11",
     "react-leaflet": "^2.0.1",
     "react-localize-redux": "^3.4.0",
     "react-markdown": "^4.0.3",

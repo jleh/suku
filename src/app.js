@@ -3,6 +3,8 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { Route, withRouter } from 'react-router-dom';
 import { withLocalize, Translate } from 'react-localize-redux';
 
+import { hot } from 'react-hot-loader';
+
 import './app.css';
 
 import translations from './translations/translations.json';
@@ -87,6 +89,8 @@ class App extends Component {
   }
 }
 
-export default withRouter(
-  withLocalize(App)
+export default hot(module)(
+  withRouter(
+    withLocalize(App)
+  )
 );

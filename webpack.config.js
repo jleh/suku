@@ -43,7 +43,9 @@ module.exports = {
   },
 
   devtool: 'source-map',
+
   devServer: {
+    hot: true,
     historyApiFallback: {
       rewrites: [
         { from: /family.json$/, to: '/family.json' },
