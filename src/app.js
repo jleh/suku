@@ -18,10 +18,11 @@ import Header from './components/Header';
 import AncestorTree from './components/AncestorTree';
 import Person from './components/Person';
 import Timeline from './components/Timeline';
-import Places from './places/places';
+import Places from './components/Places';
 import PersonList from './components/PersonList';
-import Place from './places/place';
-import Village from './places/village';
+import Place from './components/Places/Place';
+import Village from './components/Places/Village';
+import House from './components/Places/House';
 import Blog from './components/Blog';
 
 
@@ -81,6 +82,7 @@ class App extends Component {
             <Route path="/persons" component={PersonList} />
             <Route path="/place/:id" component={Place} />
             <Route path="/village/:id" component={Village} />
+            <Route path="/house/:id" component={House} />
             <Route path="/blog" component={Blog} />
           </div>
         </PlacesContext.Provider>

@@ -3,9 +3,9 @@ import { Translate } from 'react-localize-redux';
 import { Link } from 'react-router-dom';
 import sortBy from 'lodash/sortBy';
 
-import { renderDate } from '../util';
+import { renderDate } from '../../../util';
 
-import styles from './places.css';
+import styles from '../places.css';
 
 export default ({ placeEvents }) => (
   <table className={styles.placeEventsTable}>

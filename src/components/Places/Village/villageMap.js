@@ -4,7 +4,7 @@ import {
   Map, TileLayer, Marker, Popup
 } from 'react-leaflet';
 
-import { getCoordinates } from '../util';
+import { getCoordinates } from '../../../util';
 
 import styles from './village.css';
 

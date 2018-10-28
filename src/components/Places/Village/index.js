@@ -1,11 +1,11 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
-import withContext from '../context';
+import withContext from '../../../context';
 
-import { getPlaceEvents } from '../util';
+import { getPlaceEvents } from '../../../util';
 
-import PlaceEvents from './placeEvents';
+import PlaceEvents from '../placeEvents';
 import VillageMap from './villageMap';
 
 import styles from './village.css';

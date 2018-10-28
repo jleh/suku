@@ -2,10 +2,10 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Translate } from 'react-localize-redux';
 
-import withContext from '../context';
+import withContext from '../../../context';
 
-import { getPlaceEvents } from '../util';
-import PlaceEvents from './placeEvents';
+import { getPlaceEvents } from '../../../util';
+import PlaceEvents from '../PlaceEvents';
 
 const Place = ({ match, placesById, personList }) => {
   const place = placesById.get(match.params.id);
