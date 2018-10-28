@@ -6,8 +6,11 @@ import { getPlaceEvents } from '../../../util';
 import createResidentList from './createResidentList';
 
 import PlaceEvents from '../PlaceEvents';
+import ResidentTimeline from './ResidentTimeline';
 
-const House = ({ match, personList, personsById, placesById }) => {
+const House = ({
+  match, personList, personsById, placesById
+}) => {
   const house = placesById.get(match.params.id);
   const placeEvents = getPlaceEvents(house.id, personList);
   const residentList = createResidentList(placeEvents, personsById);
@@ -18,6 +21,7 @@ const House = ({ match, personList, personsById, placesById }) => {
     <div>
       <h2>{house.name}</h2>
 
+      <ResidentTimeline residents={residentList} />
       <PlaceEvents placeEvents={placeEvents} />
     </div>
   );

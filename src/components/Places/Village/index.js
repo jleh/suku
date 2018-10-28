@@ -5,7 +5,7 @@ import withContext from '../../../context';
 
 import { getPlaceEvents } from '../../../util';
 
-import PlaceEvents from '../placeEvents';
+import PlaceEvents from '../PlaceEvents';
 import VillageMap from './villageMap';
 
 import styles from './village.css';
