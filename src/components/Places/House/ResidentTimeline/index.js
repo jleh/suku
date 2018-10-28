@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import { scaleLinear, scaleBand } from 'd3-scale';
 import { select } from 'd3-selection';
+import { axisBottom } from 'd3-axis';
+
+import styles from './residentTimeline.css';
 
 export default class ResidentsTimeline extends Component {
   componentDidMount() {
     const { residents } = this.props;
-    let lane = 0;
     const filteredResidents = residents
-      .filter(d => d.start !== undefined)
-      .map(r => Object.assign(r, { lane: lane++ })); // eslint-disable-line
+      .filter(d => d.start !== undefined);
 
-    const startYear = 1818;
+    const startYear = parseInt(filteredResidents[0].start.substring(0, 4), 10);
     const height = filteredResidents.length * 25;
+
+    const getStart = d => (d.start ? d.start.substring(0, 4) : startYear);
+    const getEnd = d => (d.end ? d.end.substring(0, 4) : 2000);
 
     const x = scaleLinear()
       .domain([startYear, 2000])
@@ -24,7 +28,7 @@ export default class ResidentsTimeline extends Component {
     const chart = select('#residents-timeline')
       .append('svg')
       .attr('width', 500)
-      .attr('height', filteredResidents.length * 50);
+      .attr('height', filteredResidents.length * 25 + 30);
 
     chart.append('defs')
       .append('clipPath')
@@ -52,15 +56,12 @@ export default class ResidentsTimeline extends Component {
       .enter()
       .append('text')
       .text(d => d.person.name)
-      .attr('x', 15)
+      .attr('x', 20)
       .attr('y', d => y1(d.person.name) + 13)
       .attr('dy', '0.5ex')
       .attr('text-anchor', 'start')
       .attr('stroke', '#000')
       .attr('class', 'laneText');
-
-    const getStart = d => (d.start ? d.start.substring(0, 4) : startYear);
-    const getEnd = d => (d.end ? d.end.substring(0, 4) : 2000);
 
     main.append('g').selectAll('.items')
       .data(filteredResidents)
@@ -72,6 +73,15 @@ export default class ResidentsTimeline extends Component {
       .attr('height', 24)
       .attr('fill', '#24ad39')
       .attr('fill-opacity', 0.5);
+
+    chart.append('g')
+      .attr('transform', `translate(0, ${height})`)
+      .call(axisBottom(x).ticks(10, 'f'));
+
+    chart.append('g')
+      .attr('transform', `translate(0, ${height})`)
+      .attr('class', styles.xAxis)
+      .call(axisBottom(x).tickSize(-height).tickFormat(''));
   }
 
   render() {

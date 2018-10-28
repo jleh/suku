@@ -15,8 +15,6 @@ const House = ({
   const placeEvents = getPlaceEvents(house.id, personList);
   const residentList = createResidentList(placeEvents, personsById);
 
-  console.log(residentList);
-
   return (
     <div>
       <h2>{house.name}</h2>
