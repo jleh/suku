@@ -15,7 +15,7 @@ export default ({ village }) => {
 
   const farmsWithCoordinates = village.farms.filter(farm => farm.coordinates);
 
-  if (farmsWithCoordinates.length > 0) {
+  if (farmsWithCoordinates.length > 1) {
     bounds = latLngBounds(getCoordinates(village));
     farmsWithCoordinates.forEach(place => bounds.extend(getCoordinates(place)));
   } else {

@@ -10,9 +10,12 @@ import VillageMap from './villageMap';
 
 import styles from './village.css';
 
-const Village = ({ match, personList, placesById }) => {
+const Village = ({
+  match, personList, placesById
+}) => {
   const village = placesById.get(match.params.id);
   const city = placesById.get(village.city);
+  const placeEvents = getPlaceEvents(village.id, personList);
 
   return (
     <div>
@@ -33,7 +36,7 @@ const Village = ({ match, personList, placesById }) => {
         </div>
       ))}
       <div className={styles.events}>
-        <PlaceEvents placeEvents={getPlaceEvents(village.id, personList)} />
+        <PlaceEvents placeEvents={placeEvents} />
       </div>
     </div>
   );

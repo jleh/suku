@@ -3,23 +3,30 @@ import { scaleLinear, scaleBand } from 'd3-scale';
 import { select } from 'd3-selection';
 import { axisBottom } from 'd3-axis';
 
+import createResidentList from './createResidentList';
+
 import styles from './residentTimeline.css';
 
 export default class ResidentsTimeline extends Component {
   componentDidMount() {
-    const { residents } = this.props;
-    const filteredResidents = residents
-      .filter(d => d.start !== undefined);
+    const { placeEvents, personsById } = this.props;
+    const residents = createResidentList(placeEvents, personsById);
+    const filteredResidents = residents.filter(d => d.start !== undefined);
+
+    if (filteredResidents.length === 0) {
+      return;
+    }
 
     const startYear = parseInt(filteredResidents[0].start.substring(0, 4), 10);
     const height = filteredResidents.length * 25;
+    const width = 500;
 
     const getStart = d => (d.start ? d.start.substring(0, 4) : startYear);
     const getEnd = d => (d.end ? d.end.substring(0, 4) : 2000);
 
     const x = scaleLinear()
       .domain([startYear, 2000])
-      .range([15, 500]);
+      .range([15, width]);
 
     const y1 = scaleBand()
       .domain(filteredResidents.map(r => r.person.name))
@@ -27,19 +34,19 @@ export default class ResidentsTimeline extends Component {
 
     const chart = select('#residents-timeline')
       .append('svg')
-      .attr('width', 500)
+      .attr('width', width)
       .attr('height', filteredResidents.length * 25 + 30);
 
     chart.append('defs')
       .append('clipPath')
       .attr('id', 'clip')
       .append('rect')
-      .attr('width', 450)
-      .attr('height', 450);
+      .attr('width', width)
+      .attr('height', height);
 
     const main = chart.append('g')
-      .attr('height', 500)
-      .attr('width', 500)
+      .attr('height', width)
+      .attr('width', width)
       .attr('stroke', 'lightgray');
 
     main.append('g').selectAll('.dataLines')
@@ -47,7 +54,7 @@ export default class ResidentsTimeline extends Component {
       .enter()
       .append('line')
       .attr('x1', 15)
-      .attr('x2', 500)
+      .attr('x2', width)
       .attr('y1', d => y1(d.person.name))
       .attr('y2', d => y1(d.person.name));
 
@@ -71,7 +78,7 @@ export default class ResidentsTimeline extends Component {
       .attr('y', d => y1(d.person.name))
       .attr('width', d => x(getEnd(d) - getStart(d) + startYear))
       .attr('height', 24)
-      .attr('fill', '#24ad39')
+      .attr('fill', '#25a7ff')
       .attr('fill-opacity', 0.5);
 
     chart.append('g')
