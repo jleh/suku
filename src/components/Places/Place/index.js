@@ -10,6 +10,8 @@ import PlaceMap from './PlaceMap';
 import VillagePlaces from './VillagePlaces';
 import ResidentsTimeline from '../ResidentTimeline';
 
+import styles from './place.css';
+
 const getParentPlace = (place, placesById) => {
   if (place.type === 'village') {
     return placesById.get(place.city);
@@ -20,6 +22,8 @@ const getParentPlace = (place, placesById) => {
   if (place.type === 'building') {
     return placesById.get(place.farm);
   }
+
+  return null;
 };
 
 const Place = ({
@@ -30,10 +34,11 @@ const Place = ({
   const parentPlace = getParentPlace(place, placesById);
 
   return (
-    <div>
-      <h2>{place.name}</h2>
-
-      {parentPlace && <Link to={`/place/${parentPlace.id}`}>{parentPlace.name}</Link>}
+    <div className={styles.container}>
+      <h2 className={styles.heading}>{place.name}</h2>
+      <span className={styles.parentLink}>
+        {parentPlace && <Link to={`/place/${parentPlace.id}`}>{parentPlace.name}</Link>}
+      </span>
 
       <PlaceMap place={place} />
 

@@ -1,0 +1,13 @@
+.heading {
+  display: inline;
+}
+
+.parentLink {
+  margin-left: 1em;
+}
+
+.container {
+  & a:visited {
+    color: #00f;
+  }
+}
