@@ -1,7 +1,3 @@
-.events {
-  margin-top: 1em;
-}
-
 .map {
   height: 25em;
   width: 90vw;
@@ -11,8 +7,4 @@
   & > div {
     height: 100%;
   }
-}
-
-.buildings {
-  margin-left: 1em;
 }

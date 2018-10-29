@@ -21,7 +21,6 @@ import Timeline from './components/Timeline';
 import Places from './components/Places';
 import PersonList from './components/PersonList';
 import Place from './components/Places/Place';
-import Village from './components/Places/Village';
 import House from './components/Places/House';
 import Blog from './components/Blog';
 
@@ -81,7 +80,6 @@ class App extends Component {
             <Route path="/person/:id" component={Person} />
             <Route path="/persons" component={PersonList} />
             <Route path="/place/:id" component={Place} />
-            <Route path="/village/:id" component={Village} />
             <Route path="/house/:id" component={House} />
             <Route path="/blog" component={Blog} />
           </div>

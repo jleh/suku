@@ -4,3 +4,4 @@ dist
 *.bak
 family.json
 coverage
+*.ged

@@ -11,6 +11,7 @@ const toCoordinates = (place) => {
 
 const toCity = city => ({
   id: city.$.id,
+  type: 'city',
   handle: city.$.handle,
   name: city.pname[0].$.value,
   coordinates: toCoordinates(city),
@@ -19,6 +20,7 @@ const toCity = city => ({
 
 const toVillage = village => ({
   id: village.$.id,
+  type: 'village',
   handle: village.$.handle,
   name: village.pname[0].$.value,
   coordinates: toCoordinates(village),
@@ -27,6 +29,7 @@ const toVillage = village => ({
 
 const toFarm = farm => ({
   id: farm.$.id,
+  type: 'farm',
   handle: farm.$.handle,
   name: farm.pname[0].$.value,
   coordinates: toCoordinates(farm),
@@ -67,7 +70,10 @@ module.exports.getPlaces = (database) => {
   database.places[0].placeobj
     .filter(place => place.$.type === 'Building')
     .forEach((building) => {
-      farms.get(building.placeref[0].$.hlink).buildings.push(toFarm(building));
+      const buildingObj = toFarm(building);
+
+      buildingObj.type = 'building';
+      farms.get(building.placeref[0].$.hlink).buildings.push(buildingObj);
     });
 
   return [...cities.values()];
