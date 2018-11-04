@@ -20,7 +20,8 @@ that will be documented later.
 * Export your data from GRAMPS using XML format & no compression.
   Save export to project dir using `gramps.xml` as a name.
 * Run `npm tree` to generate data json file.
-* Run `npm build`. `dist` contains now all needed stuff for deployment.
+* Run `npm build`. `dist/` contains now all needed stuff for deployment.
+  `media/` contains exported images that should also be uploaded.
 
 Site can be run on development mode with `npm run dev`
 
@@ -28,3 +29,33 @@ Site can be run on development mode with `npm run dev`
 
 Current version fetch world events from backend server.
 You can also write events to static json file.
+
+## About data format
+
+There are some things need to know for making perfect export from GRAMPS.
+
+### Place types
+
+Places hierarchy is important for this site. To make browserable places following hierarchy
+must be used:
+```
+city
+  - village
+    - farm
+      - building
+```
+This means e.g. every farm must have village parent and every village is covered by city.
+You can have places with other types but they are ignored.
+
+### Profile pictures
+
+Add attribute `profile` = `true` for person media object that you want to be used as
+profile picture.
+
+### Coat of arms
+
+You can show coat of arms for nobile persons. Add attribute `arms` and filename for picture.
+
+### Links
+
+Link type wikipedia is recognized and show on profile page.
