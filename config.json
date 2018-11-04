@@ -3,5 +3,6 @@
   "rootPerson": "I0000",
   "coatOfArmsBasePath": "http://karttalehtinen.fi/suku/vaakunat",
   "picturesBasePath": "http://karttalehtinen.fi/suku/kuvat",
-  "backend": "https://juusonsuku.herokuapp.com"
+  "backend": "https://juusonsuku.herokuapp.com",
+  "basePath": "/suku"
 }

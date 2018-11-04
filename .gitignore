@@ -3,5 +3,6 @@ dist
 *.xml
 *.bak
 family.json
+places.json
 coverage
 *.ged

@@ -24,8 +24,7 @@ that will be documented later.
 
 Site can be run on development mode with `npm run dev`
 
-### Note about places
+### Note about world events
 
-Current version fetch places from backend server.
-This is needed because GRAMPS currently does not supports attributes
-for places.
+Current version fetch world events from backend server.
+You can also write events to static json file.

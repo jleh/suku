@@ -7,7 +7,7 @@ import treeBuilder from '../treeBuilder';
 export const getWorldEvents = () => fetch(`${config.backend}/worldEvents`).then(res => res.json());
 
 export const getPlaces = async () => {
-  const data = await fetch(`${config.backend}/places`).then(res => res.json());
+  const data = await fetch(`${config.basePath}/places.json`).then(res => res.json());
 
   return {
     places: data,
