@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const { findEvents } = require('./events');
 const { findAttributeValue } = require('./utils');
 const findSources = require('./sources');
@@ -12,8 +14,24 @@ const findParents = (person, data) => {
 };
 
 const coatOfArms = person => findAttributeValue(person.attribute, 'arms', 'value');
-const picture = person => findAttributeValue(person.attribute, 'profile', 'value');
 const getWikipedia = person => findAttributeValue(person.url, 'wikipedia', 'href');
+
+const findObjectWithAttribute = (objref, type, database) => {
+  if (objref) {
+    const profileRef = objref.find(obj => obj.attribute && obj.attribute[0].$.type === type);
+
+    if (profileRef) {
+      const ref = profileRef.$.hlink;
+      const media = database.objects[0].object.find(obj => obj.$.handle === ref);
+
+      fs.createReadStream(media.file[0].$.src).pipe(fs.createWriteStream(`media/${media.file[0].$.description}.jpg`));
+
+      return `${media.file[0].$.description}.jpg`;
+    }
+  }
+
+  return null;
+};
 
 const toPerson = (person, database) => {
   const parents = findParents(person, database);
@@ -26,7 +44,7 @@ const toPerson = (person, database) => {
     handle: person.$.handle,
     name: printName(person),
     coatOfArms: coatOfArms(person),
-    picture: picture(person),
+    picture: findObjectWithAttribute(person.objref, 'profile', database),
     wikipedia: getWikipedia(person),
     sources: findSources(person, database),
     events: findEvents(person.eventref, database),
