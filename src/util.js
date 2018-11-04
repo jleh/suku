@@ -50,20 +50,17 @@ export const createRefMap = (objects) => {
   return refMap;
 };
 
-export const getCoordinates = place => [
-  parseFloat(place.coordinates.lat.replace(',', '.')),
-  parseFloat(place.coordinates.lng.replace(',', '.'))
-];
+export const getCoordinates = place => [place.lat, place.lng];
 
 export const createPlacesMap = (places) => {
   let placesMap = createIdMap(places);
 
   places.forEach((place) => {
-    placesMap = new Map([...createIdMap(place.villages), ...placesMap]);
-    place.villages.forEach((village) => {
-      placesMap = new Map([...createIdMap(village.farms), ...placesMap]);
-      village.farms.forEach((farm) => {
-        placesMap = new Map([...createIdMap(farm.buildings), ...placesMap]);
+    placesMap = new Map([...createIdMap(place.children), ...placesMap]);
+    place.children.forEach((village) => {
+      placesMap = new Map([...createIdMap(village.children), ...placesMap]);
+      village.children.forEach((farm) => {
+        placesMap = new Map([...createIdMap(farm.children), ...placesMap]);
       });
     });
   });

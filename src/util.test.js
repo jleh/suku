@@ -13,7 +13,7 @@ describe('Render date', () => {
 });
 
 test('Get coordinates for place', () => {
-  expect(getCoordinates({ coordinates: { lat: '62,1', lng: '25.2' } })).toEqual([62.1, 25.2]);
+  expect(getCoordinates({ lat: 62.1, lng: 25.2 })).toEqual([62.1, 25.2]);
 });
 
 describe('Render age', () => {
@@ -30,15 +30,15 @@ test('Create places map', () => {
     {
       id: 1,
       name: 'A',
-      villages: [
+      children: [
         {
           id: 2,
           name: 'B',
-          farms: [
+          children: [
             {
               id: 3,
               name: 'C',
-              buildings: [
+              children: [
                 {
                   id: 4,
                   name: 'D'

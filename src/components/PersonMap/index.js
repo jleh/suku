@@ -17,7 +17,7 @@ export default ({ events, places }) => {
   const eventPlaces = uniq(events
     .map(event => places.get(event.place.id))
     .filter(place => place !== undefined)
-    .filter(place => place.coordinates !== null));
+    .filter(place => place.lat !== null));
 
   if (eventPlaces.length === 0) {
     return null;

@@ -14,12 +14,12 @@ export default ({ place }) => {
   let center;
   let zoom;
 
-  if (!place.coordinates) {
+  if (!place.lat && !place.lon) {
     return null;
   }
 
   const subPlaces = getSubPlaces(place);
-  const subPlacesWithCoordinates = subPlaces.filter(farm => farm.coordinates);
+  const subPlacesWithCoordinates = subPlaces.filter(subPlace => subPlace.lat);
 
   if (subPlacesWithCoordinates.length > 1) {
     bounds = latLngBounds(getCoordinates(place));

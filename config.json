@@ -2,5 +2,6 @@
   "pageTitle": "Juuso Lehtisen esivanhemmat",
   "rootPerson": "I0000",
   "coatOfArmsBasePath": "http://karttalehtinen.fi/suku/vaakunat",
-  "picturesBasePath": "http://karttalehtinen.fi/suku/kuvat"
+  "picturesBasePath": "http://karttalehtinen.fi/suku/kuvat",
+  "backend": "https://juusonsuku.herokuapp.com"
 }

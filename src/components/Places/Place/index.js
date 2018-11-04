@@ -12,24 +12,17 @@ import ResidentsTimeline from '../ResidentTimeline';
 
 import styles from './place.css';
 
-const getParentPlace = (place, placesById) => {
-  if (place.type === 'village') {
-    return placesById.get(place.city);
-  }
-  if (place.type === 'farm') {
-    return placesById.get(place.village);
-  }
-  if (place.type === 'building') {
-    return placesById.get(place.farm);
-  }
-
-  return null;
-};
+const getParentPlace = (place, placesById) => place.parent && placesById.get(`P${place.parent.toString().padStart(4, 0)}`);
 
 const Place = ({
   match, placesById, personList, personsById
 }) => {
   const place = placesById.get(match.params.id);
+
+  if (!place) {
+    return null;
+  }
+
   const placeEvents = getPlaceEvents(place.id, personList);
   const parentPlace = getParentPlace(place, placesById);
 
@@ -42,7 +35,7 @@ const Place = ({
 
       <PlaceMap place={place} />
 
-      {place.villages && <VillageList villages={place.villages} />}
+      {place.type === 'city' && <VillageList villages={place.children} />}
       {place.type === 'village' && <VillagePlaces personList={personList} village={place} />}
       {(place.type === 'farm' || place.type === 'building') && (
         <div>

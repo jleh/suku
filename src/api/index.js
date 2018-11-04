@@ -4,7 +4,16 @@ import config from '../../config.json';
 import { createIdMap, createRefMap, createPlacesMap } from '../util';
 import treeBuilder from '../treeBuilder';
 
-export const getWorldEvents = () => fetch('/suku/world.json').then(res => res.json());
+export const getWorldEvents = () => fetch(`${config.backend}/worldEvents`).then(res => res.json());
+
+export const getPlaces = async () => {
+  const data = await fetch(`${config.backend}/places`).then(res => res.json());
+
+  return {
+    places: data,
+    placesById: createPlacesMap(data)
+  };
+};
 
 export const getData = () => fetch('/suku/family.json')
   .then(res => res.json())
@@ -13,7 +22,5 @@ export const getData = () => fetch('/suku/family.json')
     personList: data.persons,
     personsById: createIdMap(data.persons),
     personsByRef: createRefMap(data.persons),
-    places: data.places,
-    placesById: createPlacesMap(data.places),
     updated: data.updated
   }));

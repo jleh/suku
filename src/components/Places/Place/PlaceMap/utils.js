@@ -1,26 +1,12 @@
 const getSubPlaces = (place) => {
-  if (place.type === 'city') {
-    return [
-      ...place.villages,
-      ...place.villages.reduce((villages, village) => [...villages, ...getSubPlaces(village)], [])
-    ];
+  if (!place.children) {
+    return [];
   }
 
-  if (place.type === 'village') {
-    return [
-      ...place.farms,
-      ...place.farms.reduce((farms, farm) => [...farms, ...getSubPlaces(farm)], [])
-    ];
-  }
-
-  if (place.type === 'farm') {
-    return [
-      ...place.buildings,
-      ...place.buildings.map((buildings, building) => [...buildings, ...getSubPlaces(building)], [])
-    ];
-  }
-
-  return [];
+  return [
+    ...place.children,
+    ...place.children.reduce((subPlaces, subPlace) => [...subPlaces, ...getSubPlaces(subPlace)], [])
+  ];
 };
 
 const markerColor = (place) => {

@@ -5,6 +5,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
+  entry: ['@babel/polyfill', './src/index.js'],
+
   output: {
     filename: '[name].[hash].js',
     publicPath: process.env.NODE_ENV === 'production' ? '/suku/' : '/'

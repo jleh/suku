@@ -9,7 +9,7 @@ import './app.css';
 
 import translations from './translations/translations.json';
 
-import { getWorldEvents, getData } from './api';
+import { getWorldEvents, getData, getPlaces } from './api';
 
 import PersonContext from './context/personContext';
 import PlacesContext from './context/placeContext';
@@ -34,7 +34,8 @@ class App extends Component {
     this.state = {
       data: null,
       places: [],
-      worldEvents: {}
+      worldEvents: {},
+      placesById: new Map()
     };
 
     initialize({
@@ -49,6 +50,7 @@ class App extends Component {
   componentDidMount() {
     getData().then(data => this.setState(data));
     getWorldEvents().then(worldEvents => this.setState({ worldEvents }));
+    getPlaces().then(placesData => this.setState(placesData));
   }
 
   personSelected(selectedPerson) {
