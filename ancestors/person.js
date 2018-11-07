@@ -23,8 +23,9 @@ const findObjectWithAttribute = (objref, type, database) => {
     if (profileRef) {
       const ref = profileRef.$.hlink;
       const media = database.objects[0].object.find(obj => obj.$.handle === ref);
+      const path = database.header[0].mediapath[0];
 
-      fs.createReadStream(media.file[0].$.src).pipe(fs.createWriteStream(`media/${media.file[0].$.description}.jpg`));
+      fs.createReadStream(`${path}/${media.file[0].$.src}`).pipe(fs.createWriteStream(`media/${media.file[0].$.description}.jpg`));
 
       return `${media.file[0].$.description}.jpg`;
     }
