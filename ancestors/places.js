@@ -23,7 +23,7 @@ module.exports.getPlaces = (database) => {
   database.places[0].placeobj
     .filter(place => place.$.type === 'Village')
     .forEach((village) => {
-      const villageObject = toPlaceObj(village, 'city');
+      const villageObject = toPlaceObj(village, 'village');
       const city = cities.get(village.placeref[0].$.hlink);
 
       villageObject.parent = city.id;
