@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Autocomplete from 'react-autocomplete';
 
+import styles from './personSearch.css';
+
 const shouldItemRender = (item, value) => {
   if (value.length < 3) {
     return false;
@@ -36,7 +38,14 @@ class PersonSearch extends Component {
         shouldItemRender={shouldItemRender}
         renderItem={(item, isHighlighted) => (
           <div key={item.id} style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-            {item.name}
+            <div>{item.name}</div>
+            <div className={styles.dates}>
+              <div>
+                {item.events.birth}
+                {item.events.death && ' - '}
+                {item.events.death}
+              </div>
+            </div>
           </div>
         )}
         value={value}
