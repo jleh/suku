@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Translate } from 'react-localize-redux';
 
+import PersonSearch from '../PersonSearch';
 import config from '../../../config.json';
 import styles from './header.css';
 
-const Header = ({ updated }) => (
+const Header = ({ updated, persons, onSelect }) => (
   <div className={styles.header}>
     <h1>{config.pageTitle}</h1>
 
@@ -32,6 +33,9 @@ const Header = ({ updated }) => (
     </nav>
 
     <div><Translate id="updated" />: {updated}</div>
+    <div>
+      <PersonSearch persons={persons} onSelect={onSelect} />
+    </div>
   </div>
 );
 

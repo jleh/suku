@@ -17,7 +17,6 @@ import PlacesContext from './context/placeContext';
 import Header from './components/Header';
 import AncestorTree from './components/AncestorTree';
 import Person from './components/Person';
-import PersonSearch from './components/PersonSearch';
 import Timeline from './components/Timeline';
 import Places from './components/Places';
 import PersonList from './components/PersonList';
@@ -81,8 +80,7 @@ class App extends Component {
       <PersonContext.Provider value={personContext}>
         <PlacesContext.Provider value={{ places, placesById, worldEvents }}>
           <div>
-            <Header updated={updated} />
-            <PersonSearch persons={personList} onSelect={this.personSeacrhSelect} />
+            <Header updated={updated} persons={personList} onSelect={this.personSeacrhSelect} />
             <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
             <Route path="/timeline" component={Timeline} />
             <Route path="/places" component={Places} />
