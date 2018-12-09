@@ -17,13 +17,13 @@ import PlacesContext from './context/placeContext';
 import Header from './components/Header';
 import AncestorTree from './components/AncestorTree';
 import Person from './components/Person';
+import PersonSearch from './components/PersonSearch';
 import Timeline from './components/Timeline';
 import Places from './components/Places';
 import PersonList from './components/PersonList';
 import Place from './components/Places/Place';
 import House from './components/Places/House';
 import Blog from './components/Blog';
-
 
 class App extends Component {
   constructor(props) {
@@ -45,6 +45,7 @@ class App extends Component {
     });
 
     this.personSelected = this.personSelected.bind(this);
+    this.personSeacrhSelect = this.personSeacrhSelect.bind(this);
   }
 
   componentDidMount() {
@@ -56,6 +57,11 @@ class App extends Component {
   personSelected(selectedPerson) {
     const { history } = this.props;
     history.push(`/person/${selectedPerson.id}`);
+  }
+
+  personSeacrhSelect(personId) {
+    const { history } = this.props;
+    history.push(`/person/${personId}`);
   }
 
   render() {
@@ -76,6 +82,7 @@ class App extends Component {
         <PlacesContext.Provider value={{ places, placesById, worldEvents }}>
           <div>
             <Header updated={updated} />
+            <PersonSearch persons={personList} onSelect={this.personSeacrhSelect} />
             <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
             <Route path="/timeline" component={Timeline} />
             <Route path="/places" component={Places} />
