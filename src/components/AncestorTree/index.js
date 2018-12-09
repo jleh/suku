@@ -41,6 +41,7 @@ export default class AncestorTree extends Component {
     const margin = {
       top: 0, right: 10, bottom: 0, left: 80
     };
+
     const width = 4000 - margin.left - margin.right;
     const height = 7500 - margin.top - margin.bottom;
 
