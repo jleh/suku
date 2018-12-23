@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Translate } from 'react-localize-redux';
 
-import PersonSearch from '../PersonSearch';
+import Search from '../Search';
 import config from '../../../config.json';
 import styles from './header.css';
 
-const Header = ({ updated, persons, onSelect }) => (
+const Header = ({
+  updated, persons, places, onSelect
+}) => (
   <div className={styles.header}>
     <h1>{config.pageTitle}</h1>
 
@@ -34,7 +36,7 @@ const Header = ({ updated, persons, onSelect }) => (
 
     <div><Translate id="updated" />: {updated}</div>
     <div>
-      <PersonSearch persons={persons} onSelect={onSelect} />
+      <Search persons={persons} places={places} onSelect={onSelect} />
     </div>
   </div>
 );

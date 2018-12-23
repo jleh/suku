@@ -44,7 +44,7 @@ class App extends Component {
     });
 
     this.personSelected = this.personSelected.bind(this);
-    this.personSeacrhSelect = this.personSeacrhSelect.bind(this);
+    this.searchSelect = this.searchSelect.bind(this);
   }
 
   componentDidMount() {
@@ -58,9 +58,14 @@ class App extends Component {
     history.push(`/person/${selectedPerson.id}`);
   }
 
-  personSeacrhSelect(personId) {
+  searchSelect(itemId) {
     const { history } = this.props;
-    history.push(`/person/${personId}`);
+
+    if (itemId.charAt(0) === 'I') {
+      history.push(`/person/${itemId}`);
+    } else if (itemId.charAt(0) === 'P') {
+      history.push(`/place/${itemId}`);
+    }
   }
 
   render() {
@@ -80,7 +85,12 @@ class App extends Component {
       <PersonContext.Provider value={personContext}>
         <PlacesContext.Provider value={{ places, placesById, worldEvents }}>
           <div>
-            <Header updated={updated} persons={personList} onSelect={this.personSeacrhSelect} />
+            <Header
+              updated={updated}
+              persons={personList}
+              places={placesById}
+              onSelect={this.searchSelect}
+            />
             <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
             <Route path="/timeline" component={Timeline} />
             <Route path="/places" component={Places} />
