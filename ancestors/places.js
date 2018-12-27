@@ -1,21 +1,38 @@
+const findSources = require('./sources');
+
 const sanitizeCoordinate = coord => parseFloat(coord.replace(',', '.'));
 const getLat = place => (place.coord ? sanitizeCoordinate(place.coord[0].$.lat) : null);
 const getLng = place => (place.coord ? sanitizeCoordinate(place.coord[0].$.long) : null);
-
-const toPlaceObj = (place, type) => ({
-  id: place.$.id,
-  type,
-  handle: place.$.handle,
-  name: place.pname[0].$.value,
-  lat: getLat(place),
-  lng: getLng(place),
-  children: []
-});
 
 module.exports.getPlaces = (database) => {
   const cities = new Map();
   const villages = new Map();
   const farms = new Map();
+
+  const getText = (place) => {
+    if (place.noteref) {
+      return database
+        .notes[0]
+        .note
+        .find(note => note.$.handle === place.noteref[0].$.hlink)
+        .text[0];
+    }
+
+    return '';
+  };
+
+  const toPlaceObj = (place, type) => ({
+    id: place.$.id,
+    type,
+    handle: place.$.handle,
+    name: place.pname[0].$.value,
+    lat: getLat(place),
+    lng: getLng(place),
+    children: [],
+    text: getText(place),
+    sources: findSources(place, database)
+  });
+
   database.places[0].placeobj
     .filter(place => place.$.type === 'City')
     .forEach((city) => { cities.set(city.$.handle, toPlaceObj(city, 'city')); });
