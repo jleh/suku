@@ -11,3 +11,9 @@
     color: #00f;
   }
 }
+
+.description {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 1em;
+}

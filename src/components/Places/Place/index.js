@@ -9,6 +9,7 @@ import VillageList from './VillageList';
 import PlaceMap from './PlaceMap';
 import VillagePlaces from './VillagePlaces';
 import ResidentsTimeline from '../ResidentTimeline';
+import Sources from '../../Sources';
 
 import styles from './place.css';
 
@@ -32,6 +33,11 @@ const Place = ({
       <span className={styles.parentLink}>
         {parentPlace && <Link to={`/place/${parentPlace.id}`}>{parentPlace.name}</Link>}
       </span>
+
+      <div className={styles.description}>
+        {place.text.split('\n').map((text, i) => <p key={i}>{text}</p>)}
+        {place.sources && <Sources sources={place.sources} />}
+      </div>
 
       <PlaceMap place={place} />
 
