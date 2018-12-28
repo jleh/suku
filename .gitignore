@@ -7,3 +7,4 @@ places.json
 coverage
 *.ged
 media/*.jpg
+.DS_Store
