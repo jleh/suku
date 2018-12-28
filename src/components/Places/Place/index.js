@@ -36,7 +36,7 @@ const Place = ({
 
       <div className={styles.description}>
         {place.text.split('\n').map((text, i) => <p key={i}>{text}</p>)}
-        {place.sources && <Sources sources={place.sources} />}
+        {place.sources.length !== 0 && <Sources sources={place.sources} />}
       </div>
 
       <PlaceMap place={place} />
