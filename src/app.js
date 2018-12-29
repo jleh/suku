@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { Route, withRouter } from 'react-router-dom';
 import { withLocalize, Translate } from 'react-localize-redux';
@@ -11,6 +12,7 @@ import translations from './translations/translations.json';
 
 import { getWorldEvents, getData, getPlaces } from './api';
 
+import { addPersons } from './actions';
 import PersonContext from './context/personContext';
 import PlacesContext from './context/placeContext';
 
@@ -48,7 +50,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    getData().then(data => this.setState(data));
+    getData().then((data) => {
+      this.setState(data);
+      this.props.addPersons(data);
+    });
     getWorldEvents().then(worldEvents => this.setState({ worldEvents }));
     getPlaces().then(placesData => this.setState(placesData));
   }
@@ -106,8 +111,16 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = () => ({
+
+});
+
+const mapDispatchToProps = { addPersons };
+
 export default hot(module)(
   withRouter(
-    withLocalize(App)
+    withLocalize(
+      connect(mapStateToProps, mapDispatchToProps)(App)
+    )
   )
 );
