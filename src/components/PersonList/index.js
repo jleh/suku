@@ -23,7 +23,7 @@ const PersonList = ({ personList }) => (
 );
 
 const mapStateToProps = state => ({
-  personList: state.personList
+  personList: state.persons.personList
 });
 
 export default connect(mapStateToProps)(PersonList);

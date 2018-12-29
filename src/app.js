@@ -11,10 +11,7 @@ import './app.css';
 import translations from './translations/translations.json';
 
 import { getWorldEvents, getData, getPlaces } from './api';
-
-import { addPersons } from './actions';
-import PersonContext from './context/personContext';
-import PlacesContext from './context/placeContext';
+import { addPersons, addPlaces, addWorldEvents } from './actions';
 
 import Header from './components/Header';
 import AncestorTree from './components/AncestorTree';
@@ -23,7 +20,6 @@ import Timeline from './components/Timeline';
 import Places from './components/Places';
 import PersonList from './components/PersonList';
 import Place from './components/Places/Place';
-import House from './components/Places/House';
 import Blog from './components/Blog';
 
 class App extends Component {
@@ -31,13 +27,6 @@ class App extends Component {
     super(props);
 
     const { initialize } = this.props;
-
-    this.state = {
-      data: null,
-      places: [],
-      worldEvents: {},
-      placesById: new Map()
-    };
 
     initialize({
       languages: ['fi'],
@@ -50,12 +39,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    getData().then((data) => {
-      this.setState(data);
-      this.props.addPersons(data);
-    });
-    getWorldEvents().then(worldEvents => this.setState({ worldEvents }));
-    getPlaces().then(placesData => this.setState(placesData));
+    getData().then(data => this.props.addPersons(data));
+    getWorldEvents().then(worldEvents => this.props.addWorldEvents(worldEvents));
+    getPlaces().then(placesData => this.props.addPlaces(placesData));
   }
 
   personSelected(selectedPerson) {
@@ -75,47 +61,41 @@ class App extends Component {
 
   render() {
     const {
-      data, worldEvents, updated, personList,
-      personsById, personsByRef, places, placesById
-    } = this.state;
-    const personContext = {
-      personsById, personsByRef, personList, data
-    };
+      data, updated, personList, placesById
+    } = this.props;
 
     if (!data) {
       return <div><Translate id="loading" /></div>;
     }
 
     return (
-      <PersonContext.Provider value={personContext}>
-        <PlacesContext.Provider value={{ places, placesById, worldEvents }}>
-          <div>
-            <Header
-              updated={updated}
-              persons={personList}
-              places={placesById}
-              onSelect={this.searchSelect}
-            />
-            <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
-            <Route path="/timeline" component={Timeline} />
-            <Route path="/places" component={Places} />
-            <Route path="/person/:id" component={Person} />
-            <Route path="/persons" component={PersonList} />
-            <Route path="/place/:id" component={Place} />
-            <Route path="/house/:id" component={House} />
-            <Route path="/blog" component={Blog} />
-          </div>
-        </PlacesContext.Provider>
-      </PersonContext.Provider>
+      <div>
+        <Header
+          updated={updated}
+          persons={personList}
+          places={placesById}
+          onSelect={this.searchSelect}
+        />
+        <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
+        <Route path="/timeline" component={Timeline} />
+        <Route path="/places" component={Places} />
+        <Route path="/person/:id" component={Person} />
+        <Route path="/persons" component={PersonList} />
+        <Route path="/place/:id" component={Place} />
+        <Route path="/blog" component={Blog} />
+      </div>
     );
   }
 }
 
-const mapStateToProps = () => ({
-
+const mapStateToProps = ({ persons, places }) => ({
+  updated: persons.updated,
+  data: persons.data,
+  personList: persons.personList,
+  placesById: places.placesById
 });
 
-const mapDispatchToProps = { addPersons };
+const mapDispatchToProps = { addPersons, addPlaces, addWorldEvents };
 
 export default hot(module)(
   withRouter(

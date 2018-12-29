@@ -5,9 +5,16 @@ export function addPersons(personData) {
   };
 }
 
-export function addPlaces(personList) {
+export function addPlaces(placesData) {
   return {
     type: 'ADD_PLACES',
-    personList
+    placesData
+  };
+}
+
+export function addWorldEvents(worldEvents) {
+  return {
+    type: 'ADD_WORLD_EVENTS',
+    worldEvents
   };
 }

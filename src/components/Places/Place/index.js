@@ -1,7 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-
-import withContext from '../../../context';
 
 import { getPlaceEvents } from '../../../util';
 import PlaceEvents from '../PlaceEvents';
@@ -55,4 +54,10 @@ const Place = ({
   );
 };
 
-export default withRouter(withContext(Place));
+const mapStateToProps = ({ places, persons }) => ({
+  placesById: places.placesById,
+  personList: persons.personList,
+  personsById: persons.personsById
+});
+
+export default withRouter(connect(mapStateToProps)(Place));

@@ -1,9 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Translate } from 'react-localize-redux';
 import sortBy from 'lodash/sortBy';
-
-import withContext from '../../context';
 
 const Places = ({ places }) => (
   <div>
@@ -18,4 +17,8 @@ const Places = ({ places }) => (
   </div>
 );
 
-export default withContext(Places);
+const mapStateToProps = ({ places }) => ({
+  places: places.places
+});
+
+export default connect(mapStateToProps)(Places);
