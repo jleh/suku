@@ -1,5 +1,6 @@
 import React from 'react';
 import { Translate } from 'react-localize-redux';
+import { Link } from 'react-router-dom';
 
 import { renderAge, renderDate } from '../../util';
 
@@ -46,7 +47,9 @@ export default ({ events, birth }) => {
               <Translate id={`events.${event.type}`} /> {event.description}
             </div>
             <div className={styles.place}>
-              {event.place && event.place.name}
+              {event.place && (
+                <Link to={`/place/${event.place.id}`}>{event.place.name}</Link>
+              )}
             </div>
           </div>
         </div>
