@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Translate } from 'react-localize-redux';
 
 import styles from './person.css';
 
 import config from '../../../config.json';
-
-import withContext from '../../context';
 
 import Family from '../Family';
 import Sources from '../Sources';
@@ -34,11 +33,12 @@ class Person extends Component {
     } = this.props;
 
     const person = personsById.get(match.params.id);
-    const { personEvents, birthISO } = person.events;
 
-    if (!person.name) {
+    if (!person || !person.name) {
       return null;
     }
+
+    const { personEvents, birthISO } = person.events;
 
     return (
       (
@@ -87,4 +87,10 @@ class Person extends Component {
   }
 }
 
-export default withRouter(withContext(Person));
+const mapStateToProps = ({ persons, places }) => ({
+  personsById: persons.personsById,
+  personsByRef: persons.personsByRef,
+  placesById: places.placesById
+});
+
+export default withRouter(connect(mapStateToProps)(Person));

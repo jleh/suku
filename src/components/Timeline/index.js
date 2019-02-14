@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import sortBy from 'lodash/sortBy';
 import uniq from 'lodash/uniq';
 import groupBy from 'lodash/groupBy';
@@ -6,7 +7,6 @@ import { Translate } from 'react-localize-redux';
 
 import styles from './timeline.css';
 
-import withContext from '../../context';
 import WorldEvents from '../WorldEvents';
 import TimelineEvent from './TimelineEvent';
 
@@ -23,6 +23,10 @@ const personEventsReducer = (events, person) => {
 };
 
 const Timeline = ({ personList, worldEvents }) => {
+  if (worldEvents.length === 0) {
+    return null;
+  }
+
   const events = sortBy(personList
     .reduce(personEventsReducer, [])
     .filter(event => event.date !== undefined), 'date');
@@ -51,4 +55,9 @@ const Timeline = ({ personList, worldEvents }) => {
   );
 };
 
-export default withContext(Timeline);
+const mapStateToProps = ({ persons, worldEvents }) => ({
+  personList: persons.personList,
+  worldEvents
+});
+
+export default connect(mapStateToProps)(Timeline);

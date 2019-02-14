@@ -1,9 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import sortBy from 'lodash/sortBy';
 import { Link } from 'react-router-dom';
 import { Translate } from 'react-localize-redux';
-
-import withContext from '../../context';
 
 const filterOutPrivateNames = persons => persons.filter(p => p.name !== ' Private');
 const getLastName = (person) => {
@@ -23,5 +22,10 @@ const PersonList = ({ personList }) => (
   </div>
 );
 
-export default withContext(PersonList);
+const mapStateToProps = state => ({
+  personList: state.persons.personList
+});
+
+export default connect(mapStateToProps)(PersonList);
+
 export { PersonList as PersonListWithoutContext };
