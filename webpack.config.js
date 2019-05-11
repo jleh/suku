@@ -58,7 +58,7 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
       { from: 'family.json', to: '' },
       { from: 'world.json', to: '' },
