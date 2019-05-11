@@ -59,7 +59,7 @@ export default class AncestorTree extends Component {
     g.selectAll('.link')
       .data(ancestorTree(nodes).links())
       .enter().append('path')
-      .attr('class', 'link')
+      .attr('class', d => (d.target.children ? 'link' : 'link-invisible'))
       .attr('d', d3.linkHorizontal()
         .x(d => d.y)
         .y(d => d.x));
