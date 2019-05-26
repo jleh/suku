@@ -16,7 +16,9 @@
     "spouse": ["Puoliso"]
   },
   "person": {
-    "parents": ["Vanhemmat"]
+    "parents": ["Vanhemmat"],
+    "life": ["Elämä"],
+    "family": ["Perhe"]
   },
   "events": {
     "Birth": ["Syntyi"],

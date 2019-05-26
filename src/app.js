@@ -39,9 +39,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    getData().then(data => this.props.addPersons(data));
-    getWorldEvents().then(worldEvents => this.props.addWorldEvents(worldEvents));
-    getPlaces().then(placesData => this.props.addPlaces(placesData));
+    const { addPersons, addWorldEvents, addPlaces } = this.props;
+
+    getData().then(data => addPersons(data));
+    getWorldEvents().then(worldEvents => addWorldEvents(worldEvents));
+    getPlaces().then(placesData => addPlaces(placesData));
   }
 
   personSelected(selectedPerson) {

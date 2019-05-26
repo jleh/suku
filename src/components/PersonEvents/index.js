@@ -54,5 +54,6 @@ export default ({ events, birth }) => {
           </div>
         </div>
       ))}
-    </div>);
+    </div>
+  );
 };
