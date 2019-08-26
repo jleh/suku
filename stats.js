@@ -3,17 +3,8 @@ const fs = require('fs');
 const data = JSON.parse(fs.readFileSync('family.json'));
 
 const ignoreSources = [
-  'Juuso Jalmari Lehtinen',
-  'Jari Kalevi Lehtinen',
-  'Outi Annukka Lehtinen',
-  'Toivo Armas Viitanen',
-  'Aune Lyylikki Viitanen',
-  ' Private',
-  'Kaino Orvokki Viitanen',
-  'Tauno Kalevi Lehtinen',
-  'Raija Elina Lehtinen',
-  'Päivi Lehtinen',
-  'Lydia Lehtinen'
+  // Add names to ignore
+  ' Private'
 ];
 
 const noSources = data.persons
