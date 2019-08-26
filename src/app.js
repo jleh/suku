@@ -11,7 +11,7 @@ import './app.css';
 import translations from './translations/translations.json';
 
 import { getWorldEvents, getData, getPlaces } from './api';
-import { addPersons, addPlaces, addWorldEvents } from './actions';
+import { addPersonsAction, addPlacesAction, addWorldEventsAction } from './actions';
 
 import Header from './components/Header';
 import AncestorTree from './components/AncestorTree';
@@ -97,7 +97,11 @@ const mapStateToProps = ({ persons, places }) => ({
   placesById: places.placesById
 });
 
-const mapDispatchToProps = { addPersons, addPlaces, addWorldEvents };
+const mapDispatchToProps = {
+  addPersons: addPersonsAction,
+  addPlaces: addPlacesAction,
+  addWorldEvents: addWorldEventsAction
+};
 
 export default hot(module)(
   withRouter(

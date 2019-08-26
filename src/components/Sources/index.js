@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Translate } from 'react-localize-redux';
 
 import styles from './sources.css';
 
 const getSourceText = source => (
-  <Fragment>
+  <>
     <i>{source.author}</i> {source.title} <Translate id="page" /> {source.page}
-  </Fragment>
+  </>
 );
 
 const renderSourceLink = source => (

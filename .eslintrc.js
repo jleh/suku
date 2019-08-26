@@ -1,6 +1,5 @@
 module.exports = {
     "extends": "airbnb",
-    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 2018,
         "ecmaFeatures": {
@@ -16,7 +15,8 @@ module.exports = {
         'react/jsx-filename-extension': 'off',
         'react/jsx-one-expression-per-line': 'off',
         'react/prop-types': 'off',
-        'react/no-array-index-key': 'off'
+        'react/no-array-index-key': 'off',
+        'arrow-parens': 'off'
     },
     plugins: ['jest']
 };

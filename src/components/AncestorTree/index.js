@@ -6,6 +6,7 @@ import { select } from 'd3-selection';
 
 import config from '../../../config.json';
 
+// eslint-disable-next-line prefer-object-spread
 const d3 = Object.assign({}, {
   hierarchy,
   tree,

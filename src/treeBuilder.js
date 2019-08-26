@@ -17,7 +17,7 @@ const findParents = (person, personMap) => {
     ];
   }
 
-  const treePerson = Object.assign({}, person, { parents });
+  const treePerson = { ...person, parents };
   processedPersons.set(treePerson.id, treePerson);
 
   if (exsistingPerson) {
