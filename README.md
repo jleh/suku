@@ -8,6 +8,9 @@ Reference implementation [can be seen here.](http://karttalehtinen.fi/suku)
 This is work in progress, so documentation may not be up to date yet.
 There are still also possible hard coded links pointing to reference implementation.
 
+Frontend is built with React.js and XML is processed with node.js program which
+produces data in JSON format and possible media files for site.
+
 ## Build & deploy
 
 Building and deploying is basicly done by following steps.
