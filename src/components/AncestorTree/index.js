@@ -4,6 +4,7 @@ import { hierarchy, tree } from 'd3-hierarchy';
 import { linkHorizontal } from 'd3-shape';
 import { select } from 'd3-selection';
 
+import treeBuilder from '../../treeBuilder';
 import config from '../../../config.json';
 
 // eslint-disable-next-line prefer-object-spread
@@ -22,9 +23,13 @@ const addTextRow = (node, text, rowNumber) => node.append('text')
 
 export default class AncestorTree extends Component {
   componentDidMount() {
-    const { data } = this.props;
+    const { data, rootPerson, personList } = this.props;
 
-    this.createTree(data);
+    if (rootPerson) {
+      this.createTree(treeBuilder(personList, rootPerson));
+    } else {
+      this.createTree(data);
+    }
   }
 
   shouldComponentUpdate() {
@@ -94,11 +99,6 @@ export default class AncestorTree extends Component {
   }
 
   render() {
-    return (
-      <div>
-        Siirry alemmas nähdäksesi puun juuren.
-        <div id="tree" />
-      </div>
-    );
+    return <div id="tree" />;
   }
 }

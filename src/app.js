@@ -21,6 +21,7 @@ import Places from './components/Places';
 import PersonList from './components/PersonList';
 import Place from './components/Places/Place';
 import Blog from './components/Blog';
+import FrontPage from './components/FrontPage';
 
 class App extends Component {
   constructor(props) {
@@ -78,13 +79,21 @@ class App extends Component {
           places={placesById}
           onSelect={this.searchSelect}
         />
-        <Route path="/" exact component={() => <AncestorTree data={data} personSelected={this.personSelected} />} />
+        <Route path="/" exact component={() => <FrontPage data={data} personSelected={this.personSelected} />} />
         <Route path="/timeline" component={Timeline} />
         <Route path="/places" component={Places} />
         <Route path="/person/:id" component={Person} />
         <Route path="/persons" component={PersonList} />
         <Route path="/place/:id" component={Place} />
         <Route path="/blog" component={Blog} />
+        <Route path="/tree/:id" component={({ match }) => 
+          <AncestorTree
+            data={data}
+            rootPerson={match.params.id}
+            personList={personList}
+            personSelected={this.personSelected}
+          />}
+        />
       </div>
     );
   }
