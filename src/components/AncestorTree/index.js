@@ -48,8 +48,8 @@ export default class AncestorTree extends Component {
       top: 0, right: 10, bottom: 0, left: 80
     };
 
-    const width = 4000 - margin.left - margin.right;
-    const height = 7500 - margin.top - margin.bottom;
+    const width = 150 * data.maxGeneration;
+    const height = 200 * data.maxGeneration;
 
     const ancestorTree = d3.tree()
       .size([height, width]);
