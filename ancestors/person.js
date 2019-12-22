@@ -37,8 +37,8 @@ const findObjectWithAttribute = (objref, type, database) => {
 const toPerson = (person, database) => {
   const parents = findParents(person, database);
 
-  const father = parents && parents.father ? parents.father[0].$.hlink : null;
-  const mother = parents && parents.mother ? parents.mother[0].$.hlink : null;
+  const father = parents?.father ? parents.father[0].$.hlink : null;
+  const mother = parents?.mother ? parents.mother[0].$.hlink : null;
 
   return {
     id: person.$.id,

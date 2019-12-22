@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Translate } from 'react-localize-redux';
 
 import styles from './person.css';
@@ -21,11 +21,14 @@ const Person = ({
 }) => {
   const person = personsById.get(match.params.id);
 
-  if (!person || !person.name) {
+  if (!person?.name) {
     return null;
   }
 
-  const { personEvents, birthISO } = person.events;
+  const {
+    events, name, coatOfArms, father, mother, family, sources
+  } = person;
+  const { personEvents, birthISO } = events;
 
   useEffect(() => window.scrollTo(0, 0));
 
@@ -35,11 +38,11 @@ const Person = ({
         <ProfilePicture person={person} />
         <div className={styles.info}>
           <div>
-            <h2>{person.name}</h2>
-            <PersonDates events={person.events} />
+            <h2>{name}</h2>
+            <PersonDates events={events} />
             <Wikipedia person={person} />
           </div>
-          <CoatOfArms coatOfArms={person.coatOfArms} />
+          <CoatOfArms coatOfArms={coatOfArms} />
         </div>
       </div>
 
@@ -53,16 +56,20 @@ const Person = ({
           <h3><Translate id="person.family" /></h3>
           <div className={styles.parents}>
             <Translate id="person.parents" />:
-            <LinkedPerson personRef={person.father} persons={personsByRef} />
-            <LinkedPerson personRef={person.mother} persons={personsByRef} />
+            <LinkedPerson personRef={father} persons={personsByRef} />
+            <LinkedPerson personRef={mother} persons={personsByRef} />
           </div>
 
-          <Family families={person.family} persons={personsByRef} />
+          <Family families={family} persons={personsByRef} />
         </div>
       </div>
 
-      <PersonMap events={person.events.personEvents} places={placesById} />
-      <Sources sources={person.sources} />
+      <div>
+        <Link to={`/tree/${person.id}`}>Sukupuu</Link> 
+      </div>
+
+      <PersonMap events={events.personEvents} places={placesById} />
+      <Sources sources={sources} />
 
       <NavigationButtons />
     </div>
