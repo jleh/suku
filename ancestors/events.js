@@ -66,7 +66,8 @@ const findEvents = (eventref, database) => {
     type: event.type[0],
     date: event.dateval && event.dateval[0].$.val,
     place: getEventPlace(event, places),
-    description: event.description && event.description[0]
+    description: event.description && event.description[0],
+    sources: event.citationref?.map(ref => ref.$.hlink)
   }));
 
   return {

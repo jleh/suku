@@ -12,7 +12,8 @@ const findCitationAndSource = (ref, database) => {
     page: citation && citation.page ? citation.page[0] : '',
     title: source.stitle[0],
     author: source.sauthor ? source.sauthor[0] : null,
-    url
+    url,
+    ref: citation.$.handle
   };
 };
 
