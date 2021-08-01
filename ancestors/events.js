@@ -81,7 +81,29 @@ const findEvents = (eventref, database) => {
   };
 };
 
+const findEvent = (eventref, database) => {
+  if (!eventref) {
+    return undefined;
+  }
+
+  const places = database.places[0].placeobj;
+  const events = eventref
+    .map(event => event.$.hlink)
+    .map(ref => database.events[0].event.find(event => event.$.handle === ref))
+    .map(event => ({
+      id: event.$.id,
+      type: event.type[0],
+      date: event.dateval && event.dateval[0].$.val,
+      place: getEventPlace(event, places),
+      description: event.description && event.description[0],
+      sources: event.citationref?.map(ref => ref.$.hlink)
+    }));
+
+  return events;
+};
+
 module.exports = {
   findEvents,
+  findEvent,
   getEventsByType
 };

@@ -1,3 +1,5 @@
+const { findEvent } = require('./events');
+
 const getFamily = (ref, database) => database.families[0].family
   .find(family => family.$.handle === ref);
 
@@ -16,11 +18,13 @@ const findFamily = (person, database) => {
       const family = getFamily(familyRef.$.hlink, database);
       const spouseRef = (gender === 'M') ? family.mother : family.father;
       const spouse = getSpouse(spouseRef, database);
+      const marriage = findEvent(family.eventref, database)?.find(event => event.type === 'Marriage');
 
       return {
         type: family.rel[0].$.type,
         spouse: spouse ? spouse.$.handle : null,
-        children: getChildren(family, database)
+        children: getChildren(family, database),
+        marriage
       };
     });
   }
