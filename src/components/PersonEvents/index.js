@@ -20,12 +20,17 @@ const renderAgeOnEvent = (birth, event) => {
   return null;
 };
 
-export default ({ events, birth }) => {
+export default ({ events, birth, sources }) => {
   if (!events) {
     return null;
   }
 
   const lineClass = (index, length) => (index === length - 1 ? styles.last : '');
+
+  const getSource = srcRef => {
+    const source = sources.find(src => src.ref === srcRef);
+    return sources.indexOf(source) + 1;
+  };
 
   return (
     <div className={styles.timeline}>
@@ -45,6 +50,8 @@ export default ({ events, birth }) => {
           <div className={styles.timelineText}>
             <div>
               <Translate id={`events.${event.type}`} /> {event.description}
+              {' '}
+              {event.sources && <sup>[{event.sources.map(getSource).join(', ')}]</sup>}
             </div>
             <div className={styles.place}>
               {event.place && (

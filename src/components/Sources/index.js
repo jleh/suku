@@ -15,9 +15,9 @@ const renderSourceLink = source => (
   </a>
 );
 
-const renderSource = source => (
+const renderSource = (source, index) => (
   <div key={`${source.title}-${source.page}`}>
-    {source.url ? renderSourceLink(source) : getSourceText(source)}
+    {index + 1}. {source.url ? renderSourceLink(source) : getSourceText(source)}
   </div>
 );
 

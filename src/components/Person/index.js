@@ -16,9 +16,7 @@ import PersonMap from '../PersonMap';
 import CoatOfArms from './CoatOfArms';
 import ProfilePicture from './ProfilePicture';
 
-const Person = ({
-  personsById, personsByRef, placesById, match
-}) => {
+const Person = ({ personsById, personsByRef, placesById, match }) => {
   const person = personsById.get(match.params.id);
 
   if (!person?.name) {
@@ -49,7 +47,11 @@ const Person = ({
       <div className={styles.content}>
         <div className={styles.personEvents}>
           <h3><Translate id="person.life" /></h3>
-          <PersonEvents events={personEvents} birth={birthISO} places={placesById} />
+          <PersonEvents
+            events={personEvents}
+            birth={birthISO}
+            sources={sources}
+          />
         </div>
 
         <div>
