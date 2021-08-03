@@ -1,15 +1,15 @@
 {
   "presets": [
-    ["@babel/preset-env", {
-      "targets": {
-        "browsers": ["ie 11"]
+    [
+      "@babel/preset-env", {
+        "useBuiltIns": "usage",
+        "corejs": "3"
       }
-    }],
+    ],
     "@babel/preset-react"
   ],
   "plugins": [
     "lodash",
-    "react-hot-loader/babel",
-    "@babel/plugin-proposal-optional-chaining"
+    "react-hot-loader/babel"
   ]
 }

@@ -1,15 +1,17 @@
+const path = require('path');
+
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   entry: ['@babel/polyfill', './src/index.js'],
 
   output: {
-    filename: '[name].[hash].js',
-    publicPath: process.env.NODE_ENV === 'production' ? '/suku/' : '/'
+    filename: '[name].[contenthash].js',
+    publicPath: process.env.NODE_ENV === 'production' ? '/suku/' : '/',
+    path: path.resolve(process.cwd(), 'dist')
   },
 
   module: {
@@ -29,7 +31,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[name]__[local]___[hash:base64:5]'
+                localIdentName: '[name]__[local]___[chunkhash:base64:5]'
               }
             }
           },
@@ -60,12 +62,14 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(),
-    new CopyWebpackPlugin([
-      { from: 'family.json', to: '' },
-      { from: 'world.json', to: '' },
-      { from: 'places.json', to: '' },
-      { from: 'blog.md', to: '' }
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'family.json', to: '' },
+        { from: 'world.json', to: '' },
+        { from: 'places.json', to: '' },
+        { from: 'blog.md', to: '' }
+      ]
+    }),
     new HtmlWebpackPlugin({
       template: 'index.html'
     }),
