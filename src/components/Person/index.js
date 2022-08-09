@@ -6,6 +6,7 @@ import { Translate } from 'react-localize-redux';
 import styles from './person.css';
 
 import Family from '../Family';
+import Geni from '../Geni';
 import Sources from '../Sources';
 import Wikipedia from '../Wikipedia';
 import LinkedPerson from '../LinkedPerson';
@@ -37,6 +38,7 @@ const Person = ({ personsById, personsByRef, placesById, match }) => {
           <div>
             <h2>{name}</h2>
             <PersonDates events={events} />
+            <Geni person={person} />
             <Wikipedia person={person} />
           </div>
           <CoatOfArms coatOfArms={coatOfArms} />

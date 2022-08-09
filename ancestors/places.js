@@ -1,4 +1,4 @@
-const findSources = require('./sources');
+const { findSources } = require('./sources');
 
 const sanitizeCoordinate = (coord) => parseFloat(coord.replace(',', '.'));
 const getLat = (place) => (place.coord ? sanitizeCoordinate(place.coord[0].$.lat) : null);

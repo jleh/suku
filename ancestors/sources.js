@@ -29,4 +29,7 @@ const findSources = (person, database) => {
     .map((ref) => findCitationAndSource(ref, database));
 };
 
-module.exports = findSources;
+module.exports = {
+  findSources,
+  findCitationAndSource,
+};

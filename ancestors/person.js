@@ -1,8 +1,9 @@
 const fs = require('fs');
+const { uniqBy } = require('lodash');
 
 const { findEvents } = require('./events');
 const { findAttributeValue } = require('./utils');
-const findSources = require('./sources');
+const { findSources } = require('./sources');
 const findFamily = require('./family');
 const printName = require('./name');
 
@@ -15,6 +16,7 @@ const findParents = (person, data) => {
 
 const coatOfArms = (person) => findAttributeValue(person.attribute, 'arms', 'value');
 const getWikipedia = (person) => findAttributeValue(person.url, 'wikipedia', 'href');
+const getGeni = (person) => findAttributeValue(person.url, 'geni', 'href');
 
 const findObjectWithAttribute = (objref, type, database) => {
   if (objref) {
@@ -41,6 +43,12 @@ const toPerson = (person, database) => {
 
   const father = parents?.father ? parents.father[0].$.hlink : null;
   const mother = parents?.mother ? parents.mother[0].$.hlink : null;
+  const events = findEvents(person.eventref, database);
+  const sourcesFromEvents = events.personEvents
+    ? events.personEvents
+        .map((event) => event.sourceObjects)
+        .reduce((acc, cur) => [...acc, ...cur], [])
+    : [];
 
   return {
     id: person.$.id,
@@ -49,11 +57,12 @@ const toPerson = (person, database) => {
     coatOfArms: coatOfArms(person),
     picture: findObjectWithAttribute(person.objref, 'profile', database),
     wikipedia: getWikipedia(person),
-    sources: findSources(person, database),
-    events: findEvents(person.eventref, database),
+    sources: uniqBy([...findSources(person, database), ...sourcesFromEvents], 'ref'),
+    events,
     father,
     mother,
     family: findFamily(person, database),
+    geni: getGeni(person),
   };
 };
 

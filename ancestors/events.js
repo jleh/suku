@@ -1,3 +1,5 @@
+const { findCitationAndSource } = require('./sources');
+
 const formatDate = (date) => {
   const parts = date.split('-');
 
@@ -64,14 +66,22 @@ const findEvents = (eventref, database) => {
   const birth = getEventType(events, 'Birth');
   const death = getEventType(events, 'Death');
 
-  const personEvents = events.map((event) => ({
-    id: event.$.id,
-    type: event.type[0],
-    date: event.dateval && event.dateval[0].$.val,
-    place: getEventPlace(event, places),
-    description: event.description && event.description[0],
-    sources: event.citationref?.map((ref) => ref.$.hlink),
-  }));
+  const personEvents = events.map((event) => {
+    const sourceRefs = event.citationref?.map((ref) => ref.$.hlink);
+    const sourceObjects = sourceRefs
+      ? sourceRefs.map((ref) => findCitationAndSource(ref, database))
+      : [];
+
+    return {
+      id: event.$.id,
+      type: event.type[0],
+      date: event.dateval && event.dateval[0].$.val,
+      place: getEventPlace(event, places),
+      description: event.description && event.description[0],
+      sources: sourceRefs,
+      sourceObjects,
+    };
+  });
 
   return {
     personEvents,
@@ -93,14 +103,21 @@ const findEvent = (eventref, database) => {
   const events = eventref
     .map((event) => event.$.hlink)
     .map((ref) => database.events[0].event.find((event) => event.$.handle === ref))
-    .map((event) => ({
-      id: event.$.id,
-      type: event.type[0],
-      date: event.dateval && event.dateval[0].$.val,
-      place: getEventPlace(event, places),
-      description: event.description && event.description[0],
-      sources: event.citationref?.map((ref) => ref.$.hlink),
-    }));
+    .map((event) => {
+      const sourceRefs = event.citationref?.map((ref) => ref.$.hlink);
+
+      return {
+        id: event.$.id,
+        type: event.type[0],
+        date: event.dateval && event.dateval[0].$.val,
+        place: getEventPlace(event, places),
+        description: event.description && event.description[0],
+        sources: sourceRefs,
+        sourceObjects: sourceRefs
+          ? sourceRefs.map((ref) => findCitationAndSource(ref, database))
+          : [],
+      };
+    });
 
   return events;
 };
