@@ -5,7 +5,8 @@ import { createIdMap, createRefMap, createPlacesMap } from '../util';
 import treeBuilder from '../treeBuilder';
 
 export const getWorldEvents = () =>
-  fetch(`${config.backend}/worldEvents`).then((res) => res.json());
+  // fetch(`${config.backend}/worldEvents`).then((res) => res.json());
+  fetch('/suku/world.json').then((res) => res.json());
 
 export const getPlaces = async () => {
   const data = await fetch(`${config.basePath}/places.json`).then((res) => res.json());

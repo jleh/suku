@@ -15,6 +15,7 @@ import PersonDates from '../PersonDates';
 import PersonMap from '../PersonMap';
 import CoatOfArms from './CoatOfArms';
 import ProfilePicture from './ProfilePicture';
+import WorldEvents from '../WorldEvents';
 
 const Person = ({ personsById, personsByRef, placesById, match }) => {
   const person = personsById.get(match.params.id);
@@ -61,6 +62,16 @@ const Person = ({ personsById, personsByRef, placesById, match }) => {
           </div>
 
           <Family families={family} persons={personsByRef} />
+
+          {events.birthISO && events.deathISO && (
+            <div>
+              <h3>Maailmalla tapahtui</h3>
+              <WorldEvents
+                startYear={parseInt(events.birthISO.split('-')[0], 10)}
+                endYear={parseInt(events.deathISO.split('-')[0], 10)}
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -69,6 +80,7 @@ const Person = ({ personsById, personsByRef, placesById, match }) => {
       </div>
 
       <PersonMap events={events.personEvents} places={placesById} />
+
       <Sources sources={sources} />
 
       <NavigationButtons />

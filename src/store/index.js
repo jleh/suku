@@ -28,7 +28,7 @@ function places(state = defaultPlacesState, action) {
   }
 }
 
-function worldEvents(state = [], action) {
+function worldEvents(state = { events: [] }, action) {
   switch (action.type) {
     case 'ADD_WORLD_EVENTS':
       return action.worldEvents;
@@ -43,6 +43,10 @@ const reducers = combineReducers({
   worldEvents,
 });
 
-const store = createStore(reducers);
+const store = createStore(
+  reducers,
+  // eslint-disable-next-line no-underscore-dangle
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 export default store;

@@ -51,7 +51,7 @@ const Timeline = ({ personList, worldEvents }) => {
               ))}
             </div>
             <div className={styles.worldEvents}>
-              <WorldEvents year={year} worldEvents={worldEvents} />
+              <WorldEvents year={year} />
             </div>
           </div>
         </div>
@@ -60,9 +60,8 @@ const Timeline = ({ personList, worldEvents }) => {
   );
 };
 
-const mapStateToProps = ({ persons, worldEvents }) => ({
+const mapStateToProps = ({ persons }) => ({
   personList: persons.personList,
-  worldEvents,
 });
 
 export default connect(mapStateToProps)(Timeline);

@@ -53,9 +53,10 @@ module.exports = {
     hot: true,
     historyApiFallback: {
       rewrites: [
-        { from: /family.json$/, to: '/family.json' },
-        { from: /world.json$/, to: '/world.json' },
-        { from: /places.json$/, to: '/places.json' },
+        { from: /family\.json$/, to: '/family.json' },
+        { from: /world\.json$/, to: '/world.json' },
+        { from: /places\.json$/, to: '/places.json' },
+        { from: /blog\.md$/, to: '/blog.md' },
       ],
     },
   },
