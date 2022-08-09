@@ -8,21 +8,24 @@ const formatDate = (date) => {
   return date;
 };
 
-const getEventType = (events, type) => events.find(event => event.type[0] === type);
-const getEventsByType = (events, type) => events.filter(event => event.type[0] === type);
-const getEventDate = event => (event && event.dateval ? formatDate(event.dateval[0].$.val) : '');
+const getEventType = (events, type) => events.find((event) => event.type[0] === type);
+const getEventsByType = (events, type) => events.filter((event) => event.type[0] === type);
+const getEventDate = (event) => {
+  if (event && event.dateval) return formatDate(event.dateval[0].$.val);
+  return '';
+};
 
 const getPlace = (ref, places) => {
-  const place = places.find(p => p.$.handle === ref);
+  const place = places.find((p) => p.$.handle === ref);
   const eventPlace = {
     id: place.$.id,
-    name: place.pname[0].$.value
+    name: place.pname[0].$.value,
   };
 
   if (place.coord) {
     eventPlace.coordinates = {
       lng: place.coord[0].$.long,
-      lat: place.coord[0].$.lat
+      lat: place.coord[0].$.lat,
     };
   }
 
@@ -55,19 +58,19 @@ const findEvents = (eventref, database) => {
 
   const places = database.places[0].placeobj;
   const events = eventref
-    .map(event => event.$.hlink)
-    .map(ref => database.events[0].event.find(event => event.$.handle === ref));
+    .map((event) => event.$.hlink)
+    .map((ref) => database.events[0].event.find((event) => event.$.handle === ref));
 
   const birth = getEventType(events, 'Birth');
   const death = getEventType(events, 'Death');
 
-  const personEvents = events.map(event => ({
+  const personEvents = events.map((event) => ({
     id: event.$.id,
     type: event.type[0],
     date: event.dateval && event.dateval[0].$.val,
     place: getEventPlace(event, places),
     description: event.description && event.description[0],
-    sources: event.citationref?.map(ref => ref.$.hlink)
+    sources: event.citationref?.map((ref) => ref.$.hlink),
   }));
 
   return {
@@ -77,7 +80,7 @@ const findEvents = (eventref, database) => {
     birthPlace: getEventPlace(birth, places),
     death: getEventDate(death),
     deathPlace: getEventPlace(death, places),
-    deathISO: death && death.dateval && death.dateval[0].$.val
+    deathISO: death && death.dateval && death.dateval[0].$.val,
   };
 };
 
@@ -88,15 +91,15 @@ const findEvent = (eventref, database) => {
 
   const places = database.places[0].placeobj;
   const events = eventref
-    .map(event => event.$.hlink)
-    .map(ref => database.events[0].event.find(event => event.$.handle === ref))
-    .map(event => ({
+    .map((event) => event.$.hlink)
+    .map((ref) => database.events[0].event.find((event) => event.$.handle === ref))
+    .map((event) => ({
       id: event.$.id,
       type: event.type[0],
       date: event.dateval && event.dateval[0].$.val,
       place: getEventPlace(event, places),
       description: event.description && event.description[0],
-      sources: event.citationref?.map(ref => ref.$.hlink)
+      sources: event.citationref?.map((ref) => ref.$.hlink),
     }));
 
   return events;
@@ -105,5 +108,5 @@ const findEvent = (eventref, database) => {
 module.exports = {
   findEvents,
   findEvent,
-  getEventsByType
+  getEventsByType,
 };

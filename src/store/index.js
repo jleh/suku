@@ -3,11 +3,11 @@ import { createStore, combineReducers } from 'redux';
 const defaultPersonsState = {
   personList: [],
   personsById: new Map(),
-  personsByRef: new Map()
+  personsByRef: new Map(),
 };
 
 const defaultPlacesState = {
-  placesById: new Map()
+  placesById: new Map(),
 };
 
 function persons(state = defaultPersonsState, action) {
@@ -40,7 +40,7 @@ function worldEvents(state = [], action) {
 const reducers = combineReducers({
   persons,
   places,
-  worldEvents
+  worldEvents,
 });
 
 const store = createStore(reducers);

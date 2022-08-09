@@ -1,15 +1,13 @@
 import React from 'react';
 import { latLngBounds } from 'leaflet';
-import {
-  Map, TileLayer, Popup, CircleMarker
-} from 'react-leaflet';
+import { Map, TileLayer, Popup, CircleMarker } from 'react-leaflet';
 
 import { getCoordinates } from '../../../../util';
 import { getSubPlaces, markerColor } from './utils';
 
 import styles from './placeMap.css';
 
-export default ({ place }) => {
+const PlaceMap = ({ place }) => {
   let bounds;
   let center;
   let zoom;
@@ -19,11 +17,11 @@ export default ({ place }) => {
   }
 
   const subPlaces = getSubPlaces(place);
-  const subPlacesWithCoordinates = subPlaces.filter(subPlace => subPlace.lat);
+  const subPlacesWithCoordinates = subPlaces.filter((subPlace) => subPlace.lat);
 
   if (subPlacesWithCoordinates.length > 1) {
     bounds = latLngBounds(getCoordinates(place));
-    subPlacesWithCoordinates.forEach(subPlace => bounds.extend(getCoordinates(subPlace)));
+    subPlacesWithCoordinates.forEach((subPlace) => bounds.extend(getCoordinates(subPlace)));
   } else {
     center = getCoordinates(place);
     zoom = 12;
@@ -34,9 +32,9 @@ export default ({ place }) => {
       <Map bounds={bounds} center={center} zoom={zoom}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        {[place, ...subPlacesWithCoordinates].map(p => (
+        {[place, ...subPlacesWithCoordinates].map((p) => (
           <CircleMarker
             key={p.id}
             center={getCoordinates(p)}
@@ -50,3 +48,5 @@ export default ({ place }) => {
     </div>
   );
 };
+
+export default PlaceMap;

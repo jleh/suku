@@ -5,7 +5,7 @@ import styles from './linkedPerson.css';
 
 import { printBirth, printDeath } from '../../util';
 
-export default ({ personRef, persons }) => {
+const LinkedPerson = ({ personRef, persons }) => {
   const person = persons.get(personRef);
 
   if (!person) {
@@ -14,11 +14,12 @@ export default ({ personRef, persons }) => {
 
   return (
     <div>
-      <Link to={`/person/${person.id}`}>
-        {person.name}
-      </Link>
-      { ' ' }
-      <span className={styles.dates}>{printBirth(person)} {printDeath(person)}</span>
+      <Link to={`/person/${person.id}`}>{person.name}</Link>{' '}
+      <span className={styles.dates}>
+        {printBirth(person)} {printDeath(person)}
+      </span>
     </div>
   );
 };
+
+export default LinkedPerson;

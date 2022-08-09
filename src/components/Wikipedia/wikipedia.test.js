@@ -3,9 +3,7 @@ import renderer from 'react-test-renderer';
 
 import Wikipedia from '.';
 
-const renderComponent = person => renderer
-  .create(<Wikipedia person={person} />)
-  .toJSON();
+const renderComponent = (person) => renderer.create(<Wikipedia person={person} />).toJSON();
 
 test('Renders wikipedia link if person has wikipedia page', () => {
   const person = { wikipedia: 'http://fi.wikipedia.fi' };

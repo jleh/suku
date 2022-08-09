@@ -17,13 +17,13 @@ Building and deploying is basicly done by following steps.
 There could be some other configurable things you should take care of
 that will be documented later.
 
-* Node & npm should be installed.
-* Install dependencies `npm i`
-* Edit config.json and set suitable values for your site.
-* Export your data from GRAMPS using XML format & no compression.
+- Node & npm should be installed.
+- Install dependencies `npm i`
+- Edit config.json and set suitable values for your site.
+- Export your data from GRAMPS using XML format & no compression.
   Save export to project dir using `gramps.xml` as a name.
-* Run `npm tree` to generate data json file.
-* Run `npm build`. `dist/` contains now all needed stuff for deployment.
+- Run `npm tree` to generate data json file.
+- Run `npm build`. `dist/` contains now all needed stuff for deployment.
   `media/` contains exported images that should also be uploaded.
 
 Site can be run on development mode with `npm run dev`
@@ -41,12 +41,14 @@ There are some things need to know for making perfect export from GRAMPS.
 
 Places hierarchy is important for this site. To make browserable places following hierarchy
 must be used:
+
 ```
 city
   - village
     - farm
       - building
 ```
+
 This means e.g. every farm must have village parent and every village is covered by city.
 You can have places with other types but they are ignored.
 

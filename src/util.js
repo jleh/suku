@@ -2,8 +2,14 @@ import distanceInWordsStrict from 'date-fns/distance_in_words_strict';
 import format from 'date-fns/format';
 import fiLocale from 'date-fns/locale/fi';
 
-export const printBirth = child => (child.events.birth ? `* ${child.events.birth}` : null);
-export const printDeath = child => (child.events.death ? `† ${child.events.death}` : null);
+export const printBirth = (child) => {
+  if (child.events.birth) return `* ${child.events.birth}`;
+  return null;
+};
+export const printDeath = (child) => {
+  if (child.events.death) return `† ${child.events.death}`;
+  return null;
+};
 
 const getEvents = (person, placeId) => {
   if (!person || !person.events) {
@@ -20,7 +26,7 @@ const getEvents = (person, placeId) => {
           name: person.name,
           id: person.id,
           type: event.type,
-          event
+          event,
         });
       }
     });
@@ -29,28 +35,27 @@ const getEvents = (person, placeId) => {
   return [...events];
 };
 
-export const getPlaceEvents = (placeId, persons) => persons.reduce((events, person) => [
-  ...events,
-  ...getEvents(person, placeId)
-], []);
+export const getPlaceEvents = (placeId, persons) =>
+  persons.reduce((events, person) => [...events, ...getEvents(person, placeId)], []);
 
-export const renderAge = (birth, date) => ((birth === date || !date || !birth)
-  ? null
-  : distanceInWordsStrict(birth, date, { locale: fiLocale }));
+export const renderAge = (birth, date) => {
+  if (birth === date || !date || !birth) return null;
+  return distanceInWordsStrict(birth, date, { locale: fiLocale });
+};
 
 export const createIdMap = (objects) => {
   const idMap = new Map();
-  objects.forEach(object => idMap.set(object.id, object));
+  objects.forEach((object) => idMap.set(object.id, object));
   return idMap;
 };
 
 export const createRefMap = (objects) => {
   const refMap = new Map();
-  objects.forEach(object => refMap.set(object.handle, object));
+  objects.forEach((object) => refMap.set(object.handle, object));
   return refMap;
 };
 
-export const getCoordinates = place => [place.lat, place.lng];
+export const getCoordinates = (place) => [place.lat, place.lng];
 
 export const createPlacesMap = (places) => {
   let placesMap = createIdMap(places);
@@ -68,4 +73,4 @@ export const createPlacesMap = (places) => {
   return placesMap;
 };
 
-export const renderDate = date => date && (date.length === 4 ? date : format(date, 'DD.MM.YYYY'));
+export const renderDate = (date) => date && (date.length === 4 ? date : format(date, 'DD.MM.YYYY'));

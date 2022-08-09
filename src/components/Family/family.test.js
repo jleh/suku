@@ -12,30 +12,31 @@ persons.set('H1', {
   name: 'Test Person',
   events: {
     birth: '1.1.1900',
-    death: '1.1.1950'
-  }
+    death: '1.1.1950',
+  },
 });
 persons.set('H2', {
   handle: 'H2',
   id: '2',
   name: 'Other Person',
-  events: {}
+  events: {},
 });
 
-const renderComponent = families => renderer
-  .create(
-    <MemoryRouter>
-      <Family families={families} persons={persons} />
-    </MemoryRouter>
-  )
-  .toJSON();
+const renderComponent = (families) =>
+  renderer
+    .create(
+      <MemoryRouter>
+        <Family families={families} persons={persons} />
+      </MemoryRouter>
+    )
+    .toJSON();
 
 test('Renders family', () => {
   const families = [
     {
       spouse: 'H2',
-      children: ['H1']
-    }
+      children: ['H1'],
+    },
   ];
   expect(renderComponent(families)).toMatchSnapshot();
 });

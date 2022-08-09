@@ -1,8 +1,8 @@
 const findSources = require('./sources');
 
-const sanitizeCoordinate = coord => parseFloat(coord.replace(',', '.'));
-const getLat = place => (place.coord ? sanitizeCoordinate(place.coord[0].$.lat) : null);
-const getLng = place => (place.coord ? sanitizeCoordinate(place.coord[0].$.long) : null);
+const sanitizeCoordinate = (coord) => parseFloat(coord.replace(',', '.'));
+const getLat = (place) => (place.coord ? sanitizeCoordinate(place.coord[0].$.lat) : null);
+const getLng = (place) => (place.coord ? sanitizeCoordinate(place.coord[0].$.long) : null);
 
 module.exports.getPlaces = (database) => {
   const cities = new Map();
@@ -11,10 +11,7 @@ module.exports.getPlaces = (database) => {
 
   const getText = (place) => {
     if (place.noteref) {
-      return database
-        .notes[0]
-        .note
-        .find(note => note.$.handle === place.noteref[0].$.hlink)
+      return database.notes[0].note.find((note) => note.$.handle === place.noteref[0].$.hlink)
         .text[0];
     }
 
@@ -30,15 +27,17 @@ module.exports.getPlaces = (database) => {
     lng: getLng(place),
     children: [],
     text: getText(place),
-    sources: findSources(place, database)
+    sources: findSources(place, database),
   });
 
   database.places[0].placeobj
-    .filter(place => place.$.type === 'City')
-    .forEach((city) => { cities.set(city.$.handle, toPlaceObj(city, 'city')); });
+    .filter((place) => place.$.type === 'City')
+    .forEach((city) => {
+      cities.set(city.$.handle, toPlaceObj(city, 'city'));
+    });
 
   database.places[0].placeobj
-    .filter(place => place.$.type === 'Village')
+    .filter((place) => place.$.type === 'Village')
     .forEach((village) => {
       const villageObject = toPlaceObj(village, 'village');
       const city = cities.get(village.placeref[0].$.hlink);
@@ -49,7 +48,7 @@ module.exports.getPlaces = (database) => {
     });
 
   database.places[0].placeobj
-    .filter(place => place.$.type === 'Farm')
+    .filter((place) => place.$.type === 'Farm')
     .forEach((farm) => {
       const farmObject = toPlaceObj(farm, 'farm');
       const village = villages.get(farm.placeref[0].$.hlink);
@@ -60,7 +59,7 @@ module.exports.getPlaces = (database) => {
     });
 
   database.places[0].placeobj
-    .filter(place => place.$.type === 'Building')
+    .filter((place) => place.$.type === 'Building')
     .forEach((building) => {
       const buildingObj = toPlaceObj(building, 'building');
       const farm = farms.get(building.placeref[0].$.hlink);

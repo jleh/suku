@@ -3,8 +3,10 @@ import sortBy from 'lodash/sortBy';
 const RESIDENCE_START_TYPES = ['Birth', 'Residence', 'Occupation'];
 const RESIDENCE_END_TYPES = [...RESIDENCE_START_TYPES, 'Death'];
 
-const getNextEvent = (currentEvent, events) => events
-  .find(evt => RESIDENCE_END_TYPES.includes(evt.type) && evt.date > currentEvent.event.date);
+const getNextEvent = (currentEvent, events) =>
+  events.find(
+    (evt) => RESIDENCE_END_TYPES.includes(evt.type) && evt.date > currentEvent.event.date
+  );
 
 const createResidentList = (placeEvents, personsById) => {
   const residences = [];
@@ -20,7 +22,7 @@ const createResidentList = (placeEvents, personsById) => {
       residences.push({
         person,
         start: event.event.date,
-        end: nextEvent && nextEvent.date
+        end: nextEvent && nextEvent.date,
       });
     }
   });

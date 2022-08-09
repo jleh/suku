@@ -20,15 +20,15 @@ const renderAgeOnEvent = (birth, event) => {
   return null;
 };
 
-export default ({ events, birth, sources }) => {
+const PersonEvents = ({ events, birth, sources }) => {
   if (!events) {
     return null;
   }
 
   const lineClass = (index, length) => (index === length - 1 ? styles.last : '');
 
-  const getSource = srcRef => {
-    const source = sources.find(src => src.ref === srcRef);
+  const getSource = (srcRef) => {
+    const source = sources.find((src) => src.ref === srcRef);
     return sources.indexOf(source) + 1;
   };
 
@@ -37,26 +37,19 @@ export default ({ events, birth, sources }) => {
       {events.map((event, index) => (
         <div key={event.id} className={styles.timelineRow}>
           <div className={styles.date}>
-            <div>
-              {renderDate(event.date)}
-            </div>
-            <div className={styles.age}>
-              {renderAgeOnEvent(birth, event)}
-            </div>
+            <div>{renderDate(event.date)}</div>
+            <div className={styles.age}>{renderAgeOnEvent(birth, event)}</div>
           </div>
           <div className={`${styles.line} ${lineClass(index, events.length)}`}>
             <div />
           </div>
           <div className={styles.timelineText}>
             <div>
-              <Translate id={`events.${event.type}`} /> {event.description}
-              {' '}
+              <Translate id={`events.${event.type}`} /> {event.description}{' '}
               {event.sources && <sup>[{event.sources.map(getSource).join(', ')}]</sup>}
             </div>
             <div className={styles.place}>
-              {event.place && (
-                <Link to={`/place/${event.place.id}`}>{event.place.name}</Link>
-              )}
+              {event.place && <Link to={`/place/${event.place.id}`}>{event.place.name}</Link>}
             </div>
           </div>
         </div>
@@ -64,3 +57,5 @@ export default ({ events, birth, sources }) => {
     </div>
   );
 };
+
+export default PersonEvents;

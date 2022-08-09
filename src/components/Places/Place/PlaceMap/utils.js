@@ -5,7 +5,10 @@ const getSubPlaces = (place) => {
 
   return [
     ...place.children,
-    ...place.children.reduce((subPlaces, subPlace) => [...subPlaces, ...getSubPlaces(subPlace)], [])
+    ...place.children.reduce(
+      (subPlaces, subPlace) => [...subPlaces, ...getSubPlaces(subPlace)],
+      []
+    ),
   ];
 };
 

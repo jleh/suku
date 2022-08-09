@@ -9,15 +9,13 @@ export default class Blog extends Component {
 
   componentDidMount() {
     fetch('blog.md')
-      .then(res => res.text())
-      .then(text => this.setState({ text }));
+      .then((res) => res.text())
+      .then((text) => this.setState({ text }));
   }
 
   render() {
     const { text } = this.state;
 
-    return (
-      <ReactMarkdown source={text} />
-    );
+    return <ReactMarkdown source={text} />;
   }
 }

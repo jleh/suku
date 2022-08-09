@@ -9,7 +9,7 @@ const file = fs.readFileSync('gramps.xml');
 xml2js.parseString(file, (err, result) => {
   const data = {
     persons: getPersons(result.database),
-    updated: new Date().toLocaleString()
+    updated: new Date().toLocaleString(),
   };
   const places = getPlaces(result.database);
 

@@ -7,19 +7,15 @@ import { renderDate } from '../../../util';
 
 import styles from '../places.css';
 
-export default ({ placeEvents }) => (
+const PlaceEvents = ({ placeEvents }) => (
   <table className={styles.placeEventsTable}>
     <tbody>
-      {sortBy(placeEvents, 'event.date').map(event => (
+      {sortBy(placeEvents, 'event.date').map((event) => (
         <tr key={`${event.event.id}-${event.id}-${event.type}`}>
           <td>
-            <Link to={`/person/${event.id}`}>
-              {event.name}
-            </Link>
+            <Link to={`/person/${event.id}`}>{event.name}</Link>
           </td>
-          <td>
-            {renderDate(event.event.date)}
-          </td>
+          <td>{renderDate(event.event.date)}</td>
           <td>
             <Translate id={`events.${event.type}`} />
           </td>
@@ -28,3 +24,5 @@ export default ({ placeEvents }) => (
     </tbody>
   </table>
 );
+
+export default PlaceEvents;

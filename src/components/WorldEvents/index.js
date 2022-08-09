@@ -1,14 +1,14 @@
 import React from 'react';
 
-const getEventsForYear = (events, year) => events
-  .filter(event => event.start >= year && event.end <= year);
+const getEventsForYear = (events, year) =>
+  events.filter((event) => event.start >= year && event.end <= year);
 
-export default ({ year, worldEvents }) => (
+const WorldEvents = ({ year, worldEvents }) => (
   <div>
-    {getEventsForYear(worldEvents, parseInt(year, 10)).map(event => (
-      <div key={`${event.name}-${event.start}`}>
-        {event.name}
-      </div>
+    {getEventsForYear(worldEvents, parseInt(year, 10)).map((event) => (
+      <div key={`${event.name}-${event.start}`}>{event.name}</div>
     ))}
   </div>
 );
+
+export default WorldEvents;

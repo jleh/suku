@@ -32,7 +32,7 @@ class App extends Component {
     initialize({
       languages: ['fi'],
       translation: translations,
-      options: { renderToStaticMarkup }
+      options: { renderToStaticMarkup },
     });
 
     this.personSelected = this.personSelected.bind(this);
@@ -42,9 +42,9 @@ class App extends Component {
   componentDidMount() {
     const { addPersons, addWorldEvents, addPlaces } = this.props;
 
-    getData().then(data => addPersons(data));
-    getWorldEvents().then(worldEvents => addWorldEvents(worldEvents));
-    getPlaces().then(placesData => addPlaces(placesData));
+    getData().then((data) => addPersons(data));
+    getWorldEvents().then((worldEvents) => addWorldEvents(worldEvents));
+    getPlaces().then((placesData) => addPlaces(placesData));
   }
 
   personSelected(selectedPerson) {
@@ -63,12 +63,14 @@ class App extends Component {
   }
 
   render() {
-    const {
-      data, updated, personList, placesById
-    } = this.props;
+    const { data, updated, personList, placesById } = this.props;
 
     if (!data) {
-      return <div><Translate id="loading" /></div>;
+      return (
+        <div>
+          <Translate id="loading" />
+        </div>
+      );
     }
 
     return (
@@ -79,20 +81,29 @@ class App extends Component {
           places={placesById}
           onSelect={this.searchSelect}
         />
-        <Route path="/" exact component={() => <FrontPage data={data} personSelected={this.personSelected} />} />
+        <Route
+          path="/"
+          exact
+          // eslint-disable-next-line react/no-unstable-nested-components
+          component={() => <FrontPage data={data} personSelected={this.personSelected} />}
+        />
         <Route path="/timeline" component={Timeline} />
         <Route path="/places" component={Places} />
         <Route path="/person/:id" component={Person} />
         <Route path="/persons" component={PersonList} />
         <Route path="/place/:id" component={Place} />
         <Route path="/blog" component={Blog} />
-        <Route path="/tree/:id" component={({ match }) => 
-          <AncestorTree
-            data={data}
-            rootPerson={match.params.id}
-            personList={personList}
-            personSelected={this.personSelected}
-          />}
+        <Route
+          path="/tree/:id"
+          // eslint-disable-next-line react/no-unstable-nested-components
+          component={({ match }) => (
+            <AncestorTree
+              data={data}
+              rootPerson={match.params.id}
+              personList={personList}
+              personSelected={this.personSelected}
+            />
+          )}
         />
       </div>
     );
@@ -103,19 +114,15 @@ const mapStateToProps = ({ persons, places }) => ({
   updated: persons.updated,
   data: persons.data,
   personList: persons.personList,
-  placesById: places.placesById
+  placesById: places.placesById,
 });
 
 const mapDispatchToProps = {
   addPersons: addPersonsAction,
   addPlaces: addPlacesAction,
-  addWorldEvents: addWorldEventsAction
+  addWorldEvents: addWorldEventsAction,
 };
 
 export default hot(module)(
-  withRouter(
-    withLocalize(
-      connect(mapStateToProps, mapDispatchToProps)(App)
-    )
-  )
+  withRouter(withLocalize(connect(mapStateToProps, mapDispatchToProps)(App)))
 );

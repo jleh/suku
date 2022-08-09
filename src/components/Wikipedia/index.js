@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ person }) => {
+const Wikipedia = ({ person }) => {
   if (!person.wikipedia) {
     return null;
   }
@@ -13,3 +13,5 @@ export default ({ person }) => {
     </div>
   );
 };
+
+export default Wikipedia;

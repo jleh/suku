@@ -52,16 +52,15 @@ class Search extends Component {
 
     return (
       <Autocomplete
-        getItemValue={person => person.id}
+        getItemValue={(person) => person.id}
         items={[...persons, ...places.values()]}
         shouldItemRender={shouldItemRender}
-        renderItem={(item, isHighlighted) => (
-          item.id.charAt(0) === 'I'
-            ? renderPerson(item, isHighlighted)
-            : renderPlace(item, isHighlighted)
-        )}
+        renderItem={(item, isHighlighted) => {
+          if (item.id.charAt(0) === 'I') return renderPerson(item, isHighlighted);
+          return renderPlace(item, isHighlighted);
+        }}
         value={value}
-        onChange={e => this.setState({ value: e.target.value })}
+        onChange={(e) => this.setState({ value: e.target.value })}
         inputProps={{ placeholder: 'Haku' }}
         onSelect={this.onSelect}
       />

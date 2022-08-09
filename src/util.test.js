@@ -4,7 +4,7 @@ import {
   renderAge,
   createPlacesMap,
   createRefMap,
-  getPlaceEvents
+  getPlaceEvents,
 } from './util';
 
 describe('Render date', () => {
@@ -18,12 +18,15 @@ test('Get coordinates for place', () => {
 
 describe('Render age', () => {
   test('Render age', () => expect(renderAge('1900-01-01', '1950-06-06')).toBe('50 vuotta'));
-  test('Render age, only year can be given', () => expect(renderAge('1900-01-01', '1950')).toBe('50 vuotta'));
-  test('Do not render age for birth', () => expect(renderAge('1900-01-01', '1900-01-01')).toBe(null));
-  test('Do not render age if birth is missing', () => expect(renderAge(null, '1900-01-01')).toBe(null));
-  test('Do not render age if event date is missing', () => expect(renderAge('1900-01-01', null)).toBe(null));
+  test('Render age, only year can be given', () =>
+    expect(renderAge('1900-01-01', '1950')).toBe('50 vuotta'));
+  test('Do not render age for birth', () =>
+    expect(renderAge('1900-01-01', '1900-01-01')).toBe(null));
+  test('Do not render age if birth is missing', () =>
+    expect(renderAge(null, '1900-01-01')).toBe(null));
+  test('Do not render age if event date is missing', () =>
+    expect(renderAge('1900-01-01', null)).toBe(null));
 });
-
 
 test('Create places map', () => {
   const places = [
@@ -41,14 +44,14 @@ test('Create places map', () => {
               children: [
                 {
                   id: 4,
-                  name: 'D'
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
+                  name: 'D',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ];
 
   const map = createPlacesMap(places);
@@ -75,16 +78,16 @@ test('Get place events', () => {
           {
             place: { id: 'P1' },
             type: 'TEST',
-            description: 'test'
+            description: 'test',
           },
           {
             place: { id: 'P2' },
             type: 'TEST2',
-            description: 'test'
-          }
-        ]
-      }
-    }
+            description: 'test',
+          },
+        ],
+      },
+    },
   ];
 
   const events = getPlaceEvents('P1', persons);
@@ -97,8 +100,8 @@ test('Get place events', () => {
     event: {
       place: { id: 'P1' },
       description: 'test',
-      type: 'TEST'
-    }
+      type: 'TEST',
+    },
   });
   expect(getPlaceEvents('P1', [{}]).length).toBe(0);
 });

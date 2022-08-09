@@ -12,11 +12,10 @@ import Sources from '../../Sources';
 
 import styles from './place.css';
 
-const getParentPlace = (place, placesById) => place.parent && placesById.get(`P${place.parent.toString().padStart(4, 0)}`);
+const getParentPlace = (place, placesById) =>
+  place.parent && placesById.get(`P${place.parent.toString().padStart(4, 0)}`);
 
-const Place = ({
-  match, placesById, personList, personsById
-}) => {
+const Place = ({ match, placesById, personList, personsById }) => {
   const place = placesById.get(match.params.id);
 
   if (!place) {
@@ -34,7 +33,9 @@ const Place = ({
       </span>
 
       <div className={styles.description}>
-        {place.text.split('\n').map((text, i) => <p key={i}>{text}</p>)}
+        {place.text.split('\n').map((text, i) => (
+          <p key={i}>{text}</p>
+        ))}
         {place.sources.length !== 0 && <Sources sources={place.sources} />}
       </div>
 
@@ -57,7 +58,7 @@ const Place = ({
 const mapStateToProps = ({ places, persons }) => ({
   placesById: places.placesById,
   personList: persons.personList,
-  personsById: persons.personsById
+  personsById: persons.personsById,
 });
 
 export default withRouter(connect(mapStateToProps)(Place));

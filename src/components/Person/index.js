@@ -23,9 +23,7 @@ const Person = ({ personsById, personsByRef, placesById, match }) => {
     return null;
   }
 
-  const {
-    events, name, coatOfArms, father, mother, family, sources
-  } = person;
+  const { events, name, coatOfArms, father, mother, family, sources } = person;
   const { personEvents, birthISO } = events;
 
   useEffect(() => window.scrollTo(0, 0));
@@ -46,16 +44,16 @@ const Person = ({ personsById, personsByRef, placesById, match }) => {
 
       <div className={styles.content}>
         <div className={styles.personEvents}>
-          <h3><Translate id="person.life" /></h3>
-          <PersonEvents
-            events={personEvents}
-            birth={birthISO}
-            sources={sources}
-          />
+          <h3>
+            <Translate id="person.life" />
+          </h3>
+          <PersonEvents events={personEvents} birth={birthISO} sources={sources} />
         </div>
 
         <div>
-          <h3><Translate id="person.family" /></h3>
+          <h3>
+            <Translate id="person.family" />
+          </h3>
           <div className={styles.parents}>
             <Translate id="person.parents" />:
             <LinkedPerson personRef={father} persons={personsByRef} />
@@ -67,7 +65,7 @@ const Person = ({ personsById, personsByRef, placesById, match }) => {
       </div>
 
       <div>
-        <Link to={`/tree/${person.id}`}>Sukupuu</Link> 
+        <Link to={`/tree/${person.id}`}>Sukupuu</Link>
       </div>
 
       <PersonMap events={events.personEvents} places={placesById} />
@@ -81,7 +79,7 @@ const Person = ({ personsById, personsByRef, placesById, match }) => {
 const mapStateToProps = ({ persons, places }) => ({
   personsById: persons.personsById,
   personsByRef: persons.personsByRef,
-  placesById: places.placesById
+  placesById: places.placesById,
 });
 
 export default withRouter(connect(mapStateToProps)(Person));

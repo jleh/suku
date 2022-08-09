@@ -10,12 +10,14 @@ import styles from './timeline.css';
 import WorldEvents from '../WorldEvents';
 import TimelineEvent from './TimelineEvent';
 
-const getYear = date => date.substring(0, 4);
-const getYears = events => uniq(events.map(event => getYear(event.date))).sort();
+const getYear = (date) => date.substring(0, 4);
+const getYears = (events) => uniq(events.map((event) => getYear(event.date))).sort();
 
 const personEventsReducer = (events, person) => {
   if (person.events.personEvents) {
-    const personEvents = person.events.personEvents.map(event => Object.assign(event, { person }));
+    const personEvents = person.events.personEvents.map((event) =>
+      Object.assign(event, { person })
+    );
     return [...events, ...personEvents];
   }
 
@@ -27,21 +29,24 @@ const Timeline = ({ personList, worldEvents }) => {
     return null;
   }
 
-  const events = sortBy(personList
-    .reduce(personEventsReducer, [])
-    .filter(event => event.date !== undefined), 'date');
-  const eventsByYear = groupBy(events, event => getYear(event.date));
+  const events = sortBy(
+    personList.reduce(personEventsReducer, []).filter((event) => event.date !== undefined),
+    'date'
+  );
+  const eventsByYear = groupBy(events, (event) => getYear(event.date));
   const years = getYears(events);
 
   return (
     <div>
-      <h2><Translate id="menu.timeline" /></h2>
-      {years.map(year => (
+      <h2>
+        <Translate id="menu.timeline" />
+      </h2>
+      {years.map((year) => (
         <div key={year}>
           <h4>{year}</h4>
           <div className={styles.timelineEvents}>
             <div className={styles.familyEvents}>
-              {eventsByYear[year].map(event => (
+              {eventsByYear[year].map((event) => (
                 <TimelineEvent key={`${event.id}-${event.person.id}`} event={event} />
               ))}
             </div>
@@ -57,7 +62,7 @@ const Timeline = ({ personList, worldEvents }) => {
 
 const mapStateToProps = ({ persons, worldEvents }) => ({
   personList: persons.personList,
-  worldEvents
+  worldEvents,
 });
 
 export default connect(mapStateToProps)(Timeline);

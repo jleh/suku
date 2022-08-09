@@ -1,51 +1,54 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
 
-  <title>Sukupuu</title>
+    <title>Sukupuu</title>
 
-  <style>
-    .node circle {
-      fill: #999;
-    }
+    <style>
+      .node circle {
+        fill: #999;
+      }
 
-    .node text {
-      font: 10px sans-serif;
-    }
+      .node text {
+        font: 10px sans-serif;
+      }
 
-    .node--internal circle {
-      fill: #555;
-    }
+      .node--internal circle {
+        fill: #555;
+      }
 
-    .node--internal text {
-      text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
-    }
+      .node--internal text {
+        text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+      }
 
-    .node--duplicate {
-      fill: #af4545;
-    }
+      .node--duplicate {
+        fill: #af4545;
+      }
 
-    .node--leaf {
-      display: none;
-    }
+      .node--leaf {
+        display: none;
+      }
 
-    .link {
-      fill: none;
-      stroke: #555;
-      stroke-opacity: 0.4;
-      stroke-width: 1.5px;
-    }
+      .link {
+        fill: none;
+        stroke: #555;
+        stroke-opacity: 0.4;
+        stroke-width: 1.5px;
+      }
 
-    .link-invisible {
-      display: none;
-    }
-  </style>
+      .link-invisible {
+        display: none;
+      }
+    </style>
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
-</head>
-<body>
-  <div id="root"></div>
-</body>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>

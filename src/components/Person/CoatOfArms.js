@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './person.css';
 import config from '../../../config.json';
 
-export default ({ coatOfArms }) => {
+const CoatOfArms = ({ coatOfArms }) => {
   if (!coatOfArms) {
     return null;
   }
@@ -14,3 +14,5 @@ export default ({ coatOfArms }) => {
     </div>
   );
 };
+
+export default CoatOfArms;

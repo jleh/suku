@@ -11,7 +11,7 @@ module.exports = {
   output: {
     filename: '[name].[contenthash].js',
     publicPath: process.env.NODE_ENV === 'production' ? '/suku/' : '/',
-    path: path.resolve(process.cwd(), 'dist')
+    path: path.resolve(process.cwd(), 'dist'),
   },
 
   module: {
@@ -20,8 +20,8 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.css$/,
@@ -31,20 +31,20 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[name]__[local]___[chunkhash:base64:5]'
-              }
-            }
+                localIdentName: '[name]__[local]___[chunkhash:base64:5]',
+              },
+            },
           },
-          { loader: 'postcss-loader' }
-        ]
-      }
-    ]
+          { loader: 'postcss-loader' },
+        ],
+      },
+    ],
   },
 
   optimization: {
     splitChunks: {
-      chunks: 'initial'
-    }
+      chunks: 'initial',
+    },
   },
 
   devtool: 'source-map',
@@ -55,9 +55,9 @@ module.exports = {
       rewrites: [
         { from: /family.json$/, to: '/family.json' },
         { from: /world.json$/, to: '/world.json' },
-        { from: /places.json$/, to: '/places.json' }
-      ]
-    }
+        { from: /places.json$/, to: '/places.json' },
+      ],
+    },
   },
 
   plugins: [
@@ -67,15 +67,15 @@ module.exports = {
         { from: 'family.json', to: '' },
         { from: 'world.json', to: '' },
         { from: 'places.json', to: '' },
-        { from: 'blog.md', to: '' }
-      ]
+        { from: 'blog.md', to: '' },
+      ],
     }),
     new HtmlWebpackPlugin({
-      template: 'index.html'
+      template: 'index.html',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
-      chunkFilename: '[id].css'
-    })
-  ]
+      chunkFilename: '[id].css',
+    }),
+  ],
 };

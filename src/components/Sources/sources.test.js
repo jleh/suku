@@ -8,13 +8,11 @@ test('Renders source list', () => {
     {
       title: 'Source title',
       page: '123',
-      author: 'Author'
-    }
+      author: 'Author',
+    },
   ];
 
-  const tree = renderer
-    .create(<Sources sources={sources} />)
-    .toJSON();
+  const tree = renderer.create(<Sources sources={sources} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
@@ -25,13 +23,11 @@ test('Renders source list with links', () => {
       title: 'Source title',
       page: '123',
       author: 'Author',
-      url: 'http://www.example.com'
-    }
+      url: 'http://www.example.com',
+    },
   ];
 
-  const tree = renderer
-    .create(<Sources sources={sources} />)
-    .toJSON();
+  const tree = renderer.create(<Sources sources={sources} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
