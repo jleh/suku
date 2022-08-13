@@ -1,4 +1,4 @@
-import formatDistance from 'date-fns/formatDistance';
+import formatDistance from 'date-fns/formatDistanceStrict';
 import format from 'date-fns/format';
 import fiLocale from 'date-fns/locale/fi';
 
