@@ -1,4 +1,4 @@
-import distanceInWordsStrict from 'date-fns/distance_in_words_strict';
+import formatDistance from 'date-fns/formatDistance';
 import format from 'date-fns/format';
 import fiLocale from 'date-fns/locale/fi';
 
@@ -40,7 +40,7 @@ export const getPlaceEvents = (placeId, persons) =>
 
 export const renderAge = (birth, date) => {
   if (birth === date || !date || !birth) return null;
-  return distanceInWordsStrict(birth, date, { locale: fiLocale });
+  return formatDistance(new Date(birth), new Date(date), { locale: fiLocale });
 };
 
 export const createIdMap = (objects) => {
@@ -73,4 +73,5 @@ export const createPlacesMap = (places) => {
   return placesMap;
 };
 
-export const renderDate = (date) => date && (date.length === 4 ? date : format(date, 'DD.MM.YYYY'));
+export const renderDate = (date) =>
+  date && (date.length === 4 ? date : format(new Date(date), 'dd.MM.yyyy'));
