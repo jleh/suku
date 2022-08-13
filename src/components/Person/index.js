@@ -25,7 +25,7 @@ const Person = ({ personsById, personsByRef, placesById, match }) => {
     return null;
   }
 
-  const { events, name, coatOfArms, father, mother, family, sources } = person;
+  const { events, name, coatOfArms, father, mother, family, sources, siblings } = person;
   const { personEvents, birthISO } = events;
 
   useEffect(() => window.scrollTo(0, 0));
@@ -58,9 +58,21 @@ const Person = ({ personsById, personsByRef, placesById, match }) => {
             <Translate id="person.family" />
           </h3>
           <div className={styles.parents}>
-            <Translate id="person.parents" />:
+            <h4>
+              <Translate id="person.parents" />:
+            </h4>
             <LinkedPerson personRef={father} persons={personsByRef} />
             <LinkedPerson personRef={mother} persons={personsByRef} />
+          </div>
+
+          <div>
+            <h4>
+              <Translate id="family.siblings" />:
+            </h4>
+            {siblings.map((sibling) => (
+              <LinkedPerson personRef={sibling} persons={personsByRef} />
+            ))}
+            {siblings.length === 0 && '—'}
           </div>
 
           <Family families={family} persons={personsByRef} />

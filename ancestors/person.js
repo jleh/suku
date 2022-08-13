@@ -43,6 +43,9 @@ const toPerson = (person, database) => {
 
   const father = parents?.father ? parents.father[0].$.hlink : null;
   const mother = parents?.mother ? parents.mother[0].$.hlink : null;
+  const siblings = parents?.childref
+    ? parents.childref.filter((x) => x.$.hlink !== person.$.handle).map((x) => x.$.hlink)
+    : [];
   const events = findEvents(person.eventref, database);
   const sourcesFromEvents = events.personEvents
     ? events.personEvents
@@ -63,6 +66,7 @@ const toPerson = (person, database) => {
     mother,
     family: findFamily(person, database),
     geni: getGeni(person),
+    siblings,
   };
 };
 

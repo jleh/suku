@@ -13,7 +13,12 @@
     "updates": ["Päivitykset"]
   },
   "family": {
-    "spouse": ["Puoliso"]
+    "spouse": [
+      "Puoliso"
+    ],
+    "siblings": [
+      "Sisarukset"
+    ]
   },
   "person": {
     "parents": ["Vanhemmat"],

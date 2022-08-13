@@ -10,7 +10,9 @@ const Family = ({ families, persons }) => (
   <div className={styles.family}>
     {families.map((family) => (
       <div key={family.spouse}>
-        <Translate id="family.spouse" />:{' '}
+        <h4>
+          <Translate id="family.spouse" />:{' '}
+        </h4>
         <LinkedPerson personRef={family.spouse} persons={persons} />
         <div className={styles.married}>
           &infin; {renderDate(family.marriage?.date)} {family.marriage?.place?.name}
