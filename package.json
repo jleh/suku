@@ -43,6 +43,7 @@
     "pettier": "^1.1.0",
     "postcss-loader": "^7.0.1",
     "postcss-preset-env": "^7.8.2",
+    "prettier": "^2.7.1",
     "react-test-renderer": "^16.13.1",
     "style-loader": "^3.3.1",
     "webpack": "^5.74.0",
