@@ -5,8 +5,11 @@ exports[`Renders family 1`] = `
   className="family"
 >
   <div>
-    Missing translationId: family.spouse for language: \${ languageCode }
-    : 
+    <h4>
+      Missing translationId: family.spouse for language: \${ languageCode }
+      :
+       
+    </h4>
     <div>
       <a
         href="/person/2"
@@ -20,6 +23,12 @@ exports[`Renders family 1`] = `
       >
          
       </span>
+    </div>
+    <div
+      className="married"
+    >
+      ∞ 
+       
     </div>
     <ol>
       <li>

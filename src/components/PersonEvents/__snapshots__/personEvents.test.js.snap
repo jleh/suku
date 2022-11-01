@@ -28,11 +28,17 @@ exports[`Renders events even if birthday is unknown 1`] = `
       <div>
         Missing translationId: events.Residence for language: \${ languageCode }
          
+         
       </div>
       <div
         className="place"
       >
-        Place
+        <a
+          href="/place/undefined"
+          onClick={[Function]}
+        >
+          Place
+        </a>
       </div>
     </div>
   </div>
@@ -71,11 +77,17 @@ exports[`Renders person age on event 1`] = `
       <div>
         Missing translationId: events.Residence for language: \${ languageCode }
          
+         
       </div>
       <div
         className="place"
       >
-        Place
+        <a
+          href="/place/undefined"
+          onClick={[Function]}
+        >
+          Place
+        </a>
       </div>
     </div>
   </div>

@@ -8,6 +8,8 @@ exports[`Renders source list 1`] = `
     Missing translationId: sources for language: \${ languageCode }
   </h3>
   <div>
+    1
+    . 
     <i>
       Author
     </i>
@@ -29,6 +31,8 @@ exports[`Renders source list with links 1`] = `
     Missing translationId: sources for language: \${ languageCode }
   </h3>
   <div>
+    1
+    . 
     <a
       href="http://www.example.com"
       rel="noopener noreferrer"

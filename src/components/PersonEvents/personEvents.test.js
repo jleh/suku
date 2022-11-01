@@ -1,10 +1,17 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
 import PersonEvents from '.';
 
 const renderComponent = (events, birth) =>
-  renderer.create(<PersonEvents events={events} birth={birth} />).toJSON();
+  renderer
+    .create(
+      <MemoryRouter>
+        <PersonEvents events={events} birth={birth} />
+      </MemoryRouter>
+    )
+    .toJSON();
 
 test('Renders nothing if no events', () => {
   const events = undefined;
