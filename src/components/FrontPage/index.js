@@ -2,10 +2,10 @@ import React from 'react';
 
 import AncestorTree from '../AncestorTree';
 
-const FrontPage = ({ data, personSelected }) => (
+const FrontPage = ({ personSelected }) => (
   <div>
     Siirry alemmas nähdäksesi puun juuren.
-    <AncestorTree data={data} personSelected={personSelected} />
+    <AncestorTree personSelected={personSelected} />
   </div>
 );
 

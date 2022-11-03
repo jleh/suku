@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 
 import { getPlaceEvents } from '../../../util';
 import PlaceEvents from '../PlaceEvents';
@@ -15,8 +15,13 @@ import styles from './place.css';
 const getParentPlace = (place, placesById) =>
   place.parent && placesById.get(`P${place.parent.toString().padStart(4, 0)}`);
 
-const Place = ({ match, placesById, personList, personsById }) => {
-  const place = placesById.get(match.params.id);
+const Place = () => {
+  const { id } = useParams();
+
+  const { placesById } = useSelector((state) => state.places);
+  const { personList, personsById } = useSelector((state) => state.persons);
+
+  const place = placesById.get(id);
 
   if (!place) {
     return null;
@@ -55,10 +60,4 @@ const Place = ({ match, placesById, personList, personsById }) => {
   );
 };
 
-const mapStateToProps = ({ places, persons }) => ({
-  placesById: places.placesById,
-  personList: persons.personList,
-  personsById: persons.personsById,
-});
-
-export default withRouter(connect(mapStateToProps)(Place));
+export default Place;

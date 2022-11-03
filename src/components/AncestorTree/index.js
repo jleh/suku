@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { hierarchy, tree } from 'd3-hierarchy';
 import { linkHorizontal } from 'd3-shape';
@@ -26,27 +28,12 @@ const addTextRow = (node, text, rowNumber) =>
     .attr('text-anchor', (d) => (d.children ? 'end' : 'start'))
     .text(text);
 
-export default class AncestorTree extends Component {
-  componentDidMount() {
-    const { data, rootPerson, personList } = this.props;
+const AncestorTree = ({ personSelected }) => {
+  const thisNode = useRef();
+  const { id: rootPerson } = useParams();
+  const { data: personData, personList } = useSelector((state) => state.persons);
 
-    if (rootPerson) {
-      this.createTree(treeBuilder(personList, rootPerson));
-    } else {
-      this.createTree(data);
-    }
-  }
-
-  shouldComponentUpdate() {
-    return false;
-  }
-
-  componentWillUnmount() {
-    this.node.on('click', null);
-  }
-
-  createTree(data) {
-    const { personSelected } = this.props;
+  const createTree = (data) => {
     const nodes = d3.hierarchy(data, (d) => d.parents);
 
     const margin = {
@@ -120,10 +107,20 @@ export default class AncestorTree extends Component {
     );
 
     node.on('click', (n) => personSelected(n.data));
-    this.node = node;
-  }
+    thisNode.current = node;
+  };
 
-  render() {
-    return <div id="tree" />;
-  }
-}
+  useEffect(() => {
+    if (rootPerson) {
+      createTree(treeBuilder(personList, rootPerson));
+    } else {
+      createTree(personData);
+    }
+
+    return () => thisNode.current.on('click', null);
+  }, []);
+
+  return <div id="tree" />;
+};
+
+export default AncestorTree;

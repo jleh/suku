@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import sortBy from 'lodash/sortBy';
 import { Link } from 'react-router-dom';
 import { Translate } from 'react-localize-redux';
@@ -11,23 +11,23 @@ const getLastName = (person) => {
 };
 const sortAndFilterList = (persons) => sortBy(filterOutPrivateNames(persons), getLastName);
 
-const PersonList = ({ personList }) => (
-  <div>
-    <h2>
-      <Translate id="menu.personIndex" />
-    </h2>
-    {sortAndFilterList(personList).map((person) => (
-      <div key={person.id}>
-        <Link to={`/person/${person.id}`}>{person.name}</Link>
-      </div>
-    ))}
-  </div>
-);
+const PersonList = () => {
+  const { personList } = useSelector((state) => state.persons.personList);
 
-const mapStateToProps = (state) => ({
-  personList: state.persons.personList,
-});
+  return (
+    <div>
+      <h2>
+        <Translate id="menu.personIndex" />
+      </h2>
+      {sortAndFilterList(personList).map((person) => (
+        <div key={person.id}>
+          <Link to={`/person/${person.id}`}>{person.name}</Link>
+        </div>
+      ))}
+    </div>
+  );
+};
 
-export default connect(mapStateToProps)(PersonList);
+export default PersonList;
 
 export { PersonList as PersonListWithoutContext };

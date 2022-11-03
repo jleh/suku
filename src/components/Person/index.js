@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 import { Translate } from 'react-localize-redux';
 
 import styles from './person.css';
@@ -18,8 +18,12 @@ import CoatOfArms from './CoatOfArms';
 import ProfilePicture from './ProfilePicture';
 import WorldEvents from '../WorldEvents';
 
-const Person = ({ personsById, personsByRef, placesById, match }) => {
-  const person = personsById.get(match.params.id);
+const Person = () => {
+  const { id } = useParams();
+  const { personsById, personsByRef } = useSelector((state) => state.persons);
+  const { placesById } = useSelector((state) => state.places);
+
+  const person = personsById.get(id);
 
   if (!person?.name) {
     return null;
@@ -102,10 +106,4 @@ const Person = ({ personsById, personsByRef, placesById, match }) => {
   );
 };
 
-const mapStateToProps = ({ persons, places }) => ({
-  personsById: persons.personsById,
-  personsByRef: persons.personsByRef,
-  placesById: places.placesById,
-});
-
-export default withRouter(connect(mapStateToProps)(Person));
+export default Person;

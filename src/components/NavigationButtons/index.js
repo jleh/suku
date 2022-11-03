@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Translate } from 'react-localize-redux';
 
 const NavigationButtons = ({ history }) => {
@@ -19,4 +19,4 @@ const NavigationButtons = ({ history }) => {
   );
 };
 
-export default withRouter(NavigationButtons);
+export default NavigationButtons;

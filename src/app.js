@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { withLocalize, Translate } from 'react-localize-redux';
-
-import { hot } from 'react-hot-loader';
 
 import './app.css';
 
@@ -23,106 +21,61 @@ import Place from './components/Places/Place';
 import Blog from './components/Blog';
 import FrontPage from './components/FrontPage';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const App = ({ initialize }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { updated, data, personList } = useSelector((state) => state.persons);
+  const { placesById } = useSelector((state) => state.places);
 
-    const { initialize } = this.props;
-
+  useEffect(() => {
     initialize({
       languages: ['fi'],
       translation: translations,
       options: { renderToStaticMarkup },
     });
+  }, []);
 
-    this.personSelected = this.personSelected.bind(this);
-    this.searchSelect = this.searchSelect.bind(this);
-  }
+  useEffect(() => {
+    getData().then((personData) => dispatch(addPersonsAction(personData)));
+    getWorldEvents().then((worldEvents) => dispatch(addWorldEventsAction(worldEvents)));
+    getPlaces().then((placesData) => dispatch(addPlacesAction(placesData)));
+  }, []);
 
-  componentDidMount() {
-    const { addPersons, addWorldEvents, addPlaces } = this.props;
+  const personSelected = (selectedPerson) => {
+    navigate(`/person/${selectedPerson.id}`);
+  };
 
-    getData().then((data) => addPersons(data));
-    getWorldEvents().then((worldEvents) => addWorldEvents(worldEvents));
-    getPlaces().then((placesData) => addPlaces(placesData));
-  }
-
-  personSelected(selectedPerson) {
-    const { history } = this.props;
-    history.push(`/person/${selectedPerson.id}`);
-  }
-
-  searchSelect(itemId) {
-    const { history } = this.props;
-
+  const searchSelect = (itemId) => {
     if (itemId.charAt(0) === 'I') {
-      history.push(`/person/${itemId}`);
+      navigate(`/person/${itemId}`);
     } else if (itemId.charAt(0) === 'P') {
-      history.push(`/place/${itemId}`);
+      navigate(`/place/${itemId}`);
     }
-  }
+  };
 
-  render() {
-    const { data, updated, personList, placesById } = this.props;
-
-    if (!data) {
-      return (
-        <div>
-          <Translate id="loading" />
-        </div>
-      );
-    }
-
+  if (!data) {
     return (
       <div>
-        <Header
-          updated={updated}
-          persons={personList}
-          places={placesById}
-          onSelect={this.searchSelect}
-        />
-        <Route
-          path="/"
-          exact
-          // eslint-disable-next-line react/no-unstable-nested-components
-          component={() => <FrontPage data={data} personSelected={this.personSelected} />}
-        />
-        <Route path="/timeline" component={Timeline} />
-        <Route path="/places" component={Places} />
-        <Route path="/person/:id" component={Person} />
-        <Route path="/persons" component={PersonList} />
-        <Route path="/place/:id" component={Place} />
-        <Route path="/blog" component={Blog} />
-        <Route
-          path="/tree/:id"
-          // eslint-disable-next-line react/no-unstable-nested-components
-          component={({ match }) => (
-            <AncestorTree
-              data={data}
-              rootPerson={match.params.id}
-              personList={personList}
-              personSelected={this.personSelected}
-            />
-          )}
-        />
+        <Translate id="loading" />
       </div>
     );
   }
-}
 
-const mapStateToProps = ({ persons, places }) => ({
-  updated: persons.updated,
-  data: persons.data,
-  personList: persons.personList,
-  placesById: places.placesById,
-});
-
-const mapDispatchToProps = {
-  addPersons: addPersonsAction,
-  addPlaces: addPlacesAction,
-  addWorldEvents: addWorldEventsAction,
+  return (
+    <div>
+      <Header updated={updated} persons={personList} places={placesById} onSelect={searchSelect} />
+      <Routes>
+        <Route path="/" exact element={<FrontPage personSelected={personSelected} />} />
+        <Route path="/timeline" element={<Timeline />} />
+        <Route path="/places" element={<Places />} />
+        <Route path="/person/:id" element={<Person />} />
+        <Route path="/persons" element={<PersonList />} />
+        <Route path="/place/:id" element={<Place />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/tree/:id" element={<AncestorTree personSelected={personSelected} />} />
+      </Routes>
+    </div>
+  );
 };
 
-export default hot(module)(
-  withRouter(withLocalize(connect(mapStateToProps, mapDispatchToProps)(App)))
-);
+export default withLocalize(App);

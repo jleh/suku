@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import sortBy from 'lodash/sortBy';
 import uniq from 'lodash/uniq';
 import groupBy from 'lodash/groupBy';
@@ -24,7 +24,9 @@ const personEventsReducer = (events, person) => {
   return events;
 };
 
-const Timeline = ({ personList, worldEvents }) => {
+const Timeline = ({ worldEvents }) => {
+  const { personList } = useSelector((state) => state.persons);
+
   if (worldEvents.length === 0) {
     return null;
   }
@@ -60,8 +62,4 @@ const Timeline = ({ personList, worldEvents }) => {
   );
 };
 
-const mapStateToProps = ({ persons }) => ({
-  personList: persons.personList,
-});
-
-export default connect(mapStateToProps)(Timeline);
+export default Timeline;
