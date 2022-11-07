@@ -19,7 +19,9 @@
   "person": {
     "parents": ["Vanhemmat"],
     "life": ["Elämä"],
-    "family": ["Perhe"]
+    "family": ["Perhe"],
+    "worldEvents": ["Maailmalla tapahtui"],
+    "familyTree": ["Sukupuu"]
   },
   "events": {
     "Birth": ["Syntyi"],

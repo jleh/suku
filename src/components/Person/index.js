@@ -83,7 +83,9 @@ const Person = () => {
 
           {events.birthISO && events.deathISO && (
             <div>
-              <h3>Maailmalla tapahtui</h3>
+              <h3>
+                <Translate id="person.worldEvents" />
+              </h3>
               <WorldEvents
                 startYear={parseInt(events.birthISO.split('-')[0], 10)}
                 endYear={parseInt(events.deathISO.split('-')[0], 10)}
@@ -94,7 +96,9 @@ const Person = () => {
       </div>
 
       <div>
-        <Link to={`/tree/${person.id}`}>Sukupuu</Link>
+        <Link to={`/tree/${person.id}`}>
+          <Translate id="person.familyTree" />
+        </Link>
       </div>
 
       <PersonMap events={events.personEvents} places={placesById} />
