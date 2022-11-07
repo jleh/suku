@@ -23,16 +23,20 @@ const Person = () => {
   const { personsById, personsByRef } = useSelector((state) => state.persons);
   const { placesById } = useSelector((state) => state.places);
 
+  useEffect(() => window.scrollTo(0, 0));
+
   const person = personsById.get(id);
 
   if (!person?.name) {
-    return null;
+    return (
+      <div>
+        <Translate id="person.notFound" />
+      </div>
+    );
   }
 
   const { events, name, coatOfArms, father, mother, family, sources, siblings } = person;
   const { personEvents, birthISO } = events;
-
-  useEffect(() => window.scrollTo(0, 0));
 
   return (
     <div className={styles.person}>
@@ -54,7 +58,7 @@ const Person = () => {
           <h3>
             <Translate id="person.life" />
           </h3>
-          <PersonEvents events={personEvents} birth={birthISO} sources={sources} />
+          <PersonEvents events={personEvents} birth={birthISO} sources={sources} family={family} />
         </div>
 
         <div>
@@ -74,7 +78,7 @@ const Person = () => {
               <Translate id="family.siblings" />:
             </h4>
             {siblings.map((sibling) => (
-              <LinkedPerson personRef={sibling} persons={personsByRef} />
+              <LinkedPerson key={sibling} personRef={sibling} persons={personsByRef} />
             ))}
             {siblings.length === 0 && '—'}
           </div>

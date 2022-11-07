@@ -19,6 +19,7 @@
 .timelineText {
   flex-grow: 2;
   align-self: center;
+  max-width: 30rem;
 }
 
 .line {
@@ -44,6 +45,11 @@
 }
 
 .place {
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.linkedPersonName {
   font-style: italic;
   font-size: 0.9em;
 }

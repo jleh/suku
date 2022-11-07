@@ -21,7 +21,8 @@
     "life": ["Elämä"],
     "family": ["Perhe"],
     "worldEvents": ["Maailmalla tapahtui"],
-    "familyTree": ["Sukupuu"]
+    "familyTree": ["Sukupuu"],
+    "notFound": ["Henkilöä ei löydy"]
   },
   "events": {
     "Birth": ["Syntyi"],
@@ -38,7 +39,9 @@
     "Confirmation": ["Pääsi ripille"],
     "Military Service": ["Asepalvelus"],
     "Medical Information": ["Terveys"],
-    "Nobility Title": ["Aateloitu"]
+    "Nobility Title": ["Aateloitu"],
+    "Marriage": ["Meni naimisiin"],
+    "ChildBirth": ["Lapsen syntymä"]
   },
   "places": {
     "villages": ["Kylät"]

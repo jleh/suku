@@ -1,6 +1,7 @@
 import formatDistance from 'date-fns/formatDistanceStrict';
 import format from 'date-fns/format';
 import fiLocale from 'date-fns/locale/fi';
+import parse from 'date-fns/parse';
 
 export const printBirth = (child) => {
   if (child.events.birth) return `* ${child.events.birth}`;
@@ -75,3 +76,9 @@ export const createPlacesMap = (places) => {
 
 export const renderDate = (date) =>
   date && (date.length === 4 ? date : format(new Date(date), 'dd.MM.yyyy'));
+
+export const strToDate = (dateStr) =>
+  dateStr &&
+  (dateStr.length === 4
+    ? parse(dateStr, 'yyyy', new Date())
+    : parse(dateStr, 'yyyy-MM-dd', new Date()));
