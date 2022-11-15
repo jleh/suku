@@ -84,18 +84,6 @@ const Person = () => {
           </div>
 
           <Family families={family} persons={personsByRef} />
-
-          {events.birthISO && events.deathISO && (
-            <div>
-              <h3>
-                <Translate id="person.worldEvents" />
-              </h3>
-              <WorldEvents
-                startYear={parseInt(events.birthISO.split('-')[0], 10)}
-                endYear={parseInt(events.deathISO.split('-')[0], 10)}
-              />
-            </div>
-          )}
         </div>
       </div>
 
@@ -106,6 +94,18 @@ const Person = () => {
       </div>
 
       <PersonMap events={events.personEvents} places={placesById} />
+
+      {events.birthISO && events.deathISO && (
+        <div>
+          <h3>
+            <Translate id="person.worldEvents" />
+          </h3>
+          <WorldEvents
+            startYear={parseInt(events.birthISO.split('-')[0], 10)}
+            endYear={parseInt(events.deathISO.split('-')[0], 10)}
+          />
+        </div>
+      )}
 
       <Sources sources={sources} />
 
