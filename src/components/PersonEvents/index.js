@@ -35,8 +35,6 @@ const PersonEvents = ({ events, birth, sources, family }) => {
     return sources.indexOf(source) + 1;
   };
 
-  console.log(family);
-
   const marriages = family
     .map((f) => ({ ...f.marriage, spouse: f.spouse }))
     .filter((marriage) => marriage !== undefined && marriage.date)
@@ -66,6 +64,8 @@ const PersonEvents = ({ events, birth, sources, family }) => {
     if (bDate === undefined) return -1;
     return 0;
   });
+
+  console.log(combinedEvents);
 
   return (
     <div className={styles.timeline}>

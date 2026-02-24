@@ -2,11 +2,11 @@ import React from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { latLngBounds } from 'leaflet';
 import uniq from 'lodash/uniq';
+import { useSelector } from 'react-redux';
 
 import { getCoordinates } from '../../util';
 
 import styles from './personMap.css';
-import { useSelector } from 'react-redux';
 
 const PersonMap = ({ events, places }) => {
   const { placesById } = useSelector((state) => state.places);
@@ -26,8 +26,9 @@ const PersonMap = ({ events, places }) => {
   // Find some coordinates for places without those
   const getCoordinatesFromParent = (place) => {
     const parent = placesById.get(place.parent);
+    if (!parent) return { lat: null, lng: null };
     if (parent.lat === null && parent.parent) return getCoordinatesFromParent(parent);
-    else return { lat: parent.lat, lng: parent.lng };
+    return { lat: parent.lat, lng: parent.lng };
   };
 
   eventPlaces.forEach((place) => {

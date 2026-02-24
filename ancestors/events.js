@@ -12,10 +12,14 @@ const formatDate = (date) => {
 
 const getEventType = (events, type) => events.find((event) => event.type[0] === type);
 const getEventsByType = (events, type) => events.filter((event) => event.type[0] === type);
+
 const getEventDate = (event) => {
-  if (event && event.dateval) return formatDate(event.dateval[0].$.val);
+  if (event?.dateval) return event.dateval[0].$.val;
+  if (event?.daterange) return event.daterange[0].$.start;
+  if (event?.datespan) return event.datespan[0].$.start;
   return '';
 };
+const getEventDateFormatted = (event) => formatDate(getEventDate(event));
 
 const getPlace = (ref, places) => {
   const place = places.find((p) => p.$.handle === ref);
@@ -75,7 +79,7 @@ const findEvents = (eventref, database) => {
     return {
       id: event.$.id,
       type: event.type[0],
-      date: event.dateval && event.dateval[0].$.val,
+      date: getEventDate(event),
       place: getEventPlace(event, places),
       description: event.description && event.description[0],
       sources: sourceRefs,
@@ -85,10 +89,10 @@ const findEvents = (eventref, database) => {
 
   return {
     personEvents,
-    birth: getEventDate(birth),
+    birth: getEventDateFormatted(birth),
     birthISO: birth && birth.dateval && birth.dateval[0].$.val,
     birthPlace: getEventPlace(birth, places),
-    death: getEventDate(death),
+    death: getEventDateFormatted(death),
     deathPlace: getEventPlace(death, places),
     deathISO: death && death.dateval && death.dateval[0].$.val,
   };

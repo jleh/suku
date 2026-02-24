@@ -16,7 +16,6 @@ import PersonDates from '../PersonDates';
 import PersonMap from '../PersonMap';
 import CoatOfArms from './CoatOfArms';
 import ProfilePicture from './ProfilePicture';
-import WorldEvents from '../WorldEvents';
 
 const Person = () => {
   const { id } = useParams();
@@ -94,18 +93,6 @@ const Person = () => {
       </div>
 
       <PersonMap events={events.personEvents} places={placesById} />
-
-      {events.birthISO && events.deathISO && (
-        <div>
-          <h3>
-            <Translate id="person.worldEvents" />
-          </h3>
-          <WorldEvents
-            startYear={parseInt(events.birthISO.split('-')[0], 10)}
-            endYear={parseInt(events.deathISO.split('-')[0], 10)}
-          />
-        </div>
-      )}
 
       <Sources sources={sources} />
 

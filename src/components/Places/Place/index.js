@@ -55,6 +55,8 @@ const Place = () => {
         </div>
       )}
 
+      <VillageList villages={place.children} />
+      <VillagePlaces personList={personList} village={place} />
       <PlaceEvents placeEvents={placeEvents} />
     </div>
   );

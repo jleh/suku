@@ -5,22 +5,35 @@ const getLat = (place) => (place.coord ? sanitizeCoordinate(place.coord[0].$.lat
 const getLng = (place) => (place.coord ? sanitizeCoordinate(place.coord[0].$.long) : null);
 
 module.exports.getPlaces = (database) => {
-  const cities = new Map();
-  const villages = new Map();
-  const farms = new Map();
+  const placesByHandle = new Map();
 
   const getText = (place) => {
     if (place.noteref) {
       return database.notes[0].note.find((note) => note.$.handle === place.noteref[0].$.hlink)
         .text[0];
     }
-
     return '';
   };
 
-  const toPlaceObj = (place, type) => ({
+  const normalizeType = (place) => {
+    const raw = (place?.$?.type || '').trim();
+    if (!raw) return 'place';
+
+    // Preserve legacy labels for any UI logic you already have.
+    const legacy = {
+      City: 'city',
+      Village: 'village',
+      Farm: 'farm',
+      Building: 'building',
+    };
+
+    return legacy[raw] || raw.toLowerCase();
+  };
+
+  const toPlaceObj = (place) => ({
     id: place.$.id,
-    type,
+    type: normalizeType(place),
+    grampsType: place.$.type, // original Gramps type, untouched
     handle: place.$.handle,
     name: place.pname[0].$.value,
     lat: getLat(place),
@@ -30,44 +43,26 @@ module.exports.getPlaces = (database) => {
     sources: findSources(place, database),
   });
 
-  database.places[0].placeobj
-    .filter((place) => place.$.type === 'City')
-    .forEach((city) => {
-      cities.set(city.$.handle, toPlaceObj(city, 'city'));
-    });
+  const placeObjs = database?.places?.[0]?.placeobj || [];
 
-  database.places[0].placeobj
-    .filter((place) => place.$.type === 'Village')
-    .forEach((village) => {
-      const villageObject = toPlaceObj(village, 'village');
-      const city = cities.get(village.placeref[0].$.hlink);
+  // 1) Create all nodes first (order-independent)
+  placeObjs.forEach((place) => {
+    placesByHandle.set(place.$.handle, toPlaceObj(place));
+  });
 
-      villageObject.parent = city.id;
-      city.children.push(villageObject);
-      villages.set(villageObject.handle, villageObject);
-    });
+  // 2) Link children to parents via placeref (type-independent)
+  placeObjs.forEach((place) => {
+    const child = placesByHandle.get(place.$.handle);
+    const parentHandle = place?.placeref?.[0]?.$?.hlink;
+    if (!parentHandle) return;
 
-  database.places[0].placeobj
-    .filter((place) => place.$.type === 'Farm')
-    .forEach((farm) => {
-      const farmObject = toPlaceObj(farm, 'farm');
-      const village = villages.get(farm.placeref[0].$.hlink);
+    const parent = placesByHandle.get(parentHandle);
+    if (!parent) return; // orphaned reference; keep as root
 
-      farmObject.parent = village.id;
-      village.children.push(farmObject);
-      farms.set(farmObject.handle, farmObject);
-    });
+    child.parent = parent.id;
+    parent.children.push(child);
+  });
 
-  database.places[0].placeobj
-    .filter((place) => place.$.type === 'Building')
-    .forEach((building) => {
-      const buildingObj = toPlaceObj(building, 'building');
-      const farm = farms.get(building.placeref[0].$.hlink);
-
-      buildingObj.type = 'building';
-      buildingObj.parent = farm.id;
-      farm.children.push(buildingObj);
-    });
-
-  return [...cities.values()];
+  // 3) Roots are places with no resolvable parent
+  return [...placesByHandle.values()].filter((p) => !p.parent);
 };

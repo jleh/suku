@@ -8,3 +8,6 @@ coverage
 *.ged
 media/*.jpg
 .DS_Store
+
+output.json
+parsed.json
